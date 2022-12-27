@@ -1,9 +1,12 @@
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import { Login } from './src/screens/login';
 
 const App = () => {
   return (
-    <Login />
+    <NavigationContainer>
+      <Login />
+    </NavigationContainer>
   );
 };
 
