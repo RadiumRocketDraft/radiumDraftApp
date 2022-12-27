@@ -17,15 +17,17 @@ const BottomNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarStyle: {height: 95, paddingTop: 20},
         headerShown: false,
       }}>
       <Tab.Screen
         options={{
+          tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="soccer-field"
               color={focused ? 'blue' : 'grey'}
-              size={26}
+              size={28}
             />
           ),
         }}
@@ -34,12 +36,12 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         options={{
-          title: 'History',
+          tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
-              name="clipboard-text-clock"
+              name="history"
               color={focused ? 'blue' : 'grey'}
-              size={26}
+              size={28}
             />
           ),
         }}
@@ -48,11 +50,12 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         options={{
+          tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
-              name="account-settings"
+              name="account"
               color={focused ? 'blue' : 'grey'}
-              size={26}
+              size={28}
             />
           ),
         }}
