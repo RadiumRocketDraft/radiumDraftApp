@@ -1,8 +1,7 @@
 import React from 'react';
-import {Stack, Input, Button} from 'native-base';
-import {useForm, Controller} from 'react-hook-form';
-import {Text, View} from 'react-native';
-import styles from './styles';
+import {Stack, Button} from 'native-base';
+import {useForm, FieldName} from 'react-hook-form';
+import Input from '../../components/shared/input';
 
 interface ILogin {
   email: string;
@@ -15,18 +14,19 @@ const Login = ({navigation}: any) => {
     handleSubmit,
     clearErrors,
     formState: {errors},
-  } = useForm({
+  } = useForm<ILogin>({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = () => {
+  const onSubmit = (data: any) => {
+    console.log('data', data);
     navigation.navigate('Home');
   };
 
-  const onFocusInput = (inputName: any) => {
+  const onFocusInput = (inputName: FieldName<ILogin>) => {
     clearErrors(inputName);
   };
   return (
@@ -36,53 +36,21 @@ const Login = ({navigation}: any) => {
       h="100%"
       alignItems="center"
       justifyContent="center">
-      <View style={styles.containerInput}>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field: {onChange, value}}) => (
-            <Input
-              onChangeText={onChange}
-              value={value}
-              onFocus={() => onFocusInput('email')}
-              w={{
-                base: '75%',
-                md: '25%',
-              }}
-              placeholder="E-mail"
-              autoCapitalize="none"
-            />
-          )}
-          name="email"
-        />
-        {errors.email && <Text style={styles.error}>This is required.</Text>}
-      </View>
-      <View style={styles.containerInput}>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field: {onChange, value}}) => (
-            <Input
-              onChangeText={onChange}
-              value={value}
-              onFocus={() => onFocusInput('password')}
-              type="password"
-              placeholder="Password"
-              autoCapitalize="none"
-              w={{
-                base: '75%',
-                md: '25%',
-              }}
-            />
-          )}
-          name="password"
-        />
-        {errors.password && <Text style={styles.error}>This is required.</Text>}
-      </View>
+      <Input
+        control={control}
+        name="email"
+        placeholder="E-mail"
+        onFocus={() => onFocusInput('email')}
+        error={errors.email}
+      />
+      <Input
+        control={control}
+        name="password"
+        placeholder="Password"
+        onFocus={() => onFocusInput('password')}
+        error={errors.password}
+        type="password"
+      />
 
       <Button onPress={handleSubmit(onSubmit)} w={'50%'}>
         Login
