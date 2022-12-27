@@ -21,8 +21,7 @@ const Login = ({navigation}: any) => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log('data', data);
+  const onSubmit = () => {
     navigation.navigate('Home');
   };
 
