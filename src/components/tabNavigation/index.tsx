@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Match, History, Profile} from '../../screens';
 
-const TabNavigation = () => {
+const TabNavigation = ({setTitleScreen}: any) => {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -13,6 +13,11 @@ const TabNavigation = () => {
         headerShown: false,
       }}>
       <Tab.Screen
+        listeners={{
+          tabPress: () => {
+            setTitleScreen('Match');
+          },
+        }}
         options={{
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
@@ -27,6 +32,11 @@ const TabNavigation = () => {
         component={Match}
       />
       <Tab.Screen
+        listeners={{
+          tabPress: () => {
+            setTitleScreen('History');
+          },
+        }}
         options={{
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
@@ -41,6 +51,11 @@ const TabNavigation = () => {
         component={History}
       />
       <Tab.Screen
+        listeners={{
+          tabPress: () => {
+            setTitleScreen('Profile');
+          },
+        }}
         options={{
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
