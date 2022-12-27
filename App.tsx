@@ -15,13 +15,16 @@ const Tab = createMaterialBottomTabNavigator();
 
 const BottomNavigation = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Home"
+      activeColor="#000"
+      inactiveColor="#3e2465">
       <Tab.Screen
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({color, focused}) => (
             <MaterialCommunityIcons
               name="soccer-field"
-              color={'blue'}
+              color={focused ? 'blue' : 'grey'}
               size={26}
             />
           ),
@@ -31,10 +34,10 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="clipboard-text-clock"
-              color={'blue'}
+              color={focused ? 'blue' : 'grey'}
               size={26}
             />
           ),
@@ -44,10 +47,10 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="account-settings"
-              color={'blue'}
+              color={focused ? 'blue' : 'grey'}
               size={26}
             />
           ),
