@@ -1,6 +1,8 @@
 import React from 'react';
 import {Stack, Input, Button} from 'native-base';
 import {useForm, Controller} from 'react-hook-form';
+import {Text, View} from 'react-native';
+import styles from './styles';
 
 interface ILogin {
   email: string;
@@ -11,7 +13,8 @@ const Login = () => {
   const {
     control,
     handleSubmit,
-    // formState: {errors},
+    clearErrors,
+    formState: {errors},
   } = useForm({
     defaultValues: {
       email: '',
@@ -22,6 +25,10 @@ const Login = () => {
   const onSubmit = (data: ILogin) => {
     console.log(data);
   };
+
+  const onFocusInput = (inputName: any) => {
+    clearErrors(inputName);
+  };
   return (
     <Stack
       space={4}
@@ -29,47 +36,53 @@ const Login = () => {
       h="100%"
       alignItems="center"
       justifyContent="center">
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({field: {onChange, value}}) => (
-          <Input
-            onChangeText={onChange}
-            value={value}
-            w={{
-              base: '75%',
-              md: '25%',
-            }}
-            mb={15}
-            placeholder="E-mail"
-            autoCapitalize="none"
-          />
-        )}
-        name="email"
-      />
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({field: {onChange, value}}) => (
-          <Input
-            onChangeText={onChange}
-            value={value}
-            type="password"
-            placeholder="Password"
-            autoCapitalize="none"
-            w={{
-              base: '75%',
-              md: '25%',
-            }}
-            mb={15}
-          />
-        )}
-        name="password"
-      />
+      <View style={styles.containerInput}>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({field: {onChange, value}}) => (
+            <Input
+              onChangeText={onChange}
+              value={value}
+              onFocus={() => onFocusInput('email')}
+              w={{
+                base: '75%',
+                md: '25%',
+              }}
+              placeholder="E-mail"
+              autoCapitalize="none"
+            />
+          )}
+          name="email"
+        />
+        {errors.email && <Text>This is required.</Text>}
+      </View>
+      <View style={styles.containerInput}>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({field: {onChange, value}}) => (
+            <Input
+              onChangeText={onChange}
+              value={value}
+              onFocus={() => onFocusInput('password')}
+              type="password"
+              placeholder="Password"
+              autoCapitalize="none"
+              w={{
+                base: '75%',
+                md: '25%',
+              }}
+            />
+          )}
+          name="password"
+        />
+        {errors.password && <Text>This is required.</Text>}
+      </View>
 
       <Button onPress={handleSubmit(onSubmit)} w={'50%'}>
         Login
