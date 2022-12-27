@@ -4,9 +4,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Login from './src/screens/login';
-import Home from './src/screens/home';
+import Match from './src/screens/home';
 import Profile from './src/screens/profile';
 import History from './src/screens/history';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,10 +15,46 @@ const Tab = createMaterialBottomTabNavigator();
 
 const BottomNavigation = () => {
   return (
-    <Tab.Navigator activeColor="#f0edf6" inactiveColor="#3e2465">
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="History" component={History} />
-      <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Navigator>
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="soccer-field"
+              color={'blue'}
+              size={26}
+            />
+          ),
+        }}
+        name="Match"
+        component={Match}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="clipboard-text-clock"
+              color={'blue'}
+              size={26}
+            />
+          ),
+        }}
+        name="History"
+        component={History}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="account-settings"
+              color={'blue'}
+              size={26}
+            />
+          ),
+        }}
+        name="Profile"
+        component={Profile}
+      />
     </Tab.Navigator>
   );
 };
