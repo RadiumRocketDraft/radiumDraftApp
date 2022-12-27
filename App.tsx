@@ -2,26 +2,26 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Login from './src/screens/login';
 import Match from './src/screens/home';
 import Profile from './src/screens/profile';
 import History from './src/screens/history';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
-      activeColor="#000"
-      inactiveColor="#3e2465">
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Tab.Screen
         options={{
-          tabBarIcon: ({color, focused}) => (
+          tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="soccer-field"
               color={focused ? 'blue' : 'grey'}
@@ -34,6 +34,7 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         options={{
+          title: 'History',
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="clipboard-text-clock"
