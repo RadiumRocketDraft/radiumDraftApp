@@ -4,4 +4,7 @@ export default StyleSheet.create({
   containerInput: {
     height: 60,
   },
+  error: {
+    color: 'red',
+  },
 });

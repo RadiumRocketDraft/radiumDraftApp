@@ -9,7 +9,7 @@ interface ILogin {
   password: string;
 }
 
-const Login = () => {
+const Login = ({navigation}: any) => {
   const {
     control,
     handleSubmit,
@@ -22,8 +22,8 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data: ILogin) => {
-    console.log(data);
+  const onSubmit = () => {
+    navigation.navigate('Home');
   };
 
   const onFocusInput = (inputName: any) => {
@@ -57,7 +57,7 @@ const Login = () => {
           )}
           name="email"
         />
-        {errors.email && <Text>This is required.</Text>}
+        {errors.email && <Text style={styles.error}>This is required.</Text>}
       </View>
       <View style={styles.containerInput}>
         <Controller
@@ -81,7 +81,7 @@ const Login = () => {
           )}
           name="password"
         />
-        {errors.password && <Text>This is required.</Text>}
+        {errors.password && <Text style={styles.error}>This is required.</Text>}
       </View>
 
       <Button onPress={handleSubmit(onSubmit)} w={'50%'}>
