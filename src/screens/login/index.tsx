@@ -3,6 +3,7 @@ import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
 import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
+import {signIn} from '../../utils/firebase';
 
 interface ILogin {
   email: string;
@@ -22,8 +23,10 @@ const Login = ({navigation}: any) => {
     },
   });
 
-  const onSubmit = () => {
-    navigation.navigate('Home');
+  const onSubmit = (data: ILogin) => {
+    signIn(data.email, data.password).then(() => {
+      navigation.navigate('Home');
+    });
   };
 
   const onFocusInput = (inputName: FieldName<ILogin>) => {
