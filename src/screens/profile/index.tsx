@@ -45,7 +45,7 @@ const Profile = () => {
         <Avatar.Badge bg={'green.500'} />
       </Avatar>
       <View style={styles.infoContainer}>
-        <FlatList data={DATA_MOCK} renderItem={renderItem} />
+        <FlatList bounces={false} data={DATA_MOCK} renderItem={renderItem} />
       </View>
     </View>
   );
