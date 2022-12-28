@@ -1,17 +1,26 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {Avatar} from 'native-base';
+import {Avatar, FlatList} from 'native-base';
 import styles from './styles';
 
 const Profile = () => {
-  const DATA_MOCK = {
-    firstName: 'Ayom',
-    lastName: 'Aristo',
-    skill: 67,
-    position: 'Flex',
-    status: 'Starter',
-    fidelity: 100,
-    matchsPlayed: 1,
+  const DATA_MOCK = [
+    {'First name': 'Ayom'},
+    {'Last name': 'Aristo'},
+    {Skill: 67},
+    {Position: 'Flex'},
+    {Status: 'Starter'},
+    {Fidelity: 100},
+    {MatchsPlayed: 1},
+  ];
+
+  const renderItem = ({item}: any) => {
+    return (
+      <View style={styles.infoRow}>
+        <Text style={styles.infoRowTitle}>{Object.keys(item)}</Text>
+        <Text style={styles.infoRowText}>{Object.values(item)}</Text>
+      </View>
+    );
   };
 
   return (
@@ -24,50 +33,13 @@ const Profile = () => {
         }}
         size="2xl">
         NB
-        <Avatar.Badge
-          bg={DATA_MOCK.status === 'Starter' ? 'green.500' : 'red.500'}
-        />
+        <Avatar.Badge bg={'green.500'} />
       </Avatar>
       <View style={styles.infoContainer}>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>First Name</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.firstName}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>Last Name</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.lastName}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>Skill</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.skill}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>Position</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.position}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>Status</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.status}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>Fidelity</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.fidelity}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoRowTitle}>Matches played</Text>
-          <Text style={styles.infoRowText}>{DATA_MOCK.matchsPlayed}</Text>
-        </View>
+        <FlatList data={DATA_MOCK} renderItem={renderItem} />
       </View>
     </View>
   );
 };
 
 export default Profile;
-
-// firstName: { type: String, required: true },
-//   lastName: { type: String, required: true },
-//   skill: { type: Number, required: true },
-//   position: { type: String, enum: PlayerPosition, required: true },
-//   status: { type: String, enum: PlayerStatus, required: true },
-//   fidelity: { type: Number, default: 100, required: true },
-//   matchsPlayed: { type: Number },

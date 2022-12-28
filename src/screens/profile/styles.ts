@@ -2,11 +2,13 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    alignContent: 'center',
     height: '100%',
   },
-  avatarContainer: {},
+  avatarContainer: {
+    alignSelf: 'center',
+  },
   infoContainer: {},
   infoRow: {
     alignItems: 'center',
