@@ -6,6 +6,7 @@ import Input from '../../components/shared/input';
 import ButtonLine from '../../components/shared/buttonLine';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validations';
+import {signIn} from '../../utils/firebase';
 
 interface ILogin {
   email: string;
@@ -28,8 +29,10 @@ const Login = ({navigation}: any) => {
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit = () => {
-    navigation.navigate('Home');
+  const onSubmit = (data: ILogin) => {
+    signIn(data.email, data.password).then(() => {
+      navigation.navigate('Home');
+    });
   };
 
   const onFocusInput = (inputName: FieldName<ILogin>) => {
