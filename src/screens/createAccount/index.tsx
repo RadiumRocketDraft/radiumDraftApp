@@ -3,7 +3,8 @@ import React from 'react';
 import {FieldName, useForm} from 'react-hook-form';
 import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
-
+import {yupResolver} from '@hookform/resolvers/yup';
+import {schema} from './validation';
 interface ICreateAccount {
   firstName: string;
   lastName: string;
@@ -26,6 +27,9 @@ const CreateAccount = () => {
       password: '',
       repeatPassword: '',
     },
+    resolver: yupResolver(schema),
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
   });
 
   const onSubmit = (data: ICreateAccount) => {
@@ -48,7 +52,7 @@ const CreateAccount = () => {
         placeholder="First name"
         label="E-mail"
         onFocus={() => onFocusInput('firstName')}
-        error={errors.firstName}
+        error={errors.firstName?.message}
       />
       <Input
         control={control}
@@ -56,7 +60,7 @@ const CreateAccount = () => {
         placeholder="Last name"
         label="LastName"
         onFocus={() => onFocusInput('lastName')}
-        error={errors.lastName}
+        error={errors.lastName?.message}
       />
       <Input
         control={control}
@@ -64,7 +68,7 @@ const CreateAccount = () => {
         placeholder="E-mail"
         label="E-mail"
         onFocus={() => onFocusInput('email')}
-        error={errors.email}
+        error={errors.email?.message}
       />
       <Input
         control={control}
@@ -72,7 +76,7 @@ const CreateAccount = () => {
         placeholder="Password"
         label="Password"
         onFocus={() => onFocusInput('password')}
-        error={errors.password}
+        error={errors.password?.message}
         type="password"
       />
       <Input
@@ -81,7 +85,7 @@ const CreateAccount = () => {
         placeholder="Repeat password"
         label="Repeat password"
         onFocus={() => onFocusInput('repeatPassword')}
-        error={errors.repeatPassword}
+        error={errors.repeatPassword?.message}
         type="password"
       />
 

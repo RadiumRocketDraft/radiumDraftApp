@@ -9,9 +9,9 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
     <View style={styles.containerInput}>
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({field: {onChange, value}}) => (
           <InputNativeBase
             onChangeText={onChange}
@@ -28,7 +28,7 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
         )}
         name={name}
       />
-      {error && <Text style={styles.error}>This is required.</Text>}
+      {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 };
