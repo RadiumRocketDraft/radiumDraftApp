@@ -3,7 +3,6 @@ import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
 import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
-import {View, Text} from 'react-native';
 import ButtonLine from '../../components/shared/buttonLine';
 
 interface ILogin {
@@ -31,6 +30,10 @@ const Login = ({navigation}: any) => {
   const onFocusInput = (inputName: FieldName<ILogin>) => {
     clearErrors(inputName);
   };
+
+  const handleSignUp = () => {
+    navigation.navigate('CreateAccount');
+  };
   return (
     <Stack
       space={4}
@@ -42,6 +45,7 @@ const Login = ({navigation}: any) => {
         control={control}
         name="email"
         placeholder="E-mail"
+        label="E-mail"
         onFocus={() => onFocusInput('email')}
         error={errors.email}
       />
@@ -49,12 +53,15 @@ const Login = ({navigation}: any) => {
         control={control}
         name="password"
         placeholder="Password"
+        label="Password"
         onFocus={() => onFocusInput('password')}
         error={errors.password}
         type="password"
       />
       <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
-      <ButtonLine>Don’t have an account? Sign up</ButtonLine>
+      <ButtonLine onPress={handleSignUp}>
+        Don’t have an account? Sign up
+      </ButtonLine>
     </Stack>
   );
 };

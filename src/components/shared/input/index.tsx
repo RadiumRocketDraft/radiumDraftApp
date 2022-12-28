@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {Controller} from 'react-hook-form';
 import {Input as InputNativeBase} from 'native-base';
-
 import styles from './styles';
 
 const Input = ({name, placeholder, onFocus, control, error, type}: any) => {

@@ -2,9 +2,14 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
-const ButtonLine = ({children}: any) => {
+interface Props {
+  children: string;
+  onPress: () => void;
+}
+
+const ButtonLine: React.FC<Props> = ({children, onPress}) => {
   return (
-    <TouchableOpacity onPress={() => console.log('buttonLine')}>
+    <TouchableOpacity onPress={onPress}>
       <Text style={styles.text}>{children}</Text>
     </TouchableOpacity>
   );

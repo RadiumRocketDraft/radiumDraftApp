@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
-import Login from './src/screens/login';
+import {Login, CreateAccount} from './src/screens/index';
 import TabNavigation from './src/components/tabNavigation';
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +23,7 @@ const App = () => {
             component={BottomNavigation}
           />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="CreateAccount" component={CreateAccount} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

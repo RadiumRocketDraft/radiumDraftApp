@@ -7,4 +7,7 @@ export default StyleSheet.create({
   error: {
     color: 'red',
   },
+  label: {
+    marginLeft: 5,
+  },
 });
