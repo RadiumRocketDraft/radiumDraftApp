@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const Match = () => {
+const History = () => {
   return (
     <View>
-      <Text>Match SCREEN</Text>
+      <Text>History SCREEN</Text>
     </View>
   );
 };
 
-export default Match;
+export default History;

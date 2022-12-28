@@ -1,6 +1,7 @@
 import React from 'react';
-import {Stack, Button} from 'native-base';
+import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
+import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
 
 interface ILogin {
@@ -50,10 +51,7 @@ const Login = ({navigation}: any) => {
         error={errors.password}
         type="password"
       />
-
-      <Button onPress={handleSubmit(onSubmit)} w={'50%'}>
-        Login
-      </Button>
+      <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
     </Stack>
   );
 };
