@@ -16,9 +16,17 @@ const App = () => {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+          }}>
           <Stack.Screen
-            options={{title: titleScreen}}
+            options={{
+              title: titleScreen,
+              headerShown: true,
+              headerBackVisible: false,
+            }}
             name="Home"
             component={BottomNavigation}
           />
