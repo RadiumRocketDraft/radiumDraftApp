@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
 import Button from '../../components/shared/button';
@@ -18,6 +18,8 @@ const Login = ({navigation}: any) => {
     control,
     handleSubmit,
     clearErrors,
+    reset,
+    setFocus,
     formState: {errors},
   } = useForm<ILogin>({
     defaultValues: {
@@ -29,9 +31,14 @@ const Login = ({navigation}: any) => {
     reValidateMode: 'onSubmit',
   });
 
+  useEffect(() => {
+    setFocus('email');
+  }, [setFocus]);
+
   const onSubmit = (data: ILogin) => {
     signIn(data.email, data.password).then(() => {
       navigation.navigate('Home');
+      reset();
     });
   };
 

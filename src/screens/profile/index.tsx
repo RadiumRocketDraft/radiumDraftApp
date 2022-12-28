@@ -27,10 +27,9 @@ const Profile = ({navigation}: any) => {
   };
 
   const onPressLogOut = () => {
-    logOut()
-      .then(() => navigation.navigate('Login'))
-      .catch(error => console.log('Error:', error));
+    logOut();
   };
+
   return (
     <View style={styles.container}>
       <ButtonLine customStyles={styles.logOut} onPress={onPressLogOut}>
