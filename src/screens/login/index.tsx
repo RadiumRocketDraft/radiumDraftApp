@@ -51,7 +51,7 @@ const Login = ({navigation}: any) => {
         error={errors.password}
         type="password"
       />
-      <Button text="Logins" handleSubmit={handleSubmit(onSubmit)} />
+      <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
     </Stack>
   );
 };

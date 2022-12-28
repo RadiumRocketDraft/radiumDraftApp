@@ -22,7 +22,6 @@ const Profile = () => {
       </View>
     );
   };
-
   return (
     <View style={styles.container}>
       <Avatar
