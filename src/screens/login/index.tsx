@@ -3,6 +3,8 @@ import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
 import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
+import {View, Text} from 'react-native';
+import ButtonLine from '../../components/shared/buttonLine';
 
 interface ILogin {
   email: string;
@@ -52,6 +54,7 @@ const Login = ({navigation}: any) => {
         type="password"
       />
       <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
+      <ButtonLine>Don’t have an account? Sign up</ButtonLine>
     </Stack>
   );
 };
