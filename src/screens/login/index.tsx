@@ -4,6 +4,8 @@ import {useForm, FieldName} from 'react-hook-form';
 import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
 import ButtonLine from '../../components/shared/buttonLine';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {schema} from './validations';
 
 interface ILogin {
   email: string;
@@ -21,6 +23,9 @@ const Login = ({navigation}: any) => {
       email: '',
       password: '',
     },
+    resolver: yupResolver(schema),
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
   });
 
   const onSubmit = () => {
@@ -47,7 +52,7 @@ const Login = ({navigation}: any) => {
         placeholder="E-mail"
         label="E-mail"
         onFocus={() => onFocusInput('email')}
-        error={errors.email}
+        error={errors.email?.message}
       />
       <Input
         control={control}
@@ -55,7 +60,7 @@ const Login = ({navigation}: any) => {
         placeholder="Password"
         label="Password"
         onFocus={() => onFocusInput('password')}
-        error={errors.password}
+        error={errors.password?.message}
         type="password"
       />
       <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
