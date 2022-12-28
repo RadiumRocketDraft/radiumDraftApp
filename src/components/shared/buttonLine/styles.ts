@@ -4,6 +4,6 @@ export default StyleSheet.create({
   text: {
     color: 'blue',
     textDecorationLine: 'underline',
-    marginTop: 20,
+    fontSize: 16,
   },
 });

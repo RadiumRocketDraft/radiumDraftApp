@@ -2,8 +2,11 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {Avatar, FlatList} from 'native-base';
 import styles from './styles';
+import ButtonLine from '../../components/shared/buttonLine';
+import {auth, logOut} from '../../utils/firebase';
+import {signOut} from 'firebase/auth';
 
-const Profile = () => {
+const Profile = ({navigation}: any) => {
   const DATA_MOCK = [
     {'First name': 'Ayom'},
     {'Last name': 'Aristo'},
@@ -22,8 +25,17 @@ const Profile = () => {
       </View>
     );
   };
+
+  const onPressLogOut = () => {
+    logOut()
+      .then(() => navigation.navigate('Login'))
+      .catch(error => console.log('Error:', error));
+  };
   return (
     <View style={styles.container}>
+      <ButtonLine customStyles={styles.logOut} onPress={onPressLogOut}>
+        Log out
+      </ButtonLine>
       <Avatar
         style={styles.avatarContainer}
         bg="lightBlue.400"
