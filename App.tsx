@@ -5,6 +5,8 @@ import {NativeBaseProvider} from 'native-base';
 import {Login, CreateAccount} from './src/screens/index';
 import TabNavigation from './src/components/tabNavigation';
 import useIsSignedIn from './src/hooks/isSignIn';
+import store from './src/store/store';
+import {Provider} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,42 +19,44 @@ const App = () => {
   const isSignedIn = useIsSignedIn();
 
   return (
-    <NavigationContainer>
-      <NativeBaseProvider>
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{
-            headerShown: false,
-          }}>
-          {isSignedIn ? (
-            <>
-              <Stack.Screen
-                options={{
-                  title: titleScreen,
-                  headerShown: true,
-                  headerBackVisible: false,
-                }}
-                name="Home"
-                component={BottomNavigation}
-              />
-            </>
-          ) : (
-            <>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen
-                options={{
-                  headerShown: true,
-                  headerBackVisible: true,
-                  headerTitle: '',
-                }}
-                name="CreateAccount"
-                component={CreateAccount}
-              />
-            </>
-          )}
-        </Stack.Navigator>
-      </NativeBaseProvider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <NativeBaseProvider>
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerShown: false,
+            }}>
+            {isSignedIn ? (
+              <>
+                <Stack.Screen
+                  options={{
+                    title: titleScreen,
+                    headerShown: true,
+                    headerBackVisible: false,
+                  }}
+                  name="Home"
+                  component={BottomNavigation}
+                />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen
+                  options={{
+                    headerShown: true,
+                    headerBackVisible: true,
+                    headerTitle: '',
+                  }}
+                  name="CreateAccount"
+                  component={CreateAccount}
+                />
+              </>
+            )}
+          </Stack.Navigator>
+        </NativeBaseProvider>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
