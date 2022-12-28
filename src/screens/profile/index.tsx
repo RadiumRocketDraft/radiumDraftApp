@@ -3,10 +3,9 @@ import {Text, View} from 'react-native';
 import {Avatar, FlatList} from 'native-base';
 import styles from './styles';
 import ButtonLine from '../../components/shared/buttonLine';
-import {auth, logOut} from '../../utils/firebase';
-import {signOut} from 'firebase/auth';
+import {logOut} from '../../utils/firebase';
 
-const Profile = ({navigation}: any) => {
+const Profile = () => {
   const DATA_MOCK = [
     {'First name': 'Ayom'},
     {'Last name': 'Aristo'},

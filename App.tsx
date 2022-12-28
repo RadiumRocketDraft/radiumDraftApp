@@ -15,7 +15,6 @@ const App = () => {
   };
 
   const isSignedIn = useIsSignedIn();
-  console.log('isSignedIn', isSignedIn);
 
   return (
     <NavigationContainer>
