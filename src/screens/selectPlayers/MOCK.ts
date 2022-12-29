@@ -1,5 +1,9 @@
 export const DATA_MOCK = [
   {
+    id: 0,
+    header: true,
+  },
+  {
     id: 1,
     firstName: 'Santiago',
     lastName: 'Gigli',

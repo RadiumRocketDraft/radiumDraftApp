@@ -38,7 +38,13 @@ const App = () => {
                   name="Home"
                   component={BottomNavigation}
                 />
-                <Stack.Screen name="selectPlayers" component={SelectPlayers} />
+                <Stack.Screen
+                  name="selectPlayers"
+                  component={SelectPlayers}
+                  options={({route}: {route: any}) => ({
+                    title: route.params.title,
+                  })}
+                />
               </>
             ) : (
               <>

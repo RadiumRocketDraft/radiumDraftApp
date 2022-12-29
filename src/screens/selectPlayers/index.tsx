@@ -1,48 +1,47 @@
-import React, {useState} from 'react';
-import {Checkbox} from 'native-base';
-import {
-  FlatList,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useMemo, useState} from 'react';
+import {Button, Checkbox} from 'native-base';
+import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {DATA_MOCK} from './MOCK';
 import styles from './styles';
 
 type TPlayers = typeof DATA_MOCK;
 
 const SelectPlayers = ({route}: any) => {
-  const {title, amountOfPlayers} = route.params;
-  const [playerSelected, setPlayerSelected] = useState<TPlayers>([]);
+  const {amountOfPlayers} = route.params;
+  const [selectedPlayers, setSelectedPlayers] = useState<TPlayers>([]);
+  const isCheckboxDisabled = useMemo(
+    () => selectedPlayers.length === amountOfPlayers,
+    [amountOfPlayers, selectedPlayers.length],
+  );
 
   const onChangeCheckbox = (item: any) => {
-    const isSelectedPlayer = playerSelected.some(
+    const isSelectedPlayer = selectedPlayers.some(
       player => player.id === item.id,
     );
     if (isSelectedPlayer) {
-      return setPlayerSelected(current =>
+      return setSelectedPlayers(current =>
         current.filter(player => player.id !== item.id),
       );
     }
-    return setPlayerSelected(current => [...current, item]);
+    return setSelectedPlayers(current => [...current, item]);
   };
 
   const listHeader = () => {
     return (
-      <View style={styles.rowContainer}>
-        <Text style={styles.rowText}>Seleccionados</Text>
-        <Text style={styles.wideRowText}>Jugadores</Text>
-        <Text style={styles.rowText}>Fidelidad</Text>
+      <View style={styles.headerContainer}>
+        <Text style={[styles.rowText, styles.headerText]}>Seleccionados</Text>
+        <Text style={[styles.wideRowText, styles.headerText]}>Jugadores</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Fidelidad</Text>
       </View>
     );
   };
 
-  const listSeparator = () => <View style={{height: 20}} />;
+  const listSeparator = () => <View style={styles.separator} />;
 
   const renderItem = ({item}: any) => {
-    const isChecked = playerSelected.some(player => player.id === item.id);
-    const isCheckboxDisabled = playerSelected.length === amountOfPlayers;
+    if (item.header) return listHeader();
+
+    const isChecked = selectedPlayers.some(player => player.id === item.id);
 
     return (
       <View style={styles.rowContainer}>
@@ -65,23 +64,32 @@ const SelectPlayers = ({route}: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Text>{title}</Text>
-        <Text>
-          Jugadores restantes: {amountOfPlayers - playerSelected.length}
-        </Text>
-      </View>
+      <Text style={styles.titleText}>
+        Jugadores restantes: {amountOfPlayers - selectedPlayers.length}
+      </Text>
       <FlatList
+        bounces={false}
         data={DATA_MOCK}
         renderItem={renderItem}
         style={styles.flatList}
         ItemSeparatorComponent={listSeparator}
-        ListHeaderComponent={listHeader}
+        stickyHeaderIndices={[0]}
+        stickyHeaderHiddenOnScroll={false}
         keyExtractor={(_, index) => index.toString()}
       />
-      <TouchableOpacity style={styles.bottomButton}>
-        <Text>El boton del Sr. Ayom</Text>
-      </TouchableOpacity>
+      <Button
+        style={styles.bottomButton}
+        isDisabled={!isCheckboxDisabled}
+        onPress={() => {
+          selectedPlayers.forEach(player =>
+            // TO DO: Integrate selectedPlayers with BE
+            console.log(
+              player.firstName + ' ' + player.lastName + ' is selected.',
+            ),
+          );
+        }}>
+        <Text>Confirmar</Text>
+      </Button>
     </SafeAreaView>
   );
 };
