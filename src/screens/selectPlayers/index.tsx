@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {Checkbox} from 'native-base';
-import {FlatList, Text, View} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {DATA_MOCK} from './MOCK';
 import styles from './styles';
 
@@ -22,12 +28,24 @@ const SelectPlayers = ({route}: any) => {
     return setPlayerSelected(current => [...current, item]);
   };
 
+  const listHeader = () => {
+    return (
+      <View style={styles.rowContainer}>
+        <Text style={styles.rowText}>Seleccionados</Text>
+        <Text style={styles.wideRowText}>Jugadores</Text>
+        <Text style={styles.rowText}>Fidelidad</Text>
+      </View>
+    );
+  };
+
+  const listSeparator = () => <View style={{height: 20}} />;
+
   const renderItem = ({item}: any) => {
     const isChecked = playerSelected.some(player => player.id === item.id);
     const isCheckboxDisabled = playerSelected.length === amountOfPlayers;
 
     return (
-      <View style={styles.renderItemContainer}>
+      <View style={styles.rowContainer}>
         <View style={styles.checkboxContainer}>
           <Checkbox
             isDisabled={!isChecked && isCheckboxDisabled}
@@ -37,31 +55,34 @@ const SelectPlayers = ({route}: any) => {
             onChange={() => onChangeCheckbox(item)}
           />
         </View>
-        <Text style={styles.rowData}>
+        <Text style={styles.wideRowText}>
           {item.firstName} {item.lastName}
         </Text>
-        <Text style={styles.rowData}>{item.fidelity}</Text>
+        <Text style={styles.rowText}>{item.fidelity}</Text>
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text>{title}</Text>
         <Text>
           Jugadores restantes: {amountOfPlayers - playerSelected.length}
         </Text>
       </View>
-      <View style={{height: '75%'}}>
-        <FlatList
-          data={DATA_MOCK}
-          renderItem={renderItem}
-          style={styles.flatList}
-          keyExtractor={(_, index) => index.toString()}
-        />
-      </View>
-    </View>
+      <FlatList
+        data={DATA_MOCK}
+        renderItem={renderItem}
+        style={styles.flatList}
+        ItemSeparatorComponent={listSeparator}
+        ListHeaderComponent={listHeader}
+        keyExtractor={(_, index) => index.toString()}
+      />
+      <TouchableOpacity style={styles.bottomButton}>
+        <Text>El boton del Sr. Ayom</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 

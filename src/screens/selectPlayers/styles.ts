@@ -3,14 +3,11 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
-    height: '100%',
-    marginTop: 20,
+    flex: 1,
   },
-  renderItemContainer: {
+  rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '100%',
-    marginTop: 20,
   },
   titleRow: {
     flexDirection: 'row',
@@ -24,8 +21,26 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  rowData: {
+  wideRowText: {
+    flex: 2,
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
+  rowText: {
     flex: 1,
     textAlign: 'center',
+    alignSelf: 'center',
+  },
+  headerWrapper: {
+    flexDirection: 'row',
+  },
+  bottomButton: {
+    minWidth: '50%',
+    marginTop: 15,
+    borderRadius: 15,
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: 'lightblue',
   },
 });
