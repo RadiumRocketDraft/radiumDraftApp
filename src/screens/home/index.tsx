@@ -1,11 +1,25 @@
+import {Stack} from 'native-base';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
-const Match = () => {
+const Match = ({navigation}: any) => {
+  const onPressMatch = () => {
+    navigation.navigate('selectPlayers');
+  };
   return (
-    <View>
-      <Text>Match SCREEN</Text>
-    </View>
+    <Stack
+      space={2}
+      w="100%"
+      h="100%"
+      alignItems="center"
+      justifyContent="center">
+      <TouchableOpacity onPress={onPressMatch}>
+        <Text>5 Vs 5</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={onPressMatch}>
+        <Text>7 Vs 7</Text>
+      </TouchableOpacity>
+    </Stack>
   );
 };
 
