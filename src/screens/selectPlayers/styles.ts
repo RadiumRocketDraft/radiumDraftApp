@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
     marginTop: 20,
@@ -15,7 +14,7 @@ export default StyleSheet.create({
   },
   titleRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     width: '100%',
   },
   flatList: {
@@ -24,7 +23,6 @@ export default StyleSheet.create({
   checkboxContainer: {
     flex: 1,
     alignItems: 'center',
-    right: 5,
   },
   rowData: {
     flex: 1,

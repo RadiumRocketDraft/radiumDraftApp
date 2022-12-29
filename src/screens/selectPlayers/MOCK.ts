@@ -71,4 +71,22 @@ export const DATA_MOCK = [
     lastName: 'Blascow',
     fidelity: 100,
   },
+  {
+    id: 13,
+    firstName: 'Agustin',
+    lastName: 'Schiaffino',
+    fidelity: 100,
+  },
+  {
+    id: 14,
+    firstName: 'Facundo',
+    lastName: 'De Lafuente',
+    fidelity: 100,
+  },
+  {
+    id: 15,
+    firstName: 'Rodrigo',
+    lastName: 'Sibrins',
+    fidelity: 100,
+  },
 ];

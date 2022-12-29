@@ -24,7 +24,7 @@ const SelectPlayers = ({route}: any) => {
 
   const renderItem = ({item}: any) => {
     const isChecked = playerSelected.some(player => player.id === item.id);
-    const isCheckboxDisabled = playerSelected.length === 10;
+    const isCheckboxDisabled = playerSelected.length === amountOfPlayers;
 
     return (
       <View style={styles.renderItemContainer}>
@@ -47,21 +47,20 @@ const SelectPlayers = ({route}: any) => {
 
   return (
     <View style={styles.container}>
-      <Text>{title}</Text>
-      <Text>
-        Jugadores restantes: {amountOfPlayers - playerSelected.length}
-      </Text>
-      <View style={styles.titleRow}>
-        <Text>Select</Text>
-        <Text>Full Name</Text>
-        <Text>Fidelity</Text>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Text>{title}</Text>
+        <Text>
+          Jugadores restantes: {amountOfPlayers - playerSelected.length}
+        </Text>
       </View>
-      <FlatList
-        data={DATA_MOCK}
-        renderItem={renderItem}
-        style={styles.flatList}
-        keyExtractor={(_, index) => index.toString()}
-      />
+      <View style={{height: '75%'}}>
+        <FlatList
+          data={DATA_MOCK}
+          renderItem={renderItem}
+          style={styles.flatList}
+          keyExtractor={(_, index) => index.toString()}
+        />
+      </View>
     </View>
   );
 };
