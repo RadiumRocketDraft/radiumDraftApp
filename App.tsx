@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
-import {Login, CreateAccount} from './src/screens/index';
 import TabNavigation from './src/components/tabNavigation';
 import useIsSignedIn from './src/hooks/isSignIn';
 import store from './src/store/store';
 import {Provider} from 'react-redux';
+import {SelectPlayers, Login, CreateAccount} from './src/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +37,13 @@ const App = () => {
                   }}
                   name="Home"
                   component={BottomNavigation}
+                />
+                <Stack.Screen
+                  name="selectPlayers"
+                  component={SelectPlayers}
+                  options={({route}: {route: any}) => ({
+                    title: route.params.title,
+                  })}
                 />
               </>
             ) : (
