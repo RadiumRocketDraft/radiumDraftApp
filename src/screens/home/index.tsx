@@ -3,8 +3,8 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
 const Match = ({navigation}: any) => {
-  const onPressMatch = () => {
-    navigation.navigate('selectPlayers');
+  const onPressMatch = (title: string) => {
+    navigation.navigate('selectPlayers', {title: title});
   };
   return (
     <Stack
@@ -13,10 +13,10 @@ const Match = ({navigation}: any) => {
       h="100%"
       alignItems="center"
       justifyContent="center">
-      <TouchableOpacity onPress={onPressMatch}>
+      <TouchableOpacity onPress={() => onPressMatch('5 VS 5')}>
         <Text>5 Vs 5</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onPressMatch}>
+      <TouchableOpacity onPress={() => onPressMatch('7 VS 7')}>
         <Text>7 Vs 7</Text>
       </TouchableOpacity>
     </Stack>
