@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {Controller} from 'react-hook-form';
 import {Input as InputNativeBase} from 'native-base';
-
 import styles from './styles';
 
 const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
@@ -10,9 +9,9 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
     <View style={styles.containerInput}>
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({field: {onChange, value}}) => (
           <InputNativeBase
             onChangeText={onChange}
@@ -29,7 +28,7 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
         )}
         name={name}
       />
-      {error && <Text style={styles.error}>This is required.</Text>}
+      {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 };

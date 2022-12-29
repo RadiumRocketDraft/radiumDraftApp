@@ -2,6 +2,8 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {Avatar, FlatList} from 'native-base';
 import styles from './styles';
+import ButtonLine from '../../components/shared/buttonLine';
+import {logOut} from '../../utils/firebase';
 
 const Profile = () => {
   const DATA_MOCK = [
@@ -22,8 +24,16 @@ const Profile = () => {
       </View>
     );
   };
+
+  const onPressLogOut = () => {
+    logOut();
+  };
+
   return (
     <View style={styles.container}>
+      <ButtonLine customStyles={styles.logOut} onPress={onPressLogOut}>
+        Log out
+      </ButtonLine>
       <Avatar
         style={styles.avatarContainer}
         bg="lightBlue.400"
@@ -35,7 +45,7 @@ const Profile = () => {
         <Avatar.Badge bg={'green.500'} />
       </Avatar>
       <View style={styles.infoContainer}>
-        <FlatList data={DATA_MOCK} renderItem={renderItem} />
+        <FlatList bounces={false} data={DATA_MOCK} renderItem={renderItem} />
       </View>
     </View>
   );

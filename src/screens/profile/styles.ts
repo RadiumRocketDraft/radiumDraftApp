@@ -21,4 +21,8 @@ export default StyleSheet.create({
   infoRowText: {
     fontSize: 18,
   },
+  logOut: {
+    alignSelf: 'flex-end',
+    marginRight: 20,
+  },
 });

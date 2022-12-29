@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
-import Login from './src/screens/login';
+import {Login, CreateAccount} from './src/screens/index';
 import TabNavigation from './src/components/tabNavigation';
+import useIsSignedIn from './src/hooks/isSignIn';
 import store from './src/store/store';
 import {Provider} from 'react-redux';
 
@@ -15,17 +16,43 @@ const App = () => {
     return <TabNavigation setTitleScreen={setTitleScreen} />;
   };
 
+  const isSignedIn = useIsSignedIn();
+
   return (
     <Provider store={store}>
       <NavigationContainer>
         <NativeBaseProvider>
-          <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen
-              options={{title: titleScreen}}
-              name="Home"
-              component={BottomNavigation}
-            />
-            <Stack.Screen name="Login" component={Login} />
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerShown: false,
+            }}>
+            {isSignedIn ? (
+              <>
+                <Stack.Screen
+                  options={{
+                    title: titleScreen,
+                    headerShown: true,
+                    headerBackVisible: false,
+                  }}
+                  name="Home"
+                  component={BottomNavigation}
+                />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen
+                  options={{
+                    headerShown: true,
+                    headerBackVisible: true,
+                    headerTitle: '',
+                  }}
+                  name="CreateAccount"
+                  component={CreateAccount}
+                />
+              </>
+            )}
           </Stack.Navigator>
         </NativeBaseProvider>
       </NavigationContainer>
