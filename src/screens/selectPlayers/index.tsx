@@ -7,7 +7,7 @@ import styles from './styles';
 type TPlayers = typeof DATA_MOCK;
 
 const SelectPlayers = ({route}: any) => {
-  const title = route.params.title;
+  const {title, amountOfPlayers} = route.params;
   const [playerSelected, setPlayerSelected] = useState<TPlayers>([]);
 
   const onChangeCheckbox = (item: any) => {
@@ -22,13 +22,15 @@ const SelectPlayers = ({route}: any) => {
     return setPlayerSelected(current => [...current, item]);
   };
 
-  console.log('playerSelected', playerSelected);
-
   const renderItem = ({item}: any) => {
+    const isChecked = playerSelected.some(player => player.id === item.id);
+    const isCheckboxDisabled = playerSelected.length === 10;
+
     return (
       <View style={styles.renderItemContainer}>
         <View style={styles.checkboxContainer}>
           <Checkbox
+            isDisabled={!isChecked && isCheckboxDisabled}
             accessibilityLabel="player"
             value={item}
             size="md"
@@ -46,6 +48,9 @@ const SelectPlayers = ({route}: any) => {
   return (
     <View style={styles.container}>
       <Text>{title}</Text>
+      <Text>
+        Jugadores restantes: {amountOfPlayers - playerSelected.length}
+      </Text>
       <View style={styles.titleRow}>
         <Text>Select</Text>
         <Text>Full Name</Text>
