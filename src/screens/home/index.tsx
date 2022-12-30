@@ -3,10 +3,10 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
 const Match = ({navigation}: any) => {
-  const onPressMatch = (title: string, amountOfPlayers) => {
+  const onPressMatch = (title: string, amountOfPlayers: number) => {
     navigation.navigate('selectPlayers', {
-      title: title,
-      amountOfPlayers: amountOfPlayers,
+      title,
+      amountOfPlayers,
     });
   };
   return (

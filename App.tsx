@@ -20,8 +20,8 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <NativeBaseProvider>
+      <NativeBaseProvider>
+        <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Login"
             screenOptions={{
@@ -61,8 +61,8 @@ const App = () => {
               </>
             )}
           </Stack.Navigator>
-        </NativeBaseProvider>
-      </NavigationContainer>
+        </NavigationContainer>
+      </NativeBaseProvider>
     </Provider>
   );
 };
