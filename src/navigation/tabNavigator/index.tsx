@@ -2,10 +2,11 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Match, History, Profile} from '../../screens';
+import {Routes} from '../../interfaces/routes';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = ({setTitleScreen}: any) => {
+const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -13,11 +14,6 @@ const TabNavigator = ({setTitleScreen}: any) => {
         headerShown: false,
       }}>
       <Tab.Screen
-        listeners={{
-          tabPress: () => {
-            setTitleScreen('Match');
-          },
-        }}
         options={{
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
@@ -28,15 +24,10 @@ const TabNavigator = ({setTitleScreen}: any) => {
             />
           ),
         }}
-        name="Match"
+        name={Routes.MATCH}
         component={Match}
       />
       <Tab.Screen
-        listeners={{
-          tabPress: () => {
-            setTitleScreen('History');
-          },
-        }}
         options={{
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
@@ -47,15 +38,10 @@ const TabNavigator = ({setTitleScreen}: any) => {
             />
           ),
         }}
-        name="History"
+        name={Routes.HISTORY}
         component={History}
       />
       <Tab.Screen
-        listeners={{
-          tabPress: () => {
-            setTitleScreen('Profile');
-          },
-        }}
         options={{
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
           tabBarIcon: ({focused}) => (
@@ -66,7 +52,7 @@ const TabNavigator = ({setTitleScreen}: any) => {
             />
           ),
         }}
-        name="Profile"
+        name={Routes.PROFILE}
         component={Profile}
       />
     </Tab.Navigator>

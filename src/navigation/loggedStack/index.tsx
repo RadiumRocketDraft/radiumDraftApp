@@ -1,4 +1,5 @@
 import React from 'react';
+import {Routes} from '../../interfaces/routes';
 import {SelectPlayers} from '../../screens';
 import {Stack} from '../mainStack';
 import TabNavigator from '../tabNavigator';
@@ -10,11 +11,11 @@ const LoggedStack = () => (
         headerShown: true,
         headerBackVisible: false,
       }}
-      name="Home"
+      name={Routes.HOME}
       component={TabNavigator}
     />
     <Stack.Screen
-      name="selectPlayers"
+      name={Routes.SELECT_PLAYERS}
       component={SelectPlayers}
       options={({route}: {route: any}) => ({
         title: route.params.title,
