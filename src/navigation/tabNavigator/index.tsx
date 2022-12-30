@@ -3,9 +3,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Match, History, Profile} from '../../screens';
 
-const TabNavigation = ({setTitleScreen}: any) => {
-  const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
+const TabNavigator = ({setTitleScreen}: any) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -73,4 +73,4 @@ const TabNavigation = ({setTitleScreen}: any) => {
   );
 };
 
-export default TabNavigation;
+export default TabNavigator;
