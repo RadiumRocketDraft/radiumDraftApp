@@ -2,9 +2,9 @@
 import {initializeApp} from 'firebase/app';
 import {
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,4 +30,10 @@ export const signIn = (email: string, password: string) => {
 
 export const logOut = () => {
   return signOut(auth);
+};
+
+export const signUp = (email: string, password: string) => {
+  return createUserWithEmailAndPassword(auth, email, password).then(() => {
+    auth.signOut();
+  });
 };
