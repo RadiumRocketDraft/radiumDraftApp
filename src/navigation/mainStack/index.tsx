@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import useIsSignedIn from '../../hooks/isSignIn';
 import LoggedStack from '../loggedStack';
 import LogInStack from '../logInStack';
+import {mainStackNavOption} from '../../helpers';
 
 export const Stack = createNativeStackNavigator();
 
@@ -11,11 +12,7 @@ const MainStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{
-        contentStyle: {
-          backgroundColor: '#FFFFFF',
-        },
-      }}>
+      screenOptions={mainStackNavOption}>
       {isSignedIn ? <LoggedStack /> : <LogInStack />}
     </Stack.Navigator>
   );
