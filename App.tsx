@@ -7,11 +7,11 @@ import MainStack from './src/navigation/mainStack';
 
 const App = () => (
   <Provider store={store}>
-    <NavigationContainer>
-      <NativeBaseProvider>
+    <NativeBaseProvider>
+      <NavigationContainer>
         <MainStack />
-      </NativeBaseProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </NativeBaseProvider>
   </Provider>
 );
 

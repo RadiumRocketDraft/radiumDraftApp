@@ -8,12 +8,18 @@ export const mainStackNavOption: NativeStackNavigationOptions = {
 };
 
 export const appNavOptions: AppNavOptions = {
-  [Routes.LOG_IN]: undefined,
+  [Routes.LOG_IN]: {
+    headerShown: false,
+  },
   [Routes.CREATE_ACCOUNT]: {
     headerTitle: '',
+    headerBackTitle: 'Log In',
   },
-  [Routes.HOME]: undefined,
-  [Routes.SELECT_PLAYERS]: ({route}: {route: any}) => ({
+  [Routes.HOME]: {
+    headerShown: false,
+  },
+  [Routes.SELECT_PLAYERS]: ({route}) => ({
     title: route.params.title,
+    headerBackTitleVisible: false,
   }),
 };
