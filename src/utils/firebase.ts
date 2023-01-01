@@ -2,22 +2,23 @@
 import {initializeApp} from 'firebase/app';
 import {
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
+import Config from 'react-native-config';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyB28n1sflO5vDGp2C8RMKPsskM7oQBpT3I',
-  authDomain: 'radium-draft.firebaseapp.com',
-  projectId: 'radium-draft',
-  storageBucket: 'radium-draft.appspot.com',
-  messagingSenderId: '742647588950',
-  appId: '1:742647588950:web:5cd48f14ed8dae02bdf3f7',
+  apiKey: Config.FIREBASE_API_KEY,
+  authDomain: Config.FIREBASE_AUTH_DOMAIN,
+  projectId: Config.FIREBASE_PROJECT_ID,
+  storageBucket: Config.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: Config.FIREBASE_MESSAGING_SENDER_ID,
+  appId: Config.FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
@@ -30,4 +31,8 @@ export const signIn = (email: string, password: string) => {
 
 export const logOut = () => {
   return signOut(auth);
+};
+
+export const signUp = (email: string, password: string) => {
+  return createUserWithEmailAndPassword(auth, email, password);
 };

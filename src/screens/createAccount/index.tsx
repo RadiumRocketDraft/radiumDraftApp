@@ -5,6 +5,7 @@ import Button from '../../components/shared/button';
 import Input from '../../components/shared/input';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validation';
+import {signUp} from '../../utils/firebase';
 interface ICreateAccount {
   firstName: string;
   lastName: string;
@@ -33,7 +34,7 @@ const CreateAccount = () => {
   });
 
   const onSubmit = (data: ICreateAccount) => {
-    console.log('data del form: ', data);
+    signUp(data.email, data.password);
   };
 
   const onFocusInput = (inputName: FieldName<ICreateAccount>) => {
