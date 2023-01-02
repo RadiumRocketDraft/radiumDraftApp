@@ -3,15 +3,16 @@ import {Button, Checkbox} from 'native-base';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {DATA_MOCK} from './MOCK';
 import styles from './styles';
+import {Routes, TNavigation} from '../../interfaces';
 
 type TPlayers = typeof DATA_MOCK;
 
-const SelectPlayers = ({route}: any) => {
-  const {amountOfPlayers} = route.params;
+const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
+  const {playersAmount} = route.params;
   const [selectedPlayers, setSelectedPlayers] = useState<TPlayers>([]);
   const isCheckboxDisabled = useMemo(
-    () => selectedPlayers.length === amountOfPlayers,
-    [amountOfPlayers, selectedPlayers.length],
+    () => selectedPlayers.length === playersAmount,
+    [playersAmount, selectedPlayers.length],
   );
 
   const onChangeCheckbox = (item: any) => {
@@ -65,7 +66,7 @@ const SelectPlayers = ({route}: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>
-        Jugadores restantes: {amountOfPlayers - selectedPlayers.length}
+        Jugadores restantes: {playersAmount - selectedPlayers.length}
       </Text>
       <FlatList
         bounces={false}

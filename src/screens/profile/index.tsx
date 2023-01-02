@@ -4,6 +4,7 @@ import {Avatar, FlatList} from 'native-base';
 import styles from './styles';
 import ButtonLine from '../../components/shared/buttonLine';
 import {logOut} from '../../utils/firebase';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Profile = () => {
   const DATA_MOCK = [
@@ -30,7 +31,7 @@ const Profile = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ButtonLine customStyles={styles.logOut} onPress={onPressLogOut}>
         Log out
       </ButtonLine>
@@ -47,7 +48,7 @@ const Profile = () => {
       <View style={styles.infoContainer}>
         <FlatList bounces={false} data={DATA_MOCK} renderItem={renderItem} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

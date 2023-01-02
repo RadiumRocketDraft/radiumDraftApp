@@ -7,13 +7,14 @@ import ButtonLine from '../../components/shared/buttonLine';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validations';
 import {signIn} from '../../utils/firebase';
+import {Routes, TNavigation} from '../../interfaces';
 
 interface ILogin {
   email: string;
   password: string;
 }
 
-const Login = ({navigation}: any) => {
+const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
   const {
     control,
     handleSubmit,
@@ -37,7 +38,7 @@ const Login = ({navigation}: any) => {
 
   const onSubmit = (data: ILogin) => {
     signIn(data.email, data.password).then(() => {
-      navigation.navigate('Home');
+      navigation.navigate(Routes.HOME);
       reset();
     });
   };
@@ -47,7 +48,7 @@ const Login = ({navigation}: any) => {
   };
 
   const handleSignUp = () => {
-    navigation.navigate('CreateAccount');
+    navigation.navigate(Routes.CREATE_ACCOUNT);
   };
   return (
     <Stack

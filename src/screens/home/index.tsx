@@ -1,12 +1,13 @@
 import {Stack} from 'native-base';
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
+import {Routes, TNavigation} from '../../interfaces';
 
-const Match = ({navigation}: any) => {
-  const onPressMatch = (title: string, amountOfPlayers: number) => {
-    navigation.navigate('selectPlayers', {
+const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
+  const onPressMatch = (title: string, playersAmount: number) => {
+    navigation.navigate(Routes.SELECT_PLAYERS, {
       title,
-      amountOfPlayers,
+      playersAmount,
     });
   };
   return (

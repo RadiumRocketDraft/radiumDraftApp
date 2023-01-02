@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {StyleProp, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import styles from './styles';
 
 interface Props {
   children: string;
   onPress: () => void;
-  customStyles: any;
+  customStyles?: StyleProp<ViewStyle>;
 }
 
 const ButtonLine: React.FC<Props> = ({children, onPress, customStyles}) => {
