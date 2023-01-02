@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
 import {initializeApp} from 'firebase/app';
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
   signOut,
-  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import Config from 'react-native-config';
 
@@ -24,6 +24,13 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+export const getCurrentFirebaseToken = async (
+  forceRefresh = false,
+): Promise<string> => {
+  const token = await auth.currentUser?.getIdToken(forceRefresh);
+  return token || '';
+};
 
 export const signIn = (email: string, password: string) => {
   return signInWithEmailAndPassword(auth, email, password);

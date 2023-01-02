@@ -1,5 +1,5 @@
 import {URL, api} from '../api';
-import {UserLogin} from '../store/modules/auth';
+import {UserLogin} from '../interfaces';
 
 export const logInRequest = async (body: UserLogin) => {
   const response = await api.post(URL.LOGIN, body);

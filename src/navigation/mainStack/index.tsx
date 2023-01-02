@@ -11,9 +11,7 @@ export const Stack = createNativeStackNavigator<StackParamList>();
 const MainStack = () => {
   const isSignedIn = useIsSignedIn();
   return (
-    <Stack.Navigator
-      initialRouteName={Routes.LOG_IN}
-      screenOptions={mainStackNavOption}>
+    <Stack.Navigator screenOptions={mainStackNavOption}>
       {isSignedIn ? (
         <>
           <Stack.Screen

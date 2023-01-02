@@ -1,10 +1,6 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
+import {UserLogin} from '../../../interfaces';
 import {logInRequest, creatAccountRequest} from '../../../services/auth';
-
-export interface UserLogin {
-  email: string;
-  password: string;
-}
 
 export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
   logInRequest(values),
