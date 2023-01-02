@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "742647588950",
+    "project_id": "radium-draft",
+    "storage_bucket": "radium-draft.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742647588950:android:026bf8f64742bb7cbdf3f7",
+        "android_client_info": {
+          "package_name": "com.radiumdraftapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742647588950-q1bn4h3du8oft9ald7iajrp4ngm6efif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.radiumdraftapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "742647588950-48kseu93n90h5a9grf2k85ou5rj83jq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_aEpNdfuOoBRJFOajFPoFmRtVVVcC0X8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742647588950-48kseu93n90h5a9grf2k85ou5rj83jq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "742647588950-ijra18nup0gvieo5ih3abmpr1vsvb1g6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.radiumDraftApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
