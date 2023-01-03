@@ -23,4 +23,6 @@ export const URL = {
   GET_INACTIVE_MATCHES: 'api/match/inactive',
   GET_ACTIVE_MATCHES: 'api/match/active',
   CREATE_MATCH: 'api/match',
+  FINISH_MATCH: 'api/match/finish/',
+  CANCEL_MATCH: 'api/match/cancel/',
 };

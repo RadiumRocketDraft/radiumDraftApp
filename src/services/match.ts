@@ -20,3 +20,13 @@ export const createMatchRequest = async (body: MatchBody) => {
   const response = await api.post(URL.CREATE_MATCH, body);
   return response.data.payload;
 };
+
+export const finishMatchRequest = async (id: string) => {
+  const response = await api.patch(`${URL.FINISH_MATCH}${id}`);
+  return response.data.payload;
+};
+
+export const cancelMatchRequest = async (id: string) => {
+  const response = await api.patch(`${URL.CANCEL_MATCH}${id}`);
+  return response.data.payload;
+};
