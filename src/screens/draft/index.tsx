@@ -5,6 +5,7 @@ import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
 import DatePicker from 'react-native-date-picker';
+import format from 'date-fns/format';
 
 const Draft = ({route}: any) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
@@ -129,7 +130,7 @@ const Draft = ({route}: any) => {
         w={{base: '50%', md: '25%'}}
         editable={false}
         onPressIn={() => modalDatePicker(openDatePicker)}
-        valueInput={date?.toISOString()}
+        valueInput={format(date, 'd/M/yyyy')}
       />
     </SafeAreaView>
   );
