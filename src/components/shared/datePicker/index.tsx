@@ -24,6 +24,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
       mode={mode}
       onConfirm={onConfirm}
       onCancel={onCancel}
+      locale={'es'}
     />
   );
 };
