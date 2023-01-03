@@ -6,7 +6,7 @@ export interface Auth {
   password: string;
   token: string;
   isLoading: boolean;
-  isLoggedIn: boolean;
+  error?: string;
   message?: string;
 }
 
@@ -14,9 +14,9 @@ export const authReducer = createReducer<Auth>(
   {
     email: '',
     isLoading: false,
-    isLoggedIn: false,
     password: '',
     token: '',
+    error: '',
     message: '',
   },
   builder => {
@@ -35,7 +35,8 @@ export const authReducer = createReducer<Auth>(
     builder.addCase(createAccount.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(createAccount.rejected, state => {
+    builder.addCase(createAccount.rejected, (state, action) => {
+      state.error = action.error.message;
       state.isLoading = false;
     });
     builder.addCase(createAccount.fulfilled, (state, action) => {
