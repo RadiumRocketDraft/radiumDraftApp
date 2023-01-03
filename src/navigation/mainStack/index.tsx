@@ -4,7 +4,7 @@ import useIsSignedIn from '../../hooks/isSignIn';
 import {appNavOptions, mainStackNavOption} from '../../helpers';
 import {Routes, StackParamList} from '../../interfaces';
 import TabNavigator from '../tabNavigator';
-import {CreateAccount, Login, SelectPlayers} from '../../screens';
+import {CreateAccount, Draft, Login, SelectPlayers} from '../../screens';
 
 export const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -25,6 +25,11 @@ const MainStack = () => {
             name={Routes.SELECT_PLAYERS}
             component={SelectPlayers}
             options={appNavOptions[Routes.SELECT_PLAYERS]}
+          />
+          <Stack.Screen
+            name={Routes.DRAFT}
+            component={Draft}
+            options={appNavOptions[Routes.DRAFT]}
           />
         </>
       ) : (

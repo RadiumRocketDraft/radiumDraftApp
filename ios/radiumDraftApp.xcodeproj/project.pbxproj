@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* radiumDraftAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* radiumDraftAppTests.m */; };
+		09F32D28D89316F1411328B4 /* libPods-radiumDraftApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D24FD81DAF9E776CC4474E27 /* libPods-radiumDraftApp.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		98FC827F143889EA999101C0 /* libPods-radiumDraftApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA3B04A2648567B5A2FAC3A /* libPods-radiumDraftApp.a */; };
-		BC91F65F9409138DE3A43BCF /* libPods-radiumDraftApp-radiumDraftAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB26BCF155FCEC74ED76F06 /* libPods-radiumDraftApp-radiumDraftAppTests.a */; };
+		DE2D6E2D10B19C9FD053757B /* libPods-radiumDraftApp-radiumDraftAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5259ACCEB613079783FE99CA /* libPods-radiumDraftApp-radiumDraftAppTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,19 +30,19 @@
 		00E356EE1AD99517003FC87E /* radiumDraftAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = radiumDraftAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* radiumDraftAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = radiumDraftAppTests.m; sourceTree = "<group>"; };
+		0A5FC4E00C2340F46E9B1EFF /* Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* radiumDraftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = radiumDraftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = radiumDraftApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = radiumDraftApp/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = radiumDraftApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = radiumDraftApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = radiumDraftApp/main.m; sourceTree = "<group>"; };
-		1BA3B04A2648567B5A2FAC3A /* libPods-radiumDraftApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-radiumDraftApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		26AAF488EB2749FA263AFFF2 /* Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2AB26BCF155FCEC74ED76F06 /* libPods-radiumDraftApp-radiumDraftAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-radiumDraftApp-radiumDraftAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62A1EA7EE74A314F88F861FE /* Pods-radiumDraftApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp.debug.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp.debug.xcconfig"; sourceTree = "<group>"; };
-		6ABC4DA0EFCB555EBDD56C91 /* Pods-radiumDraftApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp.release.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp.release.xcconfig"; sourceTree = "<group>"; };
+		5259ACCEB613079783FE99CA /* libPods-radiumDraftApp-radiumDraftAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-radiumDraftApp-radiumDraftAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F4F949D6D484B7CBF9329F5 /* Pods-radiumDraftApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp.release.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = radiumDraftApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BB8A82BF99D66984356752FC /* Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		B896233E0BADDC4D1CC50C50 /* Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		C0644E51D2ED50D2A6A356FD /* Pods-radiumDraftApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-radiumDraftApp.debug.xcconfig"; path = "Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D24FD81DAF9E776CC4474E27 /* libPods-radiumDraftApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-radiumDraftApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC91F65F9409138DE3A43BCF /* libPods-radiumDraftApp-radiumDraftAppTests.a in Frameworks */,
+				DE2D6E2D10B19C9FD053757B /* libPods-radiumDraftApp-radiumDraftAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98FC827F143889EA999101C0 /* libPods-radiumDraftApp.a in Frameworks */,
+				09F32D28D89316F1411328B4 /* libPods-radiumDraftApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				1BA3B04A2648567B5A2FAC3A /* libPods-radiumDraftApp.a */,
-				2AB26BCF155FCEC74ED76F06 /* libPods-radiumDraftApp-radiumDraftAppTests.a */,
+				D24FD81DAF9E776CC4474E27 /* libPods-radiumDraftApp.a */,
+				5259ACCEB613079783FE99CA /* libPods-radiumDraftApp-radiumDraftAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				62A1EA7EE74A314F88F861FE /* Pods-radiumDraftApp.debug.xcconfig */,
-				6ABC4DA0EFCB555EBDD56C91 /* Pods-radiumDraftApp.release.xcconfig */,
-				26AAF488EB2749FA263AFFF2 /* Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig */,
-				BB8A82BF99D66984356752FC /* Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig */,
+				C0644E51D2ED50D2A6A356FD /* Pods-radiumDraftApp.debug.xcconfig */,
+				5F4F949D6D484B7CBF9329F5 /* Pods-radiumDraftApp.release.xcconfig */,
+				0A5FC4E00C2340F46E9B1EFF /* Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig */,
+				B896233E0BADDC4D1CC50C50 /* Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "radiumDraftAppTests" */;
 			buildPhases = (
-				0AF913E2D88D2EA1B3FCE486 /* [CP] Check Pods Manifest.lock */,
+				C514E7BFEF23F3A9471D8DCA /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				19DF4764E6869924AC2814CC /* [CP] Embed Pods Frameworks */,
-				3311D50C9B4F6B17CD8AED5F /* [CP] Copy Pods Resources */,
+				A9DB95707E481235554AD265 /* [CP] Embed Pods Frameworks */,
+				B01CC6E063276B2337529533 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,14 +176,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "radiumDraftApp" */;
 			buildPhases = (
-				02633A62B2F48F02EF935CD9 /* [CP] Check Pods Manifest.lock */,
+				FEAF7A35CE277396B032847A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				FDBD9721B0D6EE8DA327E888 /* [CP] Embed Pods Frameworks */,
-				2B7B4DE9C54A9839DE569198 /* [CP] Copy Pods Resources */,
+				1222A7074CD02C5708420F89 /* [CP] Embed Pods Frameworks */,
+				14DE580D35220B8FF5DFA0A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -266,29 +266,75 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		02633A62B2F48F02EF935CD9 /* [CP] Check Pods Manifest.lock */ = {
+		1222A7074CD02C5708420F89 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-radiumDraftApp-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0AF913E2D88D2EA1B3FCE486 /* [CP] Check Pods Manifest.lock */ = {
+		14DE580D35220B8FF5DFA0A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9DB95707E481235554AD265 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B01CC6E063276B2337529533 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C514E7BFEF23F3A9471D8DCA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -310,57 +356,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		19DF4764E6869924AC2814CC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2B7B4DE9C54A9839DE569198 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3311D50C9B4F6B17CD8AED5F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp-radiumDraftAppTests/Pods-radiumDraftApp-radiumDraftAppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,21 +375,26 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FDBD9721B0D6EE8DA327E888 /* [CP] Embed Pods Frameworks */ = {
+		FEAF7A35CE277396B032847A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-radiumDraftApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-radiumDraftApp/Pods-radiumDraftApp-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -430,7 +430,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26AAF488EB2749FA263AFFF2 /* Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig */;
+			baseConfigurationReference = 0A5FC4E00C2340F46E9B1EFF /* Pods-radiumDraftApp-radiumDraftAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -457,7 +457,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB8A82BF99D66984356752FC /* Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig */;
+			baseConfigurationReference = B896233E0BADDC4D1CC50C50 /* Pods-radiumDraftApp-radiumDraftAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -481,7 +481,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62A1EA7EE74A314F88F861FE /* Pods-radiumDraftApp.debug.xcconfig */;
+			baseConfigurationReference = C0644E51D2ED50D2A6A356FD /* Pods-radiumDraftApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -507,7 +507,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6ABC4DA0EFCB555EBDD56C91 /* Pods-radiumDraftApp.release.xcconfig */;
+			baseConfigurationReference = 5F4F949D6D484B7CBF9329F5 /* Pods-radiumDraftApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

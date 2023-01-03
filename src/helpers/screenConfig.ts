@@ -22,4 +22,8 @@ export const appNavOptions: AppNavOptions = {
     title: route.params.title,
     headerBackTitleVisible: false,
   }),
+  [Routes.DRAFT]: {
+    headerTitle: '',
+    headerBackTitle: 'Select Players',
+  },
 };

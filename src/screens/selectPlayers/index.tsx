@@ -7,7 +7,10 @@ import {Routes, TNavigation} from '../../interfaces';
 
 type TPlayers = typeof DATA_MOCK;
 
-const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
+const SelectPlayers = ({
+  route,
+  navigation,
+}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const {playersAmount} = route.params;
   const [selectedPlayers, setSelectedPlayers] = useState<TPlayers>([]);
   const isCheckboxDisabled = useMemo(
@@ -63,6 +66,15 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
     );
   };
 
+  const onHandleSubmit = () => {
+    const TEAM_A = DATA_MOCK.slice(1, 6);
+    const TEAM_B = DATA_MOCK.slice(6, 11);
+    navigation.navigate(Routes.DRAFT, {
+      teamA: TEAM_A,
+      teamB: TEAM_B,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>
@@ -81,14 +93,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
       <Button
         style={styles.bottomButton}
         isDisabled={!isCheckboxDisabled}
-        onPress={() => {
-          selectedPlayers.forEach(player =>
-            // TO DO: Integrate selectedPlayers with BE
-            console.log(
-              player.firstName + ' ' + player.lastName + ' is selected.',
-            ),
-          );
-        }}>
+        onPress={onHandleSubmit}>
         <Text>Confirmar</Text>
       </Button>
     </SafeAreaView>
