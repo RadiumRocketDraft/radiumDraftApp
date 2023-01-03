@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {MatchStatus} from '../../../enums';
+import {MatchStatus} from '../../../types/enums';
 import {Players} from '../player';
 import {getActiveMatches, getInactiveMatches} from './actions';
 

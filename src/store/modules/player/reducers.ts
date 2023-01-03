@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {PlayerPosition, PlayerStatus} from '../../../enums';
+import {PlayerPosition, PlayerStatus} from '../../../types/enums';
 import {getPlayers} from './actions';
 
 export interface PlayerReducer {
