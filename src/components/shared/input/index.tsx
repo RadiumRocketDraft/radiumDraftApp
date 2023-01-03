@@ -4,7 +4,28 @@ import {Controller} from 'react-hook-form';
 import {Input as InputNativeBase} from 'native-base';
 import styles from './styles';
 
-const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
+interface Props {
+  name: string;
+  placeholder: string;
+  onFocus: any;
+  control: any;
+  error: any;
+  type: any;
+  w?: {
+    base: string;
+    md: string;
+  };
+}
+
+const Input: React.FC<Props> = ({
+  name,
+  placeholder,
+  onFocus,
+  control,
+  error,
+  type,
+  w,
+}: any) => {
   return (
     <View style={styles.containerInput}>
       <Controller
@@ -18,8 +39,8 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
             value={value}
             onFocus={onFocus}
             w={{
-              base: '75%',
-              md: '25%',
+              base: w.base,
+              md: w.md,
             }}
             placeholder={placeholder}
             autoCapitalize="none"
@@ -34,3 +55,10 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
 };
 
 export default Input;
+
+Input.defaultProps = {
+  w: {
+    base: '75%',
+    md: '25%',
+  },
+};

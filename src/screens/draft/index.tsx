@@ -2,10 +2,24 @@ import {FlatList} from 'native-base';
 import React from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import Input from '../../components/shared/input';
+import {useForm} from 'react-hook-form';
 import styles from './styles';
+import DatePickerInput from '../../components/shared/datePicker';
 
 const Draft = ({route}: any) => {
   const {teamA, teamB} = route.params;
+
+  const {
+    control,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      field: '',
+    },
+    // resolver: yupResolver(schema),
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+  });
 
   const averageSkillTeamA = Math.floor(
     teamA.reduce(
@@ -23,6 +37,8 @@ const Draft = ({route}: any) => {
     ) / teamB.length,
   );
 
+  const listSeparator = () => <View style={styles.separator} />;
+
   const renderItemTeamA = (data: any) => {
     return (
       <Text>
@@ -31,15 +47,13 @@ const Draft = ({route}: any) => {
     );
   };
 
-  const renderItemTeamB = data => {
+  const renderItemTeamB = (data: any) => {
     return (
       <Text>
         {data.item.firstName} {data.item.lastName}
       </Text>
     );
   };
-
-  const listSeparator = () => <View style={styles.separator} />;
 
   return (
     <SafeAreaView>
@@ -73,8 +87,17 @@ const Draft = ({route}: any) => {
             ItemSeparatorComponent={listSeparator}
           />
         </View>
-        {/* <Input name="fieldName" placeholder="Field" type="text" /> */}
       </View>
+      <Input
+        name="field"
+        placeholder="Field"
+        onFocus={() => console.log('OnFocus')}
+        control={control}
+        error={errors.field?.message}
+        type="text"
+        w={{base: '50%', md: '25%'}}
+      />
+      <DatePickerInput />
     </SafeAreaView>
   );
 };

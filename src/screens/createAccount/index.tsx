@@ -60,8 +60,8 @@ const CreateAccount = () => {
         name="lastName"
         placeholder="Last name"
         label="LastName"
-        onFocus={() => onFocusInput('lastName')}
-        error={errors.lastName?.message}
+        // onFocus={() => onFocusInput('lastName')}
+        error={errors.field?.message}
       />
       <Input
         control={control}
