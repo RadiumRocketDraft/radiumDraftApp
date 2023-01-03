@@ -1,4 +1,4 @@
-import {InfoIcon, Popover, Stack, View} from 'native-base';
+import {Stack} from 'native-base';
 import React, {useState} from 'react';
 import {FieldName, useForm} from 'react-hook-form';
 import Button from '../../components/shared/button';
@@ -10,6 +10,7 @@ import {PlayerPosition} from '../../types/enums';
 import Select from '../../components/shared/select';
 import {useDispatch, useSelector} from 'react-redux';
 import {authIsLoading, createAccount} from '../../store/modules/auth';
+import CustomTooltip from '../../components/tooltip';
 
 interface ICreateAccount {
   firstName: string;
@@ -22,9 +23,9 @@ interface ICreateAccount {
 }
 
 const CreateAccount = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const isLoadingFromServer = useSelector(authIsLoading);
-  const [isLoading, setIsLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -120,19 +121,10 @@ const CreateAccount = () => {
         onFocus={() => onFocusInput('skill')}
         error={errors.skill?.message}
         rightElement={
-          <View m={2}>
-            <Popover trigger={props => <InfoIcon {...props} />}>
-              <Popover.Content>
-                <Popover.Arrow />
-                <Popover.CloseButton />
-                <Popover.Header>Skill Functionality</Popover.Header>
-                <Popover.Body>
-                  The skill level will help us to leverage the draft better
-                  between both teams
-                </Popover.Body>
-              </Popover.Content>
-            </Popover>
-          </View>
+          <CustomTooltip
+            title={'Skill Functionality'}
+            description="The skill level will help us to leverage the draft better between both teams"
+          />
         }
       />
       <Select
