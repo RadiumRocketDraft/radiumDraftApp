@@ -9,7 +9,11 @@ import {signUp} from '../../utils/firebase';
 import {PlayerPosition} from '../../types/enums';
 import Select from '../../components/shared/select';
 import {useDispatch, useSelector} from 'react-redux';
-import {authIsLoading, createAccount} from '../../store/modules/auth';
+import {
+  authIsLoading,
+  createAccount,
+  setIsCreatingAccount,
+} from '../../store/modules/auth';
 import CustomTooltip from '../../components/tooltip';
 
 interface ICreateAccount {
@@ -56,9 +60,11 @@ const CreateAccount = () => {
   }: ICreateAccount) => {
     try {
       setIsLoading(true);
+      dispatch(setIsCreatingAccount(true));
       await signUp(email, password);
       dispatch(createAccount({firstName, lastName, position, skill: +skill}));
     } catch (e) {
+      dispatch(setIsCreatingAccount(false));
       console.log('Error on CreateAccount onSubmit -', e);
     } finally {
       setIsLoading(false);

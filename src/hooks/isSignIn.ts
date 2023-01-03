@@ -1,21 +1,28 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {useSelector} from 'react-redux';
+import {authIsCreatingAccount} from '../store/modules/auth';
 import {onAuthStateChanged} from '../utils';
 import axiosInterceptors from '../utils/axiosInterceptors';
 
 const useIsSignedIn = () => {
   const [isSignedIn, setIsSignedIn] = useState<boolean>();
+  const isCreatingAccount = useSelector(authIsCreatingAccount);
+
+  const unsubscribeRef = useRef<() => void>();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(async user => {
+    if (unsubscribeRef.current) unsubscribeRef.current();
+    unsubscribeRef.current = onAuthStateChanged(async user => {
       if (user) {
         axiosInterceptors();
+        if (isCreatingAccount) return;
         return setIsSignedIn(true);
       } else {
         return setIsSignedIn(false);
       }
     });
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribeRef.current?.();
+  }, [isCreatingAccount]);
 
   return isSignedIn;
 };
