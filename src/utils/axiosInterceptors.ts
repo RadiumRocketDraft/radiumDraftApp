@@ -1,8 +1,8 @@
-import axios from 'axios';
+import {api} from '../api';
 import {getCurrentFirebaseToken, logOut} from './firebase';
 
 const axiosInterceptors = () => {
-  axios.interceptors.request.use(
+  api.interceptors.request.use(
     async req => {
       const authorization = await getCurrentFirebaseToken();
       if (authorization) {
@@ -18,7 +18,7 @@ const axiosInterceptors = () => {
     },
   );
 
-  axios.interceptors.response.use(
+  api.interceptors.response.use(
     res => {
       if (res.data.statusCode === 401 || res.data.error === 'Unauthorized') {
         logOut();

@@ -1,17 +1,44 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {Controller} from 'react-hook-form';
-import {Input as InputNativeBase} from 'native-base';
+import {NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  UnPackAsyncDefaultValues,
+} from 'react-hook-form';
+import {Input as InputNativeBase, Text, View} from 'native-base';
 import styles from './styles';
 
-const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
+interface Props<TFormValues extends FieldValues> {
+  name: Path<UnPackAsyncDefaultValues<TFormValues>>;
+  placeholder?: string;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  control: Control<TFormValues>;
+  error?: string;
+  type?: 'text' | 'password';
+  autocapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  rightElement?: JSX.Element | JSX.Element[];
+}
+
+const Input = <
+  TFormValues extends {
+    [key: string]: string;
+  },
+>({
+  name,
+  placeholder,
+  onFocus,
+  control,
+  error,
+  type = 'text',
+  autocapitalize = 'none',
+  rightElement,
+}: Props<TFormValues>) => {
   return (
     <View style={styles.containerInput}>
       <Controller
         control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({field: {onChange, value}}) => (
           <InputNativeBase
             onChangeText={onChange}
@@ -22,8 +49,9 @@ const Input = ({name, placeholder, onFocus, control, error, type}: any) => {
               md: '25%',
             }}
             placeholder={placeholder}
-            autoCapitalize="none"
+            autoCapitalize={autocapitalize}
             type={type}
+            InputRightElement={rightElement}
           />
         )}
         name={name}

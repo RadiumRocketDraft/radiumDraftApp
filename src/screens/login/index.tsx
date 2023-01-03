@@ -7,7 +7,7 @@ import ButtonLine from '../../components/shared/buttonLine';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validations';
 import {signIn} from '../../utils/firebase';
-import {Routes, TNavigation} from '../../interfaces';
+import {Routes, TNavigation} from '../../types/interfaces';
 
 interface ILogin {
   email: string;

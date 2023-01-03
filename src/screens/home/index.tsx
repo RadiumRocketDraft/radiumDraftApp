@@ -1,7 +1,7 @@
 import {Stack} from 'native-base';
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {Routes, TNavigation} from '../../interfaces';
+import {Routes, TNavigation} from '../../types/interfaces';
 
 const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
   const onPressMatch = (title: string, playersAmount: number) => {

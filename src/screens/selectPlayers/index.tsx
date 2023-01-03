@@ -3,7 +3,7 @@ import {Button, Checkbox} from 'native-base';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {DATA_MOCK} from './MOCK';
 import styles from './styles';
-import {Routes, TNavigation} from '../../interfaces';
+import {Routes, TNavigation} from '../../types/interfaces';
 
 type TPlayers = typeof DATA_MOCK;
 

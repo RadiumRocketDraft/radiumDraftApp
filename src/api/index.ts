@@ -16,11 +16,11 @@ export const api = axios.create({
 export const URL = {
   //LOGIN
   LOGIN: '/api/auth/login',
-  CREATE_ACCCOUNT: '/api/auth/',
   //PLAYER
-  GET_PLAYERS: 'api/player',
+  CREATE_ACCOUNT: '/api/player',
+  GET_PLAYERS: '/api/player',
   //MATCH
-  GET_INACTIVE_MATCHES: 'api/match/inactive',
-  GET_ACTIVE_MATCHES: 'api/match/active',
-  CREATE_MATCH: 'api/match',
+  GET_INACTIVE_MATCHES: '/api/match/inactive',
+  GET_ACTIVE_MATCHES: '/api/match/active',
+  CREATE_MATCH: '/api/match',
 };

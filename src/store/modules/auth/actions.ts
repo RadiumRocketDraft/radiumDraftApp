@@ -1,6 +1,6 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
-import {UserLogin} from '../../../interfaces';
-import {logInRequest, creatAccountRequest} from '../../../services/auth';
+import {UserLogin} from '../../../types/interfaces';
+import {logInRequest, createAccountRequest} from '../../../services/auth';
 
 export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
   logInRequest(values),
@@ -8,7 +8,7 @@ export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
 
 export const createAccount = createAsyncThunk(
   'CREATE_ACCOUNT',
-  (values: UserLogin) => creatAccountRequest(values),
+  (values: UserLogin) => createAccountRequest(values),
 );
 
 export const setLogOut = createAction('SET_LOG_OUT');
