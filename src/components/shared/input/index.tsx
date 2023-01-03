@@ -7,7 +7,7 @@ import styles from './styles';
 interface Props {
   name: string;
   placeholder: string;
-  onFocus: any;
+  onFocus?: any;
   control: any;
   error: any;
   type: any;
@@ -15,6 +15,10 @@ interface Props {
     base: string;
     md: string;
   };
+  label?: string;
+  editable?: boolean;
+  onPressIn?: () => void;
+  valueInput?: any;
 }
 
 const Input: React.FC<Props> = ({
@@ -25,9 +29,14 @@ const Input: React.FC<Props> = ({
   error,
   type,
   w,
+  label,
+  editable,
+  onPressIn,
+  valueInput,
 }: any) => {
   return (
     <View style={styles.containerInput}>
+      <Text>{label}</Text>
       <Controller
         control={control}
         // rules={{
@@ -45,6 +54,9 @@ const Input: React.FC<Props> = ({
             placeholder={placeholder}
             autoCapitalize="none"
             type={type}
+            editable={editable}
+            onPressIn={onPressIn}
+            defaultValue={valueInput}
           />
         )}
         name={name}
@@ -57,8 +69,13 @@ const Input: React.FC<Props> = ({
 export default Input;
 
 Input.defaultProps = {
+  onFocus: () => null,
   w: {
     base: '75%',
     md: '25%',
   },
+  label: '',
+  editable: true,
+  onPressIn: () => null,
+  valueInput: '',
 };

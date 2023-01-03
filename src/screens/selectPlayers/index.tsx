@@ -92,7 +92,7 @@ const SelectPlayers = ({
       />
       <Button
         style={styles.bottomButton}
-        isDisabled={!isCheckboxDisabled}
+        isDisabled={false}
         onPress={onHandleSubmit}>
         <Text>Confirmar</Text>
       </Button>

@@ -1,15 +1,35 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DatePicker from 'react-native-date-picker';
-import {View} from 'react-native';
 
-const DatePickerInput = () => {
-  const [date, setDate] = useState(new Date());
+interface DatePickerInputProps {
+  date: Date;
+  open: boolean;
+  mode?: 'date' | 'time' | 'datetime' | undefined;
+  onConfirm: () => void;
+  onCancel: () => void;
+}
 
+const DatePickerInput: React.FC<DatePickerInputProps> = ({
+  date,
+  open,
+  mode,
+  onConfirm,
+  onCancel,
+}) => {
   return (
-    <View>
-      <DatePicker date={date} onDateChange={setDate} />
-    </View>
+    <DatePicker
+      modal
+      date={date}
+      open={open}
+      mode={mode}
+      onConfirm={onConfirm}
+      onCancel={onCancel}
+    />
   );
 };
 
 export default DatePickerInput;
+
+DatePickerInput.defaultProps = {
+  mode: 'date',
+};

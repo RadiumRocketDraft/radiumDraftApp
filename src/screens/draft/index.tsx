@@ -1,22 +1,29 @@
+import React, {useState} from 'react';
 import {FlatList} from 'native-base';
-import React from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
-import DatePickerInput from '../../components/shared/datePicker';
+import DatePicker from 'react-native-date-picker';
 
 const Draft = ({route}: any) => {
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+  const [date, setDate] = useState<Date>(new Date());
   const {teamA, teamB} = route.params;
+
+  const modalDatePicker = (state: boolean) => {
+    setOpenDatePicker(!state);
+  };
 
   const {
     control,
     formState: {errors},
+    setValue,
   } = useForm({
     defaultValues: {
       field: '',
+      date: '',
     },
-    // resolver: yupResolver(schema),
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   });
@@ -55,6 +62,12 @@ const Draft = ({route}: any) => {
     );
   };
 
+  const onConfirmDate = (value: Date) => {
+    setDate(value);
+    modalDatePicker(openDatePicker);
+    setValue('date', value);
+  };
+
   return (
     <SafeAreaView>
       <View>
@@ -91,13 +104,33 @@ const Draft = ({route}: any) => {
       <Input
         name="field"
         placeholder="Field"
+        label="Seleccionar cancha"
         onFocus={() => console.log('OnFocus')}
         control={control}
         error={errors.field?.message}
         type="text"
         w={{base: '50%', md: '25%'}}
       />
-      <DatePickerInput />
+      <DatePicker
+        modal
+        date={date}
+        open={openDatePicker}
+        mode="date"
+        onConfirm={onConfirmDate}
+        onCancel={() => setOpenDatePicker(false)}
+      />
+      <Input
+        name="date"
+        placeholder="Fecha"
+        label="Elegir fecha:"
+        control={control}
+        error={errors.field?.message}
+        type="text"
+        w={{base: '50%', md: '25%'}}
+        editable={false}
+        onPressIn={() => modalDatePicker(openDatePicker)}
+        valueInput={date?.toISOString()}
+      />
     </SafeAreaView>
   );
 };

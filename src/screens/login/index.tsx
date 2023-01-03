@@ -64,6 +64,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         label="E-mail"
         onFocus={() => onFocusInput('email')}
         error={errors.email?.message}
+        type="text"
       />
       <Input
         control={control}
@@ -76,7 +77,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
       />
       <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
       <ButtonLine onPress={handleSignUp}>
-        Don’t have an account? Sign up
+        No tenes cuenta? Crea una aquí
       </ButtonLine>
     </Stack>
   );
