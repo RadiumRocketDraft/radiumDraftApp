@@ -5,15 +5,17 @@ import {appNavOptions, mainStackNavOption} from '../../helpers';
 import {Routes, StackParamList} from '../../interfaces';
 import TabNavigator from '../tabNavigator';
 import {CreateAccount, Login, SelectPlayers} from '../../screens';
+import LoadingSpinner from '../../components/shared/activityIndicator';
 
 export const Stack = createNativeStackNavigator<StackParamList>();
 
 const MainStack = () => {
   const isSignedIn = useIsSignedIn();
+
+  if (isSignedIn == null) return <LoadingSpinner />;
+
   return (
-    <Stack.Navigator
-      initialRouteName={Routes.LOG_IN}
-      screenOptions={mainStackNavOption}>
+    <Stack.Navigator screenOptions={mainStackNavOption}>
       {isSignedIn ? (
         <>
           <Stack.Screen

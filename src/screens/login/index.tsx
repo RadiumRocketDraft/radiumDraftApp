@@ -38,7 +38,6 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
 
   const onSubmit = (data: ILogin) => {
     signIn(data.email, data.password).then(() => {
-      navigation.navigate(Routes.HOME);
       reset();
     });
   };
