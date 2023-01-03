@@ -80,6 +80,7 @@ const CreateAccount = () => {
         placeholder="First name"
         onFocus={() => onFocusInput('firstName')}
         error={errors.firstName?.message}
+        autocapitalize={'words'}
       />
       <Input
         control={control}
@@ -87,6 +88,7 @@ const CreateAccount = () => {
         placeholder="Last name"
         onFocus={() => onFocusInput('lastName')}
         error={errors.lastName?.message}
+        autocapitalize={'words'}
       />
       <Input
         control={control}
@@ -138,9 +140,9 @@ const CreateAccount = () => {
         control={control}
         name="position"
         error={errors.position?.message}
-        data={Object.keys(PlayerPosition).map(label => ({
+        data={Object.values(PlayerPosition).map(label => ({
           value: label,
-          label: label.slice(0, 1).toUpperCase() + label.slice(1),
+          label,
         }))}
       />
 
