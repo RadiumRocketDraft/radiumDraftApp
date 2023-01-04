@@ -6,6 +6,7 @@ import {useForm} from 'react-hook-form';
 import styles from './styles';
 import DatePicker from 'react-native-date-picker';
 import format from 'date-fns/format';
+import Button from '../../components/shared/button';
 
 const Draft = ({route}: any) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
@@ -164,6 +165,7 @@ const Draft = ({route}: any) => {
         onPressIn={() => modalTimePicker(openTimePicker)}
         valueInput={format(time, 'h:mm a')}
       />
+      <Button>Confirmar partido</Button>
     </SafeAreaView>
   );
 };

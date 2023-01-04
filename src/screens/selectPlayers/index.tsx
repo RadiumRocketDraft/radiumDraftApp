@@ -1,9 +1,10 @@
 import React, {useMemo, useState} from 'react';
-import {Button, Checkbox} from 'native-base';
+import {Checkbox} from 'native-base';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {DATA_MOCK} from './MOCK';
 import styles from './styles';
 import {Routes, TNavigation} from '../../interfaces';
+import Button from '../../components/shared/button';
 
 type TPlayers = typeof DATA_MOCK;
 
@@ -91,11 +92,10 @@ const SelectPlayers = ({
         keyExtractor={(_, index) => index.toString()}
       />
       <Button
-        style={styles.bottomButton}
-        isDisabled={false}
-        onPress={onHandleSubmit}>
-        <Text>Confirmar</Text>
-      </Button>
+        isDisabled={!isCheckboxDisabled}
+        handleSubmit={onHandleSubmit}
+        text="Confirmar"
+      />
     </SafeAreaView>
   );
 };
