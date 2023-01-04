@@ -7,3 +7,8 @@ export const authIsLoading = createSelector(
   [authData],
   values => values.isLoading,
 );
+
+export const authIsCreatingAccount = createSelector(
+  [authData],
+  values => values.isCreatingAccount,
+);

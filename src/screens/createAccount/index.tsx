@@ -9,8 +9,12 @@ import {signUp} from '../../utils/firebase';
 import {PlayerPosition} from '../../types/enums';
 import Select from '../../components/shared/select';
 import {useDispatch, useSelector} from 'react-redux';
-import {authIsLoading, createAccount} from '../../store/modules/auth';
 import Slider from '../../components/shared/slider';
+import {
+  authIsLoading,
+  createAccount,
+  setIsCreatingAccount,
+} from '../../store/modules/auth';
 
 interface ICreateAccount {
   firstName: string;
@@ -56,11 +60,13 @@ const CreateAccount = () => {
   }: ICreateAccount) => {
     try {
       setIsLoading(true);
+      dispatch(setIsCreatingAccount(true));
       await signUp(email, password);
       dispatch(
         createAccount({firstName, lastName, position, skill: Number(skill)}),
       );
     } catch (e) {
+      dispatch(setIsCreatingAccount(false));
       console.log('Error on CreateAccount onSubmit -', e);
     } finally {
       setIsLoading(false);
@@ -116,19 +122,6 @@ const CreateAccount = () => {
         error={errors.repeatPassword?.message}
         type="password"
       />
-      {/* <Input
-        control={control}
-        name="skill"
-        placeholder="Skill Score"
-        onFocus={() => onFocusInput('skill')}
-        error={errors.skill?.message}
-        rightElement={
-          <CustomTooltip
-            title={'Skill Functionality'}
-            description="The skill level will help us to leverage the draft better between both teams"
-          />
-        }
-      /> */}
       <Slider control={control} name="skill" label="Skill Level" />
       <Select
         placeholder="Position"
@@ -140,7 +133,6 @@ const CreateAccount = () => {
           label,
         }))}
       />
-
       <Button
         text="Sign up"
         handleSubmit={handleSubmit(onSubmit)}
