@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useMemo} from 'react';
 import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
@@ -40,7 +40,12 @@ const Input = <
   autocapitalize = 'none',
   rightElement,
 }: Props<TFormValues>) => {
+  /* type === 'password' && isPasswordVisible ? 'text' : type */
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const inputType = useMemo(
+    () => (type === 'password' && isPasswordVisible ? 'text' : type),
+    [type, isPasswordVisible],
+  );
   return (
     <View style={styles.containerInput}>
       <Controller
@@ -56,23 +61,26 @@ const Input = <
             }}
             placeholder={placeholder}
             autoCapitalize={autocapitalize}
-            type={type === 'password' && isPasswordVisible ? 'text' : type}
-            InputRightElement={rightElement}
+            type={inputType}
+            InputRightElement={
+              type === 'password' ? (
+                <TouchableOpacity
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  style={styles.icon}>
+                  <MaterialCommunityIcons
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    size={28}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              ) : (
+                rightElement
+              )
+            }
           />
         )}
         name={name}
       />
-      {type === 'password' && (
-        <TouchableOpacity
-          onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-          style={styles.icon}>
-          <MaterialCommunityIcons
-            name={isPasswordVisible ? 'eye' : 'eye-off'}
-            size={28}
-            color="black"
-          />
-        </TouchableOpacity>
-      )}
       {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
