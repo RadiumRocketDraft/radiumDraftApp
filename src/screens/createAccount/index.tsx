@@ -15,6 +15,7 @@ import {
   createAccount,
   setIsCreatingAccount,
 } from '../../store/modules/auth';
+import {tooltipContent} from './constants';
 
 interface ICreateAccount {
   firstName: string;
@@ -76,6 +77,7 @@ const CreateAccount = () => {
   const onFocusInput = (inputName: FieldName<ICreateAccount>) => {
     clearErrors(inputName);
   };
+
   return (
     <Stack
       space={6}
@@ -122,7 +124,12 @@ const CreateAccount = () => {
         error={errors.repeatPassword?.message}
         type="password"
       />
-      <Slider control={control} name="skill" label="Skill Level" />
+      <Slider
+        control={control}
+        name="skill"
+        label="Skill Level"
+        tooltipContent={tooltipContent}
+      />
       <Select
         placeholder="Position"
         control={control}

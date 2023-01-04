@@ -10,12 +10,18 @@ import {
 import CustomTooltip from '../../tooltip';
 import styles from './styles';
 
+interface ITooltip {
+  title: string;
+  description: string;
+}
+
 interface Props<TFormValues extends FieldValues> {
   name: Path<UnPackAsyncDefaultValues<TFormValues>>;
   label?: string;
   control: Control<TFormValues>;
   minLimit?: number;
   maxLimit?: number;
+  tooltipContent?: ITooltip;
 }
 
 const Slider = <
@@ -28,15 +34,18 @@ const Slider = <
   control,
   minLimit = 0,
   maxLimit = 100,
+  tooltipContent,
 }: Props<TFormValues>) => {
   return (
     <View w="75%">
       <View style={styles.tooltipContainer}>
-        <Text>{label}</Text>
-        <CustomTooltip
-          title="Skill Functionality"
-          description="The skill level will help us to leverage the draft better between both teams"
-        />
+        {label && <Text>{label}</Text>}
+        {tooltipContent && (
+          <CustomTooltip
+            title={tooltipContent.title}
+            description={tooltipContent.description}
+          />
+        )}
       </View>
       <Controller
         control={control}
