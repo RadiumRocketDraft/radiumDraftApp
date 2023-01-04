@@ -9,12 +9,13 @@ import {signUp} from '../../utils/firebase';
 import {PlayerPosition} from '../../types/enums';
 import Select from '../../components/shared/select';
 import {useDispatch, useSelector} from 'react-redux';
+import Slider from '../../components/shared/slider';
 import {
   authIsLoading,
   createAccount,
   setIsCreatingAccount,
 } from '../../store/modules/auth';
-import CustomTooltip from '../../components/tooltip';
+import {tooltipContent} from './constants';
 
 interface ICreateAccount {
   firstName: string;
@@ -62,7 +63,9 @@ const CreateAccount = () => {
       setIsLoading(true);
       dispatch(setIsCreatingAccount(true));
       await signUp(email, password);
-      dispatch(createAccount({firstName, lastName, position, skill: +skill}));
+      dispatch(
+        createAccount({firstName, lastName, position, skill: Number(skill)}),
+      );
     } catch (e) {
       dispatch(setIsCreatingAccount(false));
       console.log('Error on CreateAccount onSubmit -', e);
@@ -74,6 +77,7 @@ const CreateAccount = () => {
   const onFocusInput = (inputName: FieldName<ICreateAccount>) => {
     clearErrors(inputName);
   };
+
   return (
     <Stack
       space={6}
@@ -120,18 +124,11 @@ const CreateAccount = () => {
         error={errors.repeatPassword?.message}
         type="password"
       />
-      <Input
+      <Slider
         control={control}
         name="skill"
-        placeholder="Skill Score"
-        onFocus={() => onFocusInput('skill')}
-        error={errors.skill?.message}
-        rightElement={
-          <CustomTooltip
-            title={'Skill Functionality'}
-            description="The skill level will help us to leverage the draft better between both teams"
-          />
-        }
+        label="Skill Level"
+        tooltipContent={tooltipContent}
       />
       <Select
         placeholder="Position"
@@ -143,7 +140,6 @@ const CreateAccount = () => {
           label,
         }))}
       />
-
       <Button
         text="Sign up"
         handleSubmit={handleSubmit(onSubmit)}
