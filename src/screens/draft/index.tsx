@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FlatList} from 'native-base';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
@@ -104,9 +104,9 @@ const Draft = ({route}: any) => {
             ItemSeparatorComponent={listSeparator}
           />
         </View>
-        <View>
+        <TouchableOpacity>
           <Text style={styles.redraftContainer}>Re-draft</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.teamContainer}>
           <Text style={styles.teamTitle}>Team B</Text>
           <Text style={styles.averageSkill}>

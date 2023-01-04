@@ -38,6 +38,6 @@ export default StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   separator: {
-    height: 10,
+    height: 14,
   },
 });
