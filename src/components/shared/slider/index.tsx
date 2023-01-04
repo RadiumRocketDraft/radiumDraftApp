@@ -14,6 +14,8 @@ interface Props<TFormValues extends FieldValues> {
   name: Path<UnPackAsyncDefaultValues<TFormValues>>;
   label?: string;
   control: Control<TFormValues>;
+  minLimit?: number;
+  maxLimit?: number;
 }
 
 const Slider = <
@@ -24,8 +26,9 @@ const Slider = <
   name,
   label,
   control,
+  minLimit = 0,
+  maxLimit = 100,
 }: Props<TFormValues>) => {
-  const LIMIT_VALUES = ['0', '100'];
   return (
     <View w="75%">
       <View style={styles.tooltipContainer}>
@@ -40,21 +43,20 @@ const Slider = <
         name={name}
         render={({field: {onChange, value}}) => (
           <Flex direction="row">
-            <Text mr={2}>{LIMIT_VALUES[0]}</Text>
+            <Text mr={2}>{minLimit}</Text>
             <SliderNB
               onChange={onChange}
               value={Number(value)}
-              defaultValue={70}
-              minValue={0}
-              maxValue={100}
-              accessibilityLabel="skill level"
+              minValue={minLimit}
+              maxValue={maxLimit}
+              accessibilityLabel={label}
               style={styles.slider}>
               <SliderNB.Track shadow={2}>
                 <SliderNB.FilledTrack />
               </SliderNB.Track>
               <SliderNB.Thumb shadow={3} />
             </SliderNB>
-            <Text ml={2}>{LIMIT_VALUES[1]}</Text>
+            <Text ml={2}>{maxLimit}</Text>
           </Flex>
         )}
       />
