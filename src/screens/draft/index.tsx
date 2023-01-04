@@ -97,7 +97,7 @@ const Draft = ({route}: any) => {
         dataMatch.date +
         '\n' +
         format(dataMatch.time, 'h:mm a'),
-      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      [{text: 'OK'}],
     );
   };
 
@@ -137,9 +137,9 @@ const Draft = ({route}: any) => {
       <View style={styles.viewOptionsMatch}>
         <Input
           name="field"
-          placeholder="Field"
+          placeholder="Cancha"
           label="Seleccionar cancha"
-          onFocus={() => console.log('OnFocus')}
+          onFocus={() => {}}
           control={control}
           error={errors.field?.message}
           type="text"

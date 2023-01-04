@@ -1,38 +1,28 @@
-// Import the functions you need from the SDKs you need
-import {initializeApp} from 'firebase/app';
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth';
-import Config from 'react-native-config';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+type CallbackOrObserver<T extends (...args: any[]) => any> = T | {next: T};
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: 'AIzaSyB28n1sflO5vDGp2C8RMKPsskM7oQBpT3I',
-  authDomain: 'radium-draft.firebaseapp.com',
-  projectId: 'radium-draft',
-  storageBucket: 'radium-draft.appspot.com',
-  messagingSenderId: '742647588950',
-  appId: '1:742647588950:web:5cd48f14ed8dae02bdf3f7',
+export const getCurrentFirebaseToken = async (
+  forceRefresh = false,
+): Promise<string> => {
+  const token = await auth().currentUser?.getIdToken(forceRefresh);
+  return token || '';
 };
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-
 export const signIn = (email: string, password: string) => {
-  return signInWithEmailAndPassword(auth, email, password);
+  return auth().signInWithEmailAndPassword(email, password);
 };
 
 export const logOut = () => {
-  return signOut(auth);
+  return auth().signOut();
 };
 
 export const signUp = (email: string, password: string) => {
-  return createUserWithEmailAndPassword(auth, email, password);
+  return auth().createUserWithEmailAndPassword(email, password);
+};
+
+export const onAuthStateChanged = (
+  cb: CallbackOrObserver<FirebaseAuthTypes.AuthListenerCallback>,
+) => {
+  return auth().onAuthStateChanged(cb);
 };

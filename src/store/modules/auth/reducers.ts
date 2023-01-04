@@ -1,12 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {createAccount, login} from './actions';
+import {createAccount, login, setIsCreatingAccount} from './actions';
 
 export interface Auth {
   email: string;
   password: string;
   token: string;
   isLoading: boolean;
-  isLoggedIn: boolean;
+  isCreatingAccount: boolean;
+  error?: string;
   message?: string;
 }
 
@@ -14,12 +15,16 @@ export const authReducer = createReducer<Auth>(
   {
     email: '',
     isLoading: false,
-    isLoggedIn: false,
     password: '',
     token: '',
+    isCreatingAccount: false,
+    error: '',
     message: '',
   },
   builder => {
+    builder.addCase(setIsCreatingAccount, (state, action) => {
+      state.isCreatingAccount = action.payload;
+    });
     builder.addCase(login.pending, state => {
       state.isLoading = true;
     });
@@ -35,10 +40,13 @@ export const authReducer = createReducer<Auth>(
     builder.addCase(createAccount.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(createAccount.rejected, state => {
+    builder.addCase(createAccount.rejected, (state, action) => {
+      state.isCreatingAccount = false;
+      state.error = action.error.message;
       state.isLoading = false;
     });
     builder.addCase(createAccount.fulfilled, (state, action) => {
+      state.isCreatingAccount = false;
       state.isLoading = false;
       state.message = action.payload.message;
     });

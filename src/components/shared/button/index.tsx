@@ -1,22 +1,24 @@
 import React from 'react';
 import {Button as ButtonNativeBase} from 'native-base';
-import {Text} from 'react-native';
-import styles from './styles';
+import {GestureResponderEvent, StyleProp, ViewStyle} from 'react-native';
 
 interface Props {
   text: string;
-  handleSubmit: () => void;
-  isDisabled: boolean;
+  handleSubmit?: (event: GestureResponderEvent) => void;
+  style?: StyleProp<ViewStyle>;
+  isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
-const Button: React.FC<Props> = ({text, handleSubmit, isDisabled}) => {
+const Button = ({text, handleSubmit, style, isLoading, isDisabled}: Props) => {
   return (
     <ButtonNativeBase
-      style={styles.bottomButton}
       onPress={handleSubmit}
-      isDisabled={isDisabled}
-      w={'50%'}>
-      <Text style={styles.text}>{text}</Text>
+      w={'50%'}
+      style={style}
+      isLoading={isLoading}
+      disabled={isDisabled}>
+      {text}
     </ButtonNativeBase>
   );
 };

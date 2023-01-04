@@ -19,4 +19,12 @@ export const schema = yup.object().shape({
     .string()
     .required('Repeat password is required')
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
+  skill: yup
+    .number()
+    .typeError('Skill should be a number')
+    .transform(input => input || undefined)
+    .required('Skill is required')
+    .min(0, 'Skill should be between 0 and 100')
+    .max(100, 'Skill should be between 0 and 100'),
+  position: yup.string().required('Position should be a number'),
 });

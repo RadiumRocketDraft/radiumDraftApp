@@ -7,7 +7,7 @@ import ButtonLine from '../../components/shared/buttonLine';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validations';
 import {signIn} from '../../utils/firebase';
-import {Routes, TNavigation} from '../../interfaces';
+import {Routes, TNavigation} from '../../types/interfaces';
 
 interface ILogin {
   email: string;
@@ -22,7 +22,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
     reset,
     setFocus,
     formState: {errors},
-  } = useForm<ILogin>({
+  } = useForm({
     defaultValues: {
       email: '',
       password: '',
@@ -38,7 +38,6 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
 
   const onSubmit = (data: ILogin) => {
     signIn(data.email, data.password).then(() => {
-      navigation.navigate(Routes.HOME);
       reset();
     });
   };
@@ -50,6 +49,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
   const handleSignUp = () => {
     navigation.navigate(Routes.CREATE_ACCOUNT);
   };
+
   return (
     <Stack
       space={4}
@@ -61,7 +61,6 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         control={control}
         name="email"
         placeholder="E-mail"
-        label="E-mail"
         onFocus={() => onFocusInput('email')}
         error={errors.email?.message}
         type="text"
@@ -70,7 +69,6 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         control={control}
         name="password"
         placeholder="Password"
-        label="Password"
         onFocus={() => onFocusInput('password')}
         error={errors.password?.message}
         type="password"

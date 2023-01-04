@@ -1,10 +1,7 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
-import {logInRequest, creatAccountRequest} from '../../../services/auth';
-
-export interface UserLogin {
-  email: string;
-  password: string;
-}
+import {UserLogin} from '../../../types/interfaces';
+import {logInRequest, createAccountRequest} from '../../../services/auth';
+import {logOut} from '../../../utils';
 
 export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
   logInRequest(values),
@@ -12,7 +9,18 @@ export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
 
 export const createAccount = createAsyncThunk(
   'CREATE_ACCOUNT',
-  (values: UserLogin) => creatAccountRequest(values),
+  async (values: UserLogin) => {
+    try {
+      return await createAccountRequest(values);
+    } catch (error) {
+      await logOut();
+      throw error;
+    }
+  },
+);
+
+export const setIsCreatingAccount = createAction<boolean>(
+  'SET_IS_CREATING_ACCOUNT',
 );
 
 export const setLogOut = createAction('SET_LOG_OUT');

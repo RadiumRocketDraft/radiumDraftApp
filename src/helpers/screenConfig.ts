@@ -1,5 +1,5 @@
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {AppNavOptions, Routes} from '../interfaces';
+import {AppNavOptions, Routes} from '../types/interfaces';
 
 export const mainStackNavOption: NativeStackNavigationOptions = {
   contentStyle: {

@@ -1,16 +1,29 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import {Controller} from 'react-hook-form';
-import {Input as InputNativeBase} from 'native-base';
+import React, {useState, useMemo} from 'react';
+import {
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  UnPackAsyncDefaultValues,
+} from 'react-hook-form';
+import {Input as InputNativeBase, Text, View} from 'native-base';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 
-interface Props {
-  name: string;
-  placeholder: string;
-  onFocus?: any;
-  control: any;
-  error: any;
-  type: any;
+interface Props<TFormValues extends FieldValues> {
+  name: Path<UnPackAsyncDefaultValues<TFormValues>>;
+  placeholder?: string;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  control: Control<TFormValues>;
+  error?: string;
+  type?: 'text' | 'password';
+  autocapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  rightElement?: JSX.Element | JSX.Element[];
   w?: {
     base: string;
     md: string;
@@ -21,42 +34,65 @@ interface Props {
   valueInput?: any;
 }
 
-const Input: React.FC<Props> = ({
+const Input = <
+  TFormValues extends {
+    [key: string]: string;
+  },
+>({
   name,
   placeholder,
   onFocus,
   control,
   error,
-  type,
+  type = 'text',
+  autocapitalize = 'none',
+  rightElement,
   w,
   label,
   editable,
   onPressIn,
   valueInput,
-}: any) => {
+}: Props<TFormValues>) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const inputType = useMemo(
+    () => (type === 'password' && isPasswordVisible ? 'text' : type),
+    [type, isPasswordVisible],
+  );
   return (
     <View style={styles.containerInput}>
       <Text>{label}</Text>
       <Controller
         control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({field: {onChange, value}}) => (
           <InputNativeBase
             onChangeText={onChange}
             value={value}
             onFocus={onFocus}
             w={{
-              base: w.base,
-              md: w.md,
+              base: w?.base,
+              md: w?.md,
             }}
             placeholder={placeholder}
-            autoCapitalize="none"
-            type={type}
+            autoCapitalize={autocapitalize}
+            type={inputType}
             editable={editable}
             onPressIn={onPressIn}
             defaultValue={valueInput}
+            InputRightElement={
+              type === 'password' ? (
+                <TouchableOpacity
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  style={styles.icon}>
+                  <MaterialCommunityIcons
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    size={28}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              ) : (
+                rightElement
+              )
+            }
           />
         )}
         name={name}
