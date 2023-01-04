@@ -10,4 +10,9 @@ export default StyleSheet.create({
   label: {
     marginLeft: 5,
   },
+  icon: {
+    position: 'absolute',
+    right: 10,
+    top: 2,
+  },
 });
