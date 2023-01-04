@@ -5,7 +5,8 @@ import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
 import DatePicker from 'react-native-date-picker';
-import format from 'date-fns/format';
+// import format from 'date-fns/format';
+import {format, utcToZonedTime} from 'date-fns-tz';
 import Button from '../../components/shared/button';
 
 const Draft = ({route}: any) => {
@@ -26,6 +27,7 @@ const Draft = ({route}: any) => {
     control,
     formState: {errors},
     setValue,
+    handleSubmit,
   } = useForm({
     defaultValues: {
       field: '',
@@ -82,11 +84,12 @@ const Draft = ({route}: any) => {
     setValue('time', value);
   };
 
+  const onSubmit = (data: any) => {
+    console.log('Match:', data);
+  };
+
   return (
-    <SafeAreaView>
-      <View>
-        <Text style={styles.redraftContainer}>Re-draft</Text>
-      </View>
+    <SafeAreaView style={styles.safeAreaViewContainer}>
       <View style={styles.teamsContainer}>
         <View style={styles.teamContainer}>
           <Text style={styles.teamTitle}>Team A</Text>
@@ -100,6 +103,9 @@ const Draft = ({route}: any) => {
             contentContainerStyle={styles.flatListTeam}
             ItemSeparatorComponent={listSeparator}
           />
+        </View>
+        <View>
+          <Text style={styles.redraftContainer}>Re-draft</Text>
         </View>
         <View style={styles.teamContainer}>
           <Text style={styles.teamTitle}>Team B</Text>
@@ -115,57 +121,64 @@ const Draft = ({route}: any) => {
           />
         </View>
       </View>
-      <Input
-        name="field"
-        placeholder="Field"
-        label="Seleccionar cancha"
-        onFocus={() => console.log('OnFocus')}
-        control={control}
-        error={errors.field?.message}
-        type="text"
-        w={{base: '50%', md: '25%'}}
-      />
-      <DatePicker
-        modal
-        date={date}
-        open={openDatePicker}
-        mode="date"
-        onConfirm={onConfirmDate}
-        onCancel={() => setOpenDatePicker(false)}
-      />
-      <Input
-        name="date"
-        placeholder="Fecha"
-        label="Elegir fecha:"
-        control={control}
-        error={errors.field?.message}
-        type="text"
-        w={{base: '50%', md: '25%'}}
-        editable={false}
-        onPressIn={() => modalDatePicker(openDatePicker)}
-        valueInput={format(date, 'd/M/yyyy')}
-      />
-      <DatePicker
-        modal
-        date={time}
-        open={openTimePicker}
-        mode="time"
-        onConfirm={onConfirmTime}
-        onCancel={() => setOpenTimePicker(false)}
-      />
-      <Input
-        name="time"
-        placeholder="Hora"
-        label="Elegir Hora:"
-        control={control}
-        error={errors.time?.message}
-        type="text"
-        w={{base: '50%', md: '25%'}}
-        editable={false}
-        onPressIn={() => modalTimePicker(openTimePicker)}
-        valueInput={format(time, 'h:mm a')}
-      />
-      <Button>Confirmar partido</Button>
+      <View style={styles.viewOptionsMatch}>
+        <Input
+          name="field"
+          placeholder="Field"
+          label="Seleccionar cancha"
+          onFocus={() => console.log('OnFocus')}
+          control={control}
+          error={errors.field?.message}
+          type="text"
+          w={{base: '50%', md: '25%'}}
+        />
+        <DatePicker
+          modal
+          date={date}
+          open={openDatePicker}
+          mode="date"
+          onConfirm={onConfirmDate}
+          onCancel={() => setOpenDatePicker(false)}
+        />
+        <Input
+          name="date"
+          placeholder="Fecha"
+          label="Elegir fecha:"
+          control={control}
+          error={errors.field?.message}
+          type="text"
+          w={{base: '50%', md: '25%'}}
+          editable={false}
+          onPressIn={() => modalDatePicker(openDatePicker)}
+          valueInput={format(date, 'd/M/yyyy')}
+        />
+        <DatePicker
+          modal
+          date={time}
+          open={openTimePicker}
+          mode="time"
+          onConfirm={onConfirmTime}
+          onCancel={() => setOpenTimePicker(false)}
+        />
+        <Input
+          name="time"
+          placeholder="Hora"
+          label="Elegir Hora:"
+          control={control}
+          error={errors.time?.message}
+          type="text"
+          w={{base: '50%', md: '25%'}}
+          editable={false}
+          onPressIn={() => modalTimePicker(openTimePicker)}
+          // valueInput={zonedTimeToUtc(time, 'h:mm a', UTC)}
+          valueInput={format(utcToZonedTime(time, 'UTC'), 'h:mm a')}
+        />
+        <Button
+          isDisabled={false}
+          handleSubmit={handleSubmit(onSubmit)}
+          text="Confirmar partido"
+        />
+      </View>
     </SafeAreaView>
   );
 };

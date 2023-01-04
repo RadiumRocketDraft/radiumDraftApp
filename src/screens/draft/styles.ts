@@ -1,16 +1,22 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
+  safeAreaViewContainer: {
+    justifyContent: 'space-around',
+    flex: 1,
+  },
   redraftContainer: {
+    position: 'relative',
+    top: -20,
     textAlign: 'center',
     marginTop: 8,
   },
   teamsContainer: {
     flexDirection: 'row',
+    flex: 1,
     justifyContent: 'space-around',
-    alignItems: 'center',
-    alignContent: 'center',
-    marginTop: 20,
+    alignItems: 'flex-start',
+    marginTop: 50,
   },
   teamTitle: {
     fontWeight: 'bold',
@@ -25,6 +31,11 @@ export default StyleSheet.create({
   },
   flatListTeam: {
     alignItems: 'center',
+  },
+  viewOptionsMatch: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   separator: {
     height: 10,
