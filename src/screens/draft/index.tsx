@@ -9,11 +9,16 @@ import format from 'date-fns/format';
 
 const Draft = ({route}: any) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
+  const [openTimePicker, setOpenTimePicker] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
+  const [time, setTime] = useState<Date>(new Date());
   const {teamA, teamB} = route.params;
 
   const modalDatePicker = (state: boolean) => {
     setOpenDatePicker(!state);
+  };
+  const modalTimePicker = (state: boolean) => {
+    setOpenTimePicker(!state);
   };
 
   const {
@@ -24,6 +29,7 @@ const Draft = ({route}: any) => {
     defaultValues: {
       field: '',
       date: '',
+      time: '',
     },
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
@@ -67,6 +73,12 @@ const Draft = ({route}: any) => {
     setDate(value);
     modalDatePicker(openDatePicker);
     setValue('date', value);
+  };
+
+  const onConfirmTime = (value: any) => {
+    setTime(value);
+    modalTimePicker(openDatePicker);
+    setValue('time', value);
   };
 
   return (
@@ -131,6 +143,26 @@ const Draft = ({route}: any) => {
         editable={false}
         onPressIn={() => modalDatePicker(openDatePicker)}
         valueInput={format(date, 'd/M/yyyy')}
+      />
+      <DatePicker
+        modal
+        date={time}
+        open={openTimePicker}
+        mode="time"
+        onConfirm={onConfirmTime}
+        onCancel={() => setOpenTimePicker(false)}
+      />
+      <Input
+        name="time"
+        placeholder="Hora"
+        label="Elegir Hora:"
+        control={control}
+        error={errors.time?.message}
+        type="text"
+        w={{base: '50%', md: '25%'}}
+        editable={false}
+        onPressIn={() => modalTimePicker(openTimePicker)}
+        valueInput={format(time, 'h:mm a')}
       />
     </SafeAreaView>
   );
