@@ -22,7 +22,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
     reset,
     setFocus,
     formState: {errors},
-  } = useForm<ILogin>({
+  } = useForm({
     defaultValues: {
       email: '',
       password: '',
@@ -49,6 +49,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
   const handleSignUp = () => {
     navigation.navigate(Routes.CREATE_ACCOUNT);
   };
+
   return (
     <Stack
       space={4}
@@ -60,7 +61,6 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         control={control}
         name="email"
         placeholder="E-mail"
-        label="E-mail"
         onFocus={() => onFocusInput('email')}
         error={errors.email?.message}
       />
@@ -68,7 +68,6 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         control={control}
         name="password"
         placeholder="Password"
-        label="Password"
         onFocus={() => onFocusInput('password')}
         error={errors.password?.message}
         type="password"

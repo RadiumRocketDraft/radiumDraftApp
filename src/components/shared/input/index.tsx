@@ -1,5 +1,9 @@
-import React from 'react';
-import {NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
+import React, {useState, useMemo} from 'react';
+import {
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  TouchableOpacity,
+} from 'react-native';
 import {
   Control,
   Controller,
@@ -8,6 +12,7 @@ import {
   UnPackAsyncDefaultValues,
 } from 'react-hook-form';
 import {Input as InputNativeBase, Text, View} from 'native-base';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 
 interface Props<TFormValues extends FieldValues> {
@@ -35,6 +40,11 @@ const Input = <
   autocapitalize = 'none',
   rightElement,
 }: Props<TFormValues>) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const inputType = useMemo(
+    () => (type === 'password' && isPasswordVisible ? 'text' : type),
+    [type, isPasswordVisible],
+  );
   return (
     <View style={styles.containerInput}>
       <Controller
@@ -50,8 +60,22 @@ const Input = <
             }}
             placeholder={placeholder}
             autoCapitalize={autocapitalize}
-            type={type}
-            InputRightElement={rightElement}
+            type={inputType}
+            InputRightElement={
+              type === 'password' ? (
+                <TouchableOpacity
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  style={styles.icon}>
+                  <MaterialCommunityIcons
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    size={28}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              ) : (
+                rightElement
+              )
+            }
           />
         )}
         name={name}

@@ -10,4 +10,7 @@ export default StyleSheet.create({
   label: {
     marginLeft: 5,
   },
+  icon: {
+    marginRight: 10,
+  },
 });
