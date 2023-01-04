@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FlatList} from 'native-base';
-import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity, Alert} from 'react-native';
 import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
@@ -85,7 +85,20 @@ const Draft = ({route}: any) => {
   };
 
   const onSubmit = (data: any) => {
-    console.log('Match:', data);
+    const dataMatch = {
+      field: data.field,
+      date: format(data.date, 'd/M/yyyy'),
+      time: data.time,
+    };
+    Alert.alert(
+      'Match',
+      dataMatch.field +
+        '\n' +
+        dataMatch.date +
+        '\n' +
+        format(dataMatch.time, 'h:mm a'),
+      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+    );
   };
 
   return (
@@ -170,8 +183,7 @@ const Draft = ({route}: any) => {
           w={{base: '50%', md: '25%'}}
           editable={false}
           onPressIn={() => modalTimePicker(openTimePicker)}
-          // valueInput={zonedTimeToUtc(time, 'h:mm a', UTC)}
-          valueInput={format(utcToZonedTime(time, 'UTC'), 'h:mm a')}
+          valueInput={format(time, 'h:mm a')}
         />
         <Button
           isDisabled={false}

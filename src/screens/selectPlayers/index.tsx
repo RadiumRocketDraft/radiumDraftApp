@@ -92,7 +92,7 @@ const SelectPlayers = ({
         keyExtractor={(_, index) => index.toString()}
       />
       <Button
-        isDisabled={!isCheckboxDisabled}
+        isDisabled={isCheckboxDisabled}
         handleSubmit={onHandleSubmit}
         text="Confirmar"
       />
