@@ -14,13 +14,17 @@ export const api = axios.create({
 });
 
 export const URL = {
-  //LOGIN
-  LOGIN: '/api/auth/login',
-  //PLAYER
-  CREATE_ACCOUNT: '/api/player',
-  GET_PLAYERS: '/api/player',
-  //MATCH
-  GET_INACTIVE_MATCHES: '/api/match/inactive',
-  GET_ACTIVE_MATCHES: '/api/match/active',
-  CREATE_MATCH: '/api/match',
+  auth: {
+    LOGIN: '/api/auth/login',
+    CREATE_ACCOUNT: '/api/player',
+  },
+  player: {
+    GET_PLAYER: '/api/player',
+    GET_PLAYERS: '/api/player/all',
+  },
+  match: {
+    GET_INACTIVE_MATCHES: '/api/match/inactive',
+    GET_ACTIVE_MATCHES: '/api/match/active',
+    CREATE_MATCH: '/api/match',
+  },
 };
