@@ -10,7 +10,7 @@ import {PlayerPosition} from '../../types/enums';
 import Select from '../../components/shared/select';
 import {useDispatch, useSelector} from 'react-redux';
 import {authIsLoading, createAccount} from '../../store/modules/auth';
-import CustomTooltip from '../../components/tooltip';
+import Slider from '../../components/shared/slider';
 
 interface ICreateAccount {
   firstName: string;
@@ -57,7 +57,9 @@ const CreateAccount = () => {
     try {
       setIsLoading(true);
       await signUp(email, password);
-      dispatch(createAccount({firstName, lastName, position, skill: +skill}));
+      dispatch(
+        createAccount({firstName, lastName, position, skill: Number(skill)}),
+      );
     } catch (e) {
       console.log('Error on CreateAccount onSubmit -', e);
     } finally {
@@ -114,7 +116,7 @@ const CreateAccount = () => {
         error={errors.repeatPassword?.message}
         type="password"
       />
-      <Input
+      {/* <Input
         control={control}
         name="skill"
         placeholder="Skill Score"
@@ -126,7 +128,8 @@ const CreateAccount = () => {
             description="The skill level will help us to leverage the draft better between both teams"
           />
         }
-      />
+      /> */}
+      <Slider control={control} name="skill" label="Skill Level" />
       <Select
         placeholder="Position"
         control={control}
