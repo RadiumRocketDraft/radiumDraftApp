@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
 import Button from '../../components/shared/button';
@@ -15,6 +15,7 @@ interface ILogin {
 }
 
 const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -36,10 +37,16 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
     setFocus('email');
   }, [setFocus]);
 
-  const onSubmit = (data: ILogin) => {
-    signIn(data.email, data.password).then(() => {
+  const onSubmit = async (data: ILogin) => {
+    try {
+      setIsLoading(true);
+      await signIn(data.email, data.password);
       reset();
-    });
+    } catch (error) {
+      console.log('Error on signIn onSubmit -', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onFocusInput = (inputName: FieldName<ILogin>) => {
@@ -72,7 +79,11 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         error={errors.password?.message}
         type="password"
       />
-      <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
+      <Button
+        isLoading={isLoading}
+        text="Login"
+        handleSubmit={handleSubmit(onSubmit)}
+      />
       <ButtonLine onPress={handleSignUp}>
         Don’t have an account? Sign up
       </ButtonLine>
