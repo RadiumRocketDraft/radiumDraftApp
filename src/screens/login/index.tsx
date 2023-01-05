@@ -42,7 +42,9 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
       setIsLoading(true);
       await signIn(data.email, data.password);
       reset();
-    } catch {
+    } catch (error) {
+      console.log('Error on signIn onSubmit -', error);
+    } finally {
       setIsLoading(false);
     }
   };
