@@ -5,11 +5,11 @@ import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
 import DatePicker from 'react-native-date-picker';
-// import format from 'date-fns/format';
-import {format, utcToZonedTime} from 'date-fns-tz';
+import {format} from 'date-fns-tz';
 import Button from '../../components/shared/button';
+import {Routes, TNavigation} from '../../types/interfaces';
 
-const Draft = ({route}: any) => {
+const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openTimePicker, setOpenTimePicker] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
