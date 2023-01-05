@@ -1,12 +1,11 @@
-import {PlayerPosition, PlayerStatus} from '../enums';
+import {PlayerPosition} from '../enums';
 
 export interface IPlayer {
   firstName: string;
   lastName: string;
   skill: number;
   position: PlayerPosition;
-  status: PlayerStatus;
   fidelity: number;
-  matchsPlayed: number;
+  matchesPlayed: number;
   profileImage?: string;
 }
