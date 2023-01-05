@@ -8,6 +8,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validations';
 import {signIn} from '../../utils/firebase';
 import {Routes, TNavigation} from '../../types/interfaces';
+import styles from './styles';
 
 interface ILogin {
   email: string;
@@ -64,6 +65,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         onFocus={() => onFocusInput('email')}
         error={errors.email?.message}
         type="text"
+        customStyle={styles.input}
       />
       <Input
         control={control}
@@ -72,6 +74,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         onFocus={() => onFocusInput('password')}
         error={errors.password?.message}
         type="password"
+        customStyle={styles.input}
       />
       <Button text="Login" handleSubmit={handleSubmit(onSubmit)} />
       <ButtonLine onPress={handleSignUp}>

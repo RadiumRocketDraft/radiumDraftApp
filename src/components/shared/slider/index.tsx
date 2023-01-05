@@ -42,7 +42,7 @@ const Slider = <
   return (
     <View w="75%">
       <View style={styles.tooltipContainer}>
-        {label && (
+        {(label ?? showValue) && (
           <Text>
             {label} {showValue && <Text>{currentValue}</Text>}
           </Text>
