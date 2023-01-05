@@ -10,7 +10,4 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#187DE9',
   },
-  text: {
-    color: 'black',
-  },
 });

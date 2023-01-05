@@ -22,7 +22,7 @@ const Button = ({
     <ButtonNativeBase
       onPress={handleSubmit}
       w={'50%'}
-      style={[customStyle, styles.bottomButton]}
+      style={[styles.bottomButton, customStyle]}
       isLoading={isLoading}
       isDisabled={isDisabled}>
       {text}

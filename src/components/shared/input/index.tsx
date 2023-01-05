@@ -40,16 +40,16 @@ const Input = <
 >({
   name,
   placeholder,
-  onFocus = () => null,
+  onFocus,
   control,
   error,
   type = 'text',
   autocapitalize = 'none',
   rightElement,
-  label = '',
+  label,
   editable = true,
-  onPressIn = () => null,
-  valueInput = '',
+  onPressIn,
+  valueInput,
   customStyle,
 }: Props<TFormValues>) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
