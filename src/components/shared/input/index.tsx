@@ -41,17 +41,20 @@ const Input = <
 >({
   name,
   placeholder,
-  onFocus,
+  onFocus = () => null,
   control,
   error,
   type = 'text',
   autocapitalize = 'none',
   rightElement,
-  w,
-  label,
-  editable,
-  onPressIn,
-  valueInput,
+  w = {
+    base: '75%',
+    md: '25%',
+  },
+  label = '',
+  editable = true,
+  onPressIn = () => null,
+  valueInput = '',
 }: Props<TFormValues>) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const inputType = useMemo(
@@ -103,15 +106,3 @@ const Input = <
 };
 
 export default Input;
-
-Input.defaultProps = {
-  onFocus: () => null,
-  w: {
-    base: '75%',
-    md: '25%',
-  },
-  label: '',
-  editable: true,
-  onPressIn: () => null,
-  valueInput: '',
-};
