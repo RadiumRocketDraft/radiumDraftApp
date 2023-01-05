@@ -1,25 +1,20 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    justifyContent: 'space-evenly',
-    alignContent: 'center',
-    height: '100%',
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   avatarContainer: {
+    marginTop: 20,
     alignSelf: 'center',
   },
-  infoContainer: {},
-  infoRow: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  infoRowTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  infoRowText: {
-    fontSize: 18,
+  infoContainer: {
+    marginTop: 40,
+    flex: 1,
+    justifyContent: 'space-around',
+    width: 0.85 * Dimensions.get('screen').width,
   },
   logOut: {
     alignSelf: 'flex-end',

@@ -1,38 +1,43 @@
-import {createReducer} from '@reduxjs/toolkit';
-import {PlayerPosition, PlayerStatus} from '../../../types/enums';
-import {getPlayers} from './actions';
+import {createReducer, SerializedError} from '@reduxjs/toolkit';
+import {IPlayer} from '../../../types/interfaces';
+import {getPlayerAccount, getPlayers} from './actions';
 
 export interface PlayerReducer {
   isLoading: boolean;
-  players: Players[];
-}
-
-export interface Players {
-  firstName: string;
-  lastName: string;
-  skill: number;
-  position: PlayerPosition;
-  status: PlayerStatus;
-  fidelity: number;
-  matchsPlayed: number;
-  userID?: string;
+  players: IPlayer[];
+  playerAccount?: IPlayer;
+  error?: SerializedError;
 }
 
 export const playerReducer = createReducer<PlayerReducer>(
   {
     isLoading: false,
     players: [],
+    playerAccount: undefined,
+    error: undefined,
   },
   builder => {
     builder.addCase(getPlayers.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(getPlayers.rejected, state => {
+    builder.addCase(getPlayers.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = action.error;
     });
     builder.addCase(getPlayers.fulfilled, (state, action) => {
       state.isLoading = false;
       state.players = action.payload;
+    });
+    builder.addCase(getPlayerAccount.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(getPlayerAccount.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+    builder.addCase(getPlayerAccount.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.playerAccount = action.payload;
     });
   },
 );

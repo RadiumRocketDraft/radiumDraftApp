@@ -1,3 +1,4 @@
 import {RootState} from '../../store';
 
-export const playerData = (state: RootState) => state.player;
+export const playersListSelector = (state: RootState) => state.player.players;
+export const playerSelector = (state: RootState) => state.player;
