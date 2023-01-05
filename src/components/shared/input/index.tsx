@@ -60,7 +60,7 @@ const Input = <
   );
   return (
     <View style={styles.containerInput}>
-      <Text>{label}</Text>
+      {label && <Text>{label}</Text>}
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
