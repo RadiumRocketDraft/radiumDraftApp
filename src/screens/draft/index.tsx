@@ -1,13 +1,20 @@
 import React, {useState} from 'react';
 import {FlatList} from 'native-base';
-import {View, Text, SafeAreaView, TouchableOpacity, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Alert,
+  ListRenderItemInfo,
+} from 'react-native';
 import Input from '../../components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
 import DatePicker from 'react-native-date-picker';
 import {format} from 'date-fns-tz';
 import Button from '../../components/shared/button';
-import {Routes, TNavigation} from '../../types/interfaces';
+import {IPlayer, Routes, TNavigation} from '../../types/interfaces';
 
 const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
@@ -40,7 +47,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
 
   const averageSkillTeamA = Math.floor(
     teamA.reduce(
-      (accumulator: number, initialValue: any) =>
+      (accumulator: number, initialValue: IPlayer) =>
         accumulator + initialValue.skill,
       0,
     ) / teamA.length,
@@ -48,7 +55,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
 
   const averageSkillTeamB = Math.floor(
     teamB.reduce(
-      (accumulator: number, initialValue: any) =>
+      (accumulator: number, initialValue: IPlayer) =>
         accumulator + initialValue.skill,
       0,
     ) / teamB.length,
@@ -56,7 +63,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
 
   const listSeparator = () => <View style={styles.separator} />;
 
-  const renderItemTeamA = (data: IPlayer) => {
+  const renderItemTeamA = (data: ListRenderItemInfo<IPlayer>) => {
     return (
       <Text>
         {data.item.firstName} {data.item.lastName}
@@ -64,7 +71,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
     );
   };
 
-  const renderItemTeamB = (data: any) => {
+  const renderItemTeamB = (data: ListRenderItemInfo<IPlayer>) => {
     return (
       <Text>
         {data.item.firstName} {data.item.lastName}
