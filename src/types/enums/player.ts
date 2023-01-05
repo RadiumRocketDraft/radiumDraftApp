@@ -5,8 +5,3 @@ export enum PlayerPosition {
   defender = 'Defender',
   flex = 'Flex',
 }
-
-export enum PlayerStatus {
-  starter = 'Starter',
-  sustitute = 'Sustitute',
-}

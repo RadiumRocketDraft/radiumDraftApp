@@ -1,6 +1,11 @@
 import {api, URL} from '../api';
 
 export const getPlayersRequest = async () => {
-  const response = await api.get(URL.GET_PLAYERS);
+  const response = await api.get(URL.player.GET_PLAYERS);
+  return response.data;
+};
+
+export const getPlayerRequest = async () => {
+  const response = await api.get(URL.player.GET_PLAYER);
   return response.data;
 };

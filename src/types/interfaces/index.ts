@@ -1,3 +1,4 @@
 export * from './authServices';
-export * from './routes';
 export * from './navigation';
+export * from './player';
+export * from './routes';
