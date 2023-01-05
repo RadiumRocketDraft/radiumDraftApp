@@ -1,6 +1,7 @@
 import {PlayerPosition} from '../enums';
 
 export interface IPlayer {
+  _id: string;
   firstName: string;
   lastName: string;
   skill: number;

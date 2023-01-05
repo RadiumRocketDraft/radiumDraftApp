@@ -23,6 +23,7 @@ export default StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 10,
   },
   flatList: {
     width: '100%',
