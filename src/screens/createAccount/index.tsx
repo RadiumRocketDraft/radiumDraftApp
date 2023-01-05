@@ -16,6 +16,7 @@ import {
   setIsCreatingAccount,
 } from '../../store/modules/auth';
 import {tooltipContent} from './constants';
+import styles from './styles';
 
 interface ICreateAccount {
   firstName: string;
@@ -92,6 +93,7 @@ const CreateAccount = () => {
         onFocus={() => onFocusInput('firstName')}
         error={errors.firstName?.message}
         autocapitalize={'words'}
+        customStyle={styles.input}
       />
       <Input
         control={control}
@@ -100,6 +102,7 @@ const CreateAccount = () => {
         onFocus={() => onFocusInput('lastName')}
         error={errors.lastName?.message}
         autocapitalize={'words'}
+        customStyle={styles.input}
       />
       <Input
         control={control}
@@ -107,6 +110,7 @@ const CreateAccount = () => {
         placeholder="E-mail"
         onFocus={() => onFocusInput('email')}
         error={errors.email?.message}
+        customStyle={styles.input}
       />
       <Input
         control={control}
@@ -115,6 +119,7 @@ const CreateAccount = () => {
         onFocus={() => onFocusInput('password')}
         error={errors.password?.message}
         type="password"
+        customStyle={styles.input}
       />
       <Input
         control={control}
@@ -123,6 +128,7 @@ const CreateAccount = () => {
         onFocus={() => onFocusInput('repeatPassword')}
         error={errors.repeatPassword?.message}
         type="password"
+        customStyle={styles.input}
       />
       <Slider
         control={control}

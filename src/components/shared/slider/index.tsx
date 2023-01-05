@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Flex, Slider as SliderNB, Text, View} from 'native-base';
 import {
   Control,
@@ -22,6 +22,7 @@ interface Props<TFormValues extends FieldValues> {
   minLimit?: number;
   maxLimit?: number;
   tooltipContent?: ITooltip;
+  showValue?: boolean;
 }
 
 const Slider = <
@@ -35,11 +36,17 @@ const Slider = <
   minLimit = 0,
   maxLimit = 100,
   tooltipContent,
+  showValue = true,
 }: Props<TFormValues>) => {
+  const [currentValue, setCurrentValue] = useState<string>();
   return (
     <View w="75%">
       <View style={styles.tooltipContainer}>
-        {label && <Text>{label}</Text>}
+        {(label ?? showValue) && (
+          <Text>
+            {label} {showValue && <Text>{currentValue}</Text>}
+          </Text>
+        )}
         {tooltipContent && (
           <CustomTooltip
             title={tooltipContent.title}
@@ -54,7 +61,10 @@ const Slider = <
           <Flex direction="row">
             <Text mr={2}>{minLimit}</Text>
             <SliderNB
-              onChange={onChange}
+              onChange={val => {
+                onChange(val);
+                setCurrentValue(String(val));
+              }}
               value={Number(value)}
               minValue={minLimit}
               maxValue={maxLimit}

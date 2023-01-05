@@ -1,13 +1,17 @@
 import React, {useMemo, useState} from 'react';
-import {Button, Checkbox} from 'native-base';
+import {Checkbox} from 'native-base';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {DATA_MOCK} from './MOCK';
 import styles from './styles';
 import {Routes, TNavigation} from '../../types/interfaces';
+import Button from '../../components/shared/button';
 
 type TPlayers = typeof DATA_MOCK;
 
-const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
+const SelectPlayers = ({
+  route,
+  navigation,
+}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const {playersAmount} = route.params;
   const [selectedPlayers, setSelectedPlayers] = useState<TPlayers>([]);
   const isCheckboxDisabled = useMemo(
@@ -63,6 +67,15 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
     );
   };
 
+  const onHandleSubmit = () => {
+    const TEAM_A = DATA_MOCK.slice(1, 6);
+    const TEAM_B = DATA_MOCK.slice(6, 11);
+    navigation.navigate(Routes.DRAFT, {
+      teamA: TEAM_A,
+      teamB: TEAM_B,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>
@@ -79,18 +92,10 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
         keyExtractor={(_, index) => index.toString()}
       />
       <Button
-        style={styles.bottomButton}
-        isDisabled={!isCheckboxDisabled}
-        onPress={() => {
-          selectedPlayers.forEach(player =>
-            // TO DO: Integrate selectedPlayers with BE
-            console.log(
-              player.firstName + ' ' + player.lastName + ' is selected.',
-            ),
-          );
-        }}>
-        <Text>Confirmar</Text>
-      </Button>
+        isDisabled={isCheckboxDisabled}
+        handleSubmit={onHandleSubmit}
+        text="Confirmar"
+      />
     </SafeAreaView>
   );
 };

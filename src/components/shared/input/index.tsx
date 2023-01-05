@@ -1,7 +1,9 @@
 import React, {useState, useMemo} from 'react';
 import {
   NativeSyntheticEvent,
+  StyleProp,
   TextInputFocusEventData,
+  TextStyle,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -24,6 +26,11 @@ interface Props<TFormValues extends FieldValues> {
   type?: 'text' | 'password';
   autocapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   rightElement?: JSX.Element | JSX.Element[];
+  label?: string;
+  editable?: boolean;
+  onPressIn?: () => void;
+  valueInput?: string;
+  customStyle?: StyleProp<TextStyle>;
 }
 
 const Input = <
@@ -39,6 +46,11 @@ const Input = <
   type = 'text',
   autocapitalize = 'none',
   rightElement,
+  label,
+  editable = true,
+  onPressIn,
+  valueInput,
+  customStyle,
 }: Props<TFormValues>) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const inputType = useMemo(
@@ -46,7 +58,8 @@ const Input = <
     [type, isPasswordVisible],
   );
   return (
-    <View style={styles.containerInput}>
+    <View style={[styles.containerInput, customStyle]}>
+      {label && <Text>{label}</Text>}
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
@@ -54,13 +67,12 @@ const Input = <
             onChangeText={onChange}
             value={value}
             onFocus={onFocus}
-            w={{
-              base: '75%',
-              md: '25%',
-            }}
             placeholder={placeholder}
             autoCapitalize={autocapitalize}
             type={inputType}
+            editable={editable}
+            onPressIn={onPressIn}
+            defaultValue={valueInput}
             InputRightElement={
               type === 'password' ? (
                 <TouchableOpacity
