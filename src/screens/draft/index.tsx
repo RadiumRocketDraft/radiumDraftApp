@@ -56,7 +56,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
 
   const listSeparator = () => <View style={styles.separator} />;
 
-  const renderItemTeamA = (data: any) => {
+  const renderItemTeamA = (data: IPlayer) => {
     return (
       <Text>
         {data.item.firstName} {data.item.lastName}
@@ -78,7 +78,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
     setValue('date', value);
   };
 
-  const onConfirmTime = (value: any) => {
+  const onConfirmTime = (value: Date) => {
     setTime(value);
     modalTimePicker(openDatePicker);
     setValue('time', value);

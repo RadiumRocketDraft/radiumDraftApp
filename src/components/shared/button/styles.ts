@@ -8,7 +8,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#187DE9',
   },
   text: {
     color: 'black',

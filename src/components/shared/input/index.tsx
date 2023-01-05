@@ -31,7 +31,7 @@ interface Props<TFormValues extends FieldValues> {
   label?: string;
   editable?: boolean;
   onPressIn?: () => void;
-  valueInput?: any;
+  valueInput?: string;
 }
 
 const Input = <
