@@ -79,7 +79,7 @@ const SelectPlayers = ({
     );
   };
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
         <Skeleton px="4" my={4} />
@@ -93,6 +93,7 @@ const SelectPlayers = ({
         <Skeleton bottom={0} w={'50%'} rounded="3xl" startColor="#187DE9" />
       </SafeAreaView>
     );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
