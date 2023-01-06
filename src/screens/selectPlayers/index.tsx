@@ -1,6 +1,12 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Checkbox, Skeleton} from 'native-base';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './styles';
 import {IPlayer, Routes, TNavigation} from '../../types/interfaces';
 import Button from '../../components/shared/button';
@@ -57,7 +63,7 @@ const SelectPlayers = ({
 
   const listSeparator = () => <View style={styles.separator} />;
 
-  const renderItem = (item: IPlayer) => {
+  const renderItem = ({item}: ListRenderItemInfo<IPlayer>) => {
     const isChecked = selectedPlayers.some(player => player._id === item._id);
 
     return (
@@ -103,7 +109,7 @@ const SelectPlayers = ({
       <FlatList
         bounces={false}
         data={players}
-        renderItem={({item}) => renderItem(item)}
+        renderItem={renderItem}
         style={styles.flatList}
         ItemSeparatorComponent={listSeparator}
         stickyHeaderIndices={[0]}
