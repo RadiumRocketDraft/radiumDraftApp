@@ -1,7 +1,7 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {UserLogin} from '../../../types/interfaces';
 import {logInRequest, createAccountRequest} from '../../../services/auth';
-import {logOut} from '../../../utils';
+import {getCurrentFirebaseToken, logOut} from '../../../utils';
 
 export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
   logInRequest(values),
@@ -11,7 +11,9 @@ export const createAccount = createAsyncThunk(
   'CREATE_ACCOUNT',
   async (values: UserLogin) => {
     try {
-      return await createAccountRequest(values);
+      const response = await createAccountRequest(values);
+      await getCurrentFirebaseToken(true);
+      return response;
     } catch (error) {
       await logOut();
       throw error;

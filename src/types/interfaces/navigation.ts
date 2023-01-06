@@ -3,9 +3,7 @@ import {
   NativeStackNavigationOptions,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import {DATA_MOCK} from '../screens/selectPlayers/MOCK';
-
-type TPlayers = typeof DATA_MOCK;
+import {IPlayer} from './player';
 
 import {Routes} from './routes';
 
@@ -21,8 +19,8 @@ export type StackParamList = {
   [Routes.HISTORY]: undefined;
   [Routes.PROFILE]: undefined;
   [Routes.DRAFT]: {
-    teamA: TPlayers;
-    teamB: TPlayers;
+    teamA: IPlayer[];
+    teamB: IPlayer[];
   };
 };
 

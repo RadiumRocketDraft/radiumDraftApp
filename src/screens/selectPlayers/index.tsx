@@ -1,34 +1,54 @@
-import React, {useMemo, useState} from 'react';
-import {Checkbox} from 'native-base';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
-import {DATA_MOCK} from './MOCK';
+import React, {useEffect, useMemo, useState} from 'react';
+import {Checkbox, Skeleton} from 'native-base';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './styles';
-import {Routes, TNavigation} from '../../types/interfaces';
+import {IPlayer, Routes, TNavigation} from '../../types/interfaces';
 import Button from '../../components/shared/button';
-
-type TPlayers = typeof DATA_MOCK;
+import {useDispatch, useSelector} from 'react-redux';
+import {getPlayers, playerSelector} from '../../store/modules/player';
 
 const SelectPlayers = ({
   route,
   navigation,
 }: TNavigation<Routes.SELECT_PLAYERS>) => {
+  const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
+  const {isLoading, players} = useSelector(playerSelector);
   const {playersAmount} = route.params;
-  const [selectedPlayers, setSelectedPlayers] = useState<TPlayers>([]);
   const isCheckboxDisabled = useMemo(
     () => selectedPlayers.length === playersAmount,
     [playersAmount, selectedPlayers.length],
   );
+  const dispatch = useDispatch();
 
-  const onChangeCheckbox = (item: any) => {
+  useEffect(() => {
+    dispatch(getPlayers());
+  }, [dispatch]);
+
+  const onChangeCheckbox = (item: IPlayer) => {
     const isSelectedPlayer = selectedPlayers.some(
-      player => player.id === item.id,
+      player => player._id === item._id,
     );
     if (isSelectedPlayer) {
       return setSelectedPlayers(current =>
-        current.filter(player => player.id !== item.id),
+        current.filter(player => player._id !== item._id),
       );
     }
     return setSelectedPlayers(current => [...current, item]);
+  };
+
+  const onHandleSubmit = () => {
+    const TEAM_A = players.slice(1, 6);
+    const TEAM_B = players.slice(6, 11);
+    navigation.navigate(Routes.DRAFT, {
+      teamA: TEAM_A,
+      teamB: TEAM_B,
+    });
   };
 
   const listHeader = () => {
@@ -43,10 +63,8 @@ const SelectPlayers = ({
 
   const listSeparator = () => <View style={styles.separator} />;
 
-  const renderItem = ({item}: any) => {
-    if (item.header) return listHeader();
-
-    const isChecked = selectedPlayers.some(player => player.id === item.id);
+  const renderItem = ({item}: ListRenderItemInfo<IPlayer>) => {
+    const isChecked = selectedPlayers.some(player => player._id === item._id);
 
     return (
       <View style={styles.rowContainer}>
@@ -54,27 +72,34 @@ const SelectPlayers = ({
           <Checkbox
             isDisabled={!isChecked && isCheckboxDisabled}
             accessibilityLabel="player"
-            value={item}
+            value={item.lastName}
             size="md"
             onChange={() => onChangeCheckbox(item)}
           />
         </View>
         <Text style={styles.wideRowText}>
-          {item.firstName} {item.lastName}
+          {item?.firstName} {item?.lastName}
         </Text>
         <Text style={styles.rowText}>{item.fidelity}</Text>
       </View>
     );
   };
 
-  const onHandleSubmit = () => {
-    const TEAM_A = DATA_MOCK.slice(1, 6);
-    const TEAM_B = DATA_MOCK.slice(6, 11);
-    navigation.navigate(Routes.DRAFT, {
-      teamA: TEAM_A,
-      teamB: TEAM_B,
-    });
-  };
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton px="4" my={4} />
+        <Skeleton bottom={0} w={'50%'} rounded="3xl" startColor="#187DE9" />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,16 +108,17 @@ const SelectPlayers = ({
       </Text>
       <FlatList
         bounces={false}
-        data={DATA_MOCK}
+        data={players}
         renderItem={renderItem}
         style={styles.flatList}
         ItemSeparatorComponent={listSeparator}
         stickyHeaderIndices={[0]}
         stickyHeaderHiddenOnScroll={false}
         keyExtractor={(_, index) => index.toString()}
+        ListHeaderComponent={listHeader}
       />
       <Button
-        isDisabled={isCheckboxDisabled}
+        isDisabled={!isCheckboxDisabled}
         handleSubmit={onHandleSubmit}
         text="Confirmar"
       />
