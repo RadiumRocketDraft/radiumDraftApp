@@ -1,5 +1,5 @@
 import {createReducer, SerializedError} from '@reduxjs/toolkit';
-import {IPlayer} from '../../../types/interfaces';
+import {IPlayer} from 'types/interfaces';
 import {getPlayerAccount, getPlayers} from './actions';
 
 export interface PlayerReducer {

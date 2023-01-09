@@ -6,16 +6,19 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "baseUrl": "./",
     "paths": {
-      "api/*": ["./src/api/*"],
+      "api": ["./src/api"],
       "assets/*": ["./src/assets/*"],
       "components/*": ["./src/components/*"],
+      "helpers": ["./src/helpers"],
       "helpers/*": ["./src/helpers/*"],
       "hooks/*": ["./src/hooks/*"],
       "navigation/*": ["./src/navigation/*"],
+      "screens": ["./src/screens"],
       "screens/*": ["./src/screens/*"],
       "services/*": ["./src/services/*"],
       "store/*": ["./src/store/*"],
       "types/*": ["./src/types/*"],
+      "utils": ["./src/utils"],
       "utils/*": ["./src/utils/*"],
       "src/*": ["./src/*"]
     },

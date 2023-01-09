@@ -1,20 +1,20 @@
 import {Stack} from 'native-base';
 import React, {useState} from 'react';
 import {FieldName, useForm} from 'react-hook-form';
-import Button from '../../components/shared/button';
-import Input from '../../components/shared/input';
+import Button from 'components/shared/button';
+import Input from 'components/shared/input';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validation';
-import {signUp} from '../../utils/firebase';
-import {PlayerPosition} from '../../types/enums';
-import Select from '../../components/shared/select';
+import {signUp} from 'utils/firebase';
+import {PlayerPosition} from 'types/enums';
+import Select from 'components/shared/select';
 import {useDispatch, useSelector} from 'react-redux';
-import Slider from '../../components/shared/slider';
+import Slider from 'components/shared/slider';
 import {
   authIsLoading,
   createAccount,
   setIsCreatingAccount,
-} from '../../store/modules/auth';
+} from 'store/modules/auth';
 import {tooltipContent} from './constants';
 import styles from './styles';
 

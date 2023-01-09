@@ -1,8 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {authIsCreatingAccount} from '../store/modules/auth';
-import {onAuthStateChanged} from '../utils';
-import axiosInterceptors from '../utils/axiosInterceptors';
+import {authIsCreatingAccount} from 'store/modules/auth';
+import {axiosInterceptors, onAuthStateChanged} from 'utils';
 
 const useIsSignedIn = () => {
   const [isSignedIn, setIsSignedIn] = useState<boolean>();

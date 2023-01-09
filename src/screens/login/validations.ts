@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import {emailRegex} from '../../utils/constants';
+import {emailRegex} from 'utils/constants';
 
 export const schema = yup.object().shape({
   email: yup

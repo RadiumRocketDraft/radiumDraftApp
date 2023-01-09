@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {getPlayerRequest, getPlayersRequest} from '../../../services/player';
-import {IPlayer} from '../../../types/interfaces';
+import {getPlayerRequest, getPlayersRequest} from 'services/player';
+import {IPlayer} from 'types/interfaces';
 
 export const getPlayers = createAsyncThunk<IPlayer[]>(
   'GET_PLAYERS',

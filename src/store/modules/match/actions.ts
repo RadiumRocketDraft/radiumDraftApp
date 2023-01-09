@@ -3,7 +3,7 @@ import {
   createMatchRequest,
   getActiveMatchsRequest,
   getInactiveMatchsRequest,
-} from '../../../services/match';
+} from 'services/match';
 
 export const getActiveMatches = createAsyncThunk(
   'GET_ACTIVE_MATCHES',

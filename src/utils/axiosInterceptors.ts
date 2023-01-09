@@ -1,4 +1,4 @@
-import {api} from '../api';
+import {api} from 'api';
 import {getCurrentFirebaseToken, logOut} from './firebase';
 
 const axiosInterceptors = () => {
@@ -37,4 +37,4 @@ const axiosInterceptors = () => {
   );
 };
 
-export default axiosInterceptors;
+export {axiosInterceptors};

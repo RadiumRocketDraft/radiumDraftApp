@@ -8,13 +8,13 @@ import {
   Alert,
   ListRenderItemInfo,
 } from 'react-native';
-import Input from '../../components/shared/input';
+import Input from 'components/shared/input';
 import {useForm} from 'react-hook-form';
 import styles from './styles';
 import DatePicker from 'react-native-date-picker';
 import {format} from 'date-fns-tz';
-import Button from '../../components/shared/button';
-import {IPlayer, Routes, TNavigation} from '../../types/interfaces';
+import Button from 'components/shared/button';
+import {IPlayer, Routes, TNavigation} from 'types/interfaces';
 
 const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
