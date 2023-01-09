@@ -1,12 +1,12 @@
 import React, {useEffect, useMemo} from 'react';
 import {Avatar, ScrollView, View} from 'native-base';
 import styles from './styles';
-import ButtonLine from '../../components/shared/buttonLine';
-import {logOut} from '../../utils/firebase';
+import ButtonLine from 'components/shared/buttonLine';
+import {logOut} from 'utils/firebase';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPlayerAccount, playerSelector} from '../../store/modules/player';
-import ListRow from '../../components/listRow';
+import {getPlayerAccount, playerSelector} from 'store/modules/player';
+import ListRow from 'components/listRow';
 
 const Profile = () => {
   const {isLoading, playerAccount} = useSelector(playerSelector);
@@ -21,7 +21,7 @@ const Profile = () => {
     () =>
       playerAccount?.profileImage
         ? {uri: playerAccount.profileImage}
-        : require('../../assets/defaultProfile.jpeg'),
+        : require('assets/defaultProfile.jpeg'),
     [playerAccount?.profileImage],
   );
 

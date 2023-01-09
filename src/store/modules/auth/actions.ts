@@ -1,7 +1,7 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
-import {UserLogin} from '../../../types/interfaces';
-import {logInRequest, createAccountRequest} from '../../../services/auth';
-import {getCurrentFirebaseToken, logOut} from '../../../utils';
+import {UserLogin} from 'types/interfaces';
+import {logInRequest, createAccountRequest} from 'services/auth';
+import {getCurrentFirebaseToken, logOut} from 'utils';
 
 export const login = createAsyncThunk('LOG_IN', (values: UserLogin) =>
   logInRequest(values),

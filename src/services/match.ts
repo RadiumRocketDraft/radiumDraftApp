@@ -1,4 +1,4 @@
-import {api, URL} from '../api';
+import {api, URL} from 'api';
 
 export const getInactiveMatchsRequest = async () => {
   const response = await api.get(URL.match.GET_INACTIVE_MATCHES);

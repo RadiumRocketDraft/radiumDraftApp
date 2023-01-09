@@ -8,10 +8,10 @@ import {
   View,
 } from 'react-native';
 import styles from './styles';
-import {IPlayer, Routes, TNavigation} from '../../types/interfaces';
-import Button from '../../components/shared/button';
+import {IPlayer, Routes, TNavigation} from 'types/interfaces';
+import Button from 'components/shared/button';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPlayers, playerSelector} from '../../store/modules/player';
+import {getPlayers, playerSelector} from 'store/modules/player';
 
 const SelectPlayers = ({
   route,

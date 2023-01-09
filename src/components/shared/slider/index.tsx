@@ -7,7 +7,7 @@ import {
   Path,
   UnPackAsyncDefaultValues,
 } from 'react-hook-form';
-import CustomTooltip from '../../tooltip';
+import CustomTooltip from 'components/tooltip';
 import styles from './styles';
 
 interface ITooltip {

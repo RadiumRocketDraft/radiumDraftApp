@@ -1,6 +1,6 @@
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Routes} from '../../types/interfaces';
+import {Routes} from 'types/interfaces';
 
 export const tabIcons = {
   [Routes.MATCH]: {

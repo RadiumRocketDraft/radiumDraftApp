@@ -1,8 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {MatchStatus} from '../../../types/enums';
-import {Players} from '../player';
+import {MatchStatus} from 'types/enums';
 import {getActiveMatches, getInactiveMatches} from './actions';
-
+import {IPlayer} from 'types/interfaces';
 export interface MatchReducer {
   isLoading: boolean;
   activeMatches: Match[];
@@ -10,8 +9,8 @@ export interface MatchReducer {
 }
 
 interface Match {
-  teamA: Players[];
-  teamB: Players[];
+  teamA: IPlayer[];
+  teamB: IPlayer[];
   date: Date;
   result?: Result;
   status: MatchStatus;

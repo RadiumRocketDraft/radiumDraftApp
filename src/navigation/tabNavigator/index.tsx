@@ -1,9 +1,9 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Match, History, Profile} from '../../screens';
-import {Routes} from '../../types/interfaces/routes';
+import {Match, History, Profile} from 'screens';
+import {Routes} from 'types/interfaces/routes';
 import {tabIcons, tabIconsFocused} from './constants';
-import {StackParamList} from '../../types/interfaces';
+import {StackParamList} from 'types/interfaces';
 
 const Tab = createBottomTabNavigator<StackParamList>();
 

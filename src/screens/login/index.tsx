@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Stack} from 'native-base';
 import {useForm, FieldName} from 'react-hook-form';
-import Button from '../../components/shared/button';
-import Input from '../../components/shared/input';
-import ButtonLine from '../../components/shared/buttonLine';
+import Button from 'components/shared/button';
+import Input from 'components/shared/input';
+import ButtonLine from 'components/shared/buttonLine';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {schema} from './validations';
-import {signIn} from '../../utils/firebase';
-import {Routes, TNavigation} from '../../types/interfaces';
+import {signIn} from 'utils/firebase';
+import {Routes, TNavigation} from 'types/interfaces';
 import styles from './styles';
 
 interface ILogin {
