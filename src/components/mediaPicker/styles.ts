@@ -1,20 +1,26 @@
-import colors from 'native-base/lib/typescript/theme/base/colors';
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
+  actionSheetContent: {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
   mediaTypeButton: {
     alignItems: 'center',
+    marginVertical: 16,
   },
   titleText: {
-    fontSize: 16,
-    color: colors.gray[500],
-    paddingTop: 4,
-    paddingBottom: 8,
+    fontSize: 20,
+    color: 'gray',
+    paddingVertical: 8,
   },
-  descriptionText: {fontSize: 16, color: colors.gray[500]},
+  descriptionText: {
+    fontSize: 16,
+    color: 'gray',
+  },
   icon: {
     fontSize: 52,
-    color: colors.gray[500],
+    color: 'gray',
   },
   buttonsContainer: {
     width: '100%',
