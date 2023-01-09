@@ -2,11 +2,12 @@ import React, {useEffect, useMemo} from 'react';
 import {Avatar, ScrollView, View} from 'native-base';
 import styles from './styles';
 import ButtonLine from 'components/shared/buttonLine';
-import {logOut} from 'utils/firebase';
+import {changePass, logOut} from 'utils/firebase';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayerAccount, playerSelector} from 'store/modules/player';
 import ListRow from 'components/listRow';
+import Button from 'components/shared/button';
 
 const Profile = () => {
   const {isLoading, playerAccount} = useSelector(playerSelector);
@@ -71,6 +72,11 @@ const Profile = () => {
           title={'Matches Played'}
           value={playerAccount?.matchesPlayed}
           isLoading={isLoading}
+        />
+        <Button
+          text={'Change password'}
+          customStyle={styles.changePass}
+          handleSubmit={() => changePass('caca123')}
         />
       </ScrollView>
     </View>

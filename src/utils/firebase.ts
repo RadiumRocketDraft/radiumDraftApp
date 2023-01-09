@@ -1,4 +1,4 @@
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import auth, {firebase, FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 type CallbackOrObserver<T extends (...args: any[]) => any> = T | {next: T};
 
@@ -25,4 +25,17 @@ export const onAuthStateChanged = (
   cb: CallbackOrObserver<FirebaseAuthTypes.AuthListenerCallback>,
 ) => {
   return auth().onAuthStateChanged(cb);
+};
+
+var user = auth().currentUser;
+console.log(user);
+var credential = firebase.auth.EmailAuthProvider.credential(user.email, '');
+
+export const changePass = (newPassword: string) => {
+  user.reauthenticateWithCredential(credential);
+  try {
+    auth().currentUser?.updatePassword(newPassword);
+  } catch (error) {
+    console.log('errorazo', error);
+  }
 };

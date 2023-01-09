@@ -20,4 +20,9 @@ export default StyleSheet.create({
     alignSelf: 'flex-end',
     marginRight: 20,
   },
+
+  changePass: {
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
 });
