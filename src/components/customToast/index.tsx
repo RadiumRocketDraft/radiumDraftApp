@@ -26,7 +26,7 @@ interface IToastAlertProps {
 
 export const CustomToast = ({
   id,
-  status,
+  status = ToastStatus.info,
   title,
   description,
 }: IToastAlertProps) => (
@@ -47,8 +47,3 @@ export const CustomToast = ({
     </VStack>
   </Alert>
 );
-
-CustomToast.defaultProps = {
-  id: undefined,
-  status: ToastStatus.info,
-};

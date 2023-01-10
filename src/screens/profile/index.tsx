@@ -1,8 +1,9 @@
-import React, {ElementRef, useEffect, useMemo} from 'react';
-import {Image, ScrollView, Text, View} from 'native-base';
+import React, {ElementRef, useCallback, useEffect, useState} from 'react';
+import {Image, ScrollView, Spinner, Text, Toast, View} from 'native-base';
 import styles from './styles';
 import ButtonLine from 'components/shared/buttonLine';
 import {logOut} from 'utils/firebase';
+import {Image as IImage} from 'react-native-image-crop-picker';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayerAccount, playerSelector} from 'store/modules/player';
@@ -11,11 +12,15 @@ import ListRow from 'components/listRow';
 import MediaPicker from 'components/mediaPicker';
 import {useRef} from 'react';
 import {TouchableOpacity} from 'react-native';
+import useFirebaseStorage from 'hooks/useFirebaseStorage';
+import {CustomToast, ToastStatus} from 'components/customToast';
 
 const Profile = () => {
+  const [pickedImage, setPickedImage] = useState<IImage>();
   const {isLoading, playerAccount} = useSelector(playerSelector);
   const dispatch = useDispatch();
   const {top} = useSafeAreaInsets();
+  const {storageError, isUploading} = useFirebaseStorage(pickedImage);
 
   const mediaPickerRef = useRef<ElementRef<typeof MediaPicker>>(null);
 
@@ -23,13 +28,27 @@ const Profile = () => {
     dispatch(getPlayerAccount());
   }, [dispatch]);
 
-  const profilePicture = useMemo(
-    () =>
-      playerAccount?.profileImage
-        ? {uri: playerAccount.profileImage}
-        : require('assets/defaultProfile.jpeg'),
-    [playerAccount?.profileImage],
-  );
+  useEffect(() => {
+    if (storageError) {
+      Toast.show({
+        render: ({id}) => {
+          return (
+            <CustomToast
+              id={id}
+              description={storageError}
+              title={'Error uploading picture'}
+              status={ToastStatus.error}
+            />
+          );
+        },
+      });
+    }
+  }, [storageError]);
+
+  const mediaPickerOnSuccessHandler = useCallback((image: IImage) => {
+    mediaPickerRef.current?.onClose();
+    setPickedImage(image);
+  }, []);
 
   const onPressLogOut = () => {
     logOut();
@@ -42,14 +61,21 @@ const Profile = () => {
       </ButtonLine>
       <TouchableOpacity onPress={mediaPickerRef.current?.onOpen}>
         <View style={styles.avatarContainer}>
-          <Image
-            alt="Profile Picture"
-            source={profilePicture}
-            style={styles.avatarImage}
-          />
-          <Text style={styles.editText}>
-            {playerAccount?.profileImage ? 'Edit' : 'Upload'}
-          </Text>
+          {isUploading || isLoading ? (
+            <Spinner style={styles.avatarImage} />
+          ) : (
+            <>
+              <Image
+                alt="Profile Picture"
+                source={{uri: playerAccount?.profileImage ?? '/invalidURL'}}
+                style={styles.avatarImage}
+                fallbackSource={require('assets/defaultProfile.jpeg')}
+              />
+              <Text style={styles.editText}>
+                {playerAccount?.profileImage ? 'Edit' : 'Upload'}
+              </Text>
+            </>
+          )}
         </View>
       </TouchableOpacity>
       <ScrollView bounces={false} contentContainerStyle={styles.infoContainer}>
@@ -89,10 +115,7 @@ const Profile = () => {
         title={
           (playerAccount?.profileImage ? 'Edit' : 'Upload') + ' Profile Picture'
         }
-        onSuccess={image => {
-          console.log(image);
-          mediaPickerRef.current?.onClose();
-        }}
+        onSuccess={mediaPickerOnSuccessHandler}
       />
     </View>
   );
