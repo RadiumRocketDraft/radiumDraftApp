@@ -37,6 +37,7 @@ const MediaPicker = forwardRef<IMediaPickerCustomRef, Props>(
     const onGalleryPress = useCallback(async () => {
       if (isDisabled) return;
       setIsDisabled(true);
+      setInternalError(undefined);
       try {
         const image = await ImagePicker.openPicker({
           mediaType: 'photo',
@@ -56,6 +57,7 @@ const MediaPicker = forwardRef<IMediaPickerCustomRef, Props>(
     const onCameraPress = useCallback(async () => {
       if (isDisabled) return;
       setIsDisabled(true);
+      setInternalError(undefined);
       try {
         const image = await ImagePicker.openCamera({
           mediaType: 'photo',

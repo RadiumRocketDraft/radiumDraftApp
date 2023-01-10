@@ -9,6 +9,7 @@ export default StyleSheet.create({
   avatarContainer: {
     position: 'relative',
     borderRadius: 9999,
+    borderWidth: 1,
     width: 128,
     height: 128,
     marginTop: 20,
@@ -21,7 +22,8 @@ export default StyleSheet.create({
   editText: {
     fontSize: 12,
     textAlign: 'center',
-    backgroundColor: '#5555',
+    backgroundColor: '#555B',
+    color: 'white',
     position: 'absolute',
     bottom: 0,
     paddingBottom: 4,
