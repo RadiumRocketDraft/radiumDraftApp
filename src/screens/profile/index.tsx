@@ -112,10 +112,11 @@ const Profile = () => {
         />
       </ScrollView>
       <ModalWithInput
+        onSubmit={() => {}} // TODO: Change password functionality
         firstInputName={'Email'}
         secondInputName={'Password'}
-        buttonText={'Cambiar contraseña'}
-        headerText={'Login to change your password'}
+        buttonText={'Change password'}
+        headerText={'You need to authenticate first'}
       />
       <MediaPicker
         ref={mediaPickerRef}

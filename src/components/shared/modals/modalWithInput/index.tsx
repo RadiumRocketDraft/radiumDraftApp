@@ -11,7 +11,8 @@ interface Props {
   buttonText: string;
   headerText: string;
   firstInputName: string;
-  secondInputName: string;
+  secondInputName?: string;
+  onSubmit: () => void;
 }
 
 const ModalWithInput = ({
@@ -19,6 +20,7 @@ const ModalWithInput = ({
   headerText,
   firstInputName,
   secondInputName,
+  onSubmit,
 }: Props) => {
   const newObject = {
     [firstInputName]: '',
@@ -32,17 +34,16 @@ const ModalWithInput = ({
     setError,
     watch,
     clearErrors,
+    handleSubmit,
+    setValue,
   } = useForm({
     defaultValues: newObject,
     resolver: yupResolver(schema),
-    mode: 'onChange',
+    mode: 'onSubmit',
+    reValidateMode: 'onBlur',
   });
-  useEffect(() => {
-    return () => {};
-  }, []);
   const firstInputValue = watch(firstInputName);
   const secondInputValue = watch(secondInputName);
-
   const onPress = () => {
     if (!firstInputValue || !secondInputValue) {
       Keyboard.dismiss();
@@ -51,6 +52,7 @@ const ModalWithInput = ({
         message: 'You need to enter a valid user and password',
       });
     }
+    onSubmit();
   };
 
   return (
@@ -69,17 +71,24 @@ const ModalWithInput = ({
               control={control}
               customStyle={styles.input}
             />
-            <Input
-              onFocus={() => {
-                clearErrors(secondInputName);
-              }}
-              type="text"
-              label={secondInputName}
-              name={secondInputName}
-              control={control}
-              customStyle={styles.input}
-            />
+            {secondInputName && (
+              <Input
+                onFocus={() => {
+                  clearErrors(secondInputName);
+                }}
+                type="text"
+                label={secondInputName}
+                name={secondInputName}
+                control={control}
+                customStyle={styles.input}
+              />
+            )}
           </Modal.Body>
+          {errors[firstInputName] && (
+            <Text style={styles.error}>
+              Please enter a valid email and password
+            </Text>
+          )}
           <Modal.Footer>
             <Button.Group space={2}>
               <Button
@@ -89,10 +98,9 @@ const ModalWithInput = ({
                 }}>
                 Cancel
               </Button>
-              <Button style={styles.button} onPress={onPress}>
+              <Button style={styles.button} onPress={handleSubmit(onPress)}>
                 Send
               </Button>
-              {errors[firstInputName] && <Text>Pepe</Text>}
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>
@@ -100,6 +108,8 @@ const ModalWithInput = ({
       <Button
         backgroundColor={'#187DE9'}
         onPress={() => {
+          setValue(firstInputName, '');
+          setValue(secondInputName, '');
           clearErrors();
           setModalVisible(!modalVisible);
         }}>
