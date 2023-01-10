@@ -5,6 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMatches} from 'store/modules/match/actions';
 import {matchData} from 'store/modules/match/selectors';
+import {MatchStatus} from 'types/enums/match';
 import styles from './styles';
 
 const History = () => {
@@ -15,6 +16,10 @@ const History = () => {
     dispatch(getMatches());
   }, [dispatch]);
 
+  const completedMatches = matches.filter(match => {
+    return match.status !== MatchStatus.toBePlayed;
+  });
+
   const renderItem = (item: any) => {
     return <MatchCard match={item} />;
   };
@@ -23,7 +28,7 @@ const History = () => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <FlatList
-        data={matches}
+        data={completedMatches}
         renderItem={renderItem}
         ItemSeparatorComponent={listSeparator}
         bounces={false}
