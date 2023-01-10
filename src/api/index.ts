@@ -20,6 +20,7 @@ export const URL = {
   },
   player: {
     GET_PLAYER: '/api/player',
+    UPDATE_PLAYER: '/api/player',
     GET_PLAYERS: '/api/player/all',
   },
   match: {
