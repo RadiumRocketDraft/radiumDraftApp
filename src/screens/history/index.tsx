@@ -20,7 +20,7 @@ const History = () => {
     return match.status !== MatchStatus.toBePlayed;
   });
 
-  const renderItem = (item: any) => {
+  const renderItem = ({item}: any) => {
     return <MatchCard match={item} />;
   };
   const listSeparator = () => <View style={styles.separator} />;
