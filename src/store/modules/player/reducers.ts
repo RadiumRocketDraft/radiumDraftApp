@@ -1,6 +1,6 @@
 import {createReducer, SerializedError} from '@reduxjs/toolkit';
 import {IPlayer} from 'types/interfaces';
-import {getPlayerAccount, getPlayers} from './actions';
+import {getPlayerAccount, getPlayers, updatePlayer} from './actions';
 
 export interface PlayerReducer {
   isLoading: boolean;
@@ -36,6 +36,17 @@ export const playerReducer = createReducer<PlayerReducer>(
       state.error = action.error;
     });
     builder.addCase(getPlayerAccount.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.playerAccount = action.payload;
+    });
+    builder.addCase(updatePlayer.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(updatePlayer.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+    builder.addCase(updatePlayer.fulfilled, (state, action) => {
       state.isLoading = false;
       state.playerAccount = action.payload;
     });
