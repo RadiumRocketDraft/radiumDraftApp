@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import useIsSignedIn from 'hooks/isSignIn';
+import useIsSignedIn from 'hooks/useIsSignIn';
 import {appNavOptions, mainStackNavOption} from 'helpers';
 import {Routes, StackParamList} from 'types/interfaces';
 import TabNavigator from '../tabNavigator';

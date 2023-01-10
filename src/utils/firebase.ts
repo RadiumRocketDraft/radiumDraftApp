@@ -9,6 +9,8 @@ export const getCurrentFirebaseToken = async (
   return token || '';
 };
 
+export const getCurrentFirebaseUid = () => auth().currentUser?.uid;
+
 export const signIn = (email: string, password: string) => {
   return auth().signInWithEmailAndPassword(email, password);
 };
