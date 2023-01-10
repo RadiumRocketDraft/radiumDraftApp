@@ -27,15 +27,17 @@ export const onAuthStateChanged = (
   return auth().onAuthStateChanged(cb);
 };
 
-var user = auth().currentUser;
-console.log(user);
-var credential = firebase.auth.EmailAuthProvider.credential(user.email, '');
+// var user = auth().currentUser;
+// console.log(user);
+// var credential = firebase.auth.EmailAuthProvider.credential(user.email, '');
 
-export const changePass = (newPassword: string) => {
-  user.reauthenticateWithCredential(credential);
-  try {
-    auth().currentUser?.updatePassword(newPassword);
-  } catch (error) {
-    console.log('errorazo', error);
-  }
+export const changePass = async (newPassword: string) => {
+  // user.reauthenticateWithCredential(credential);
+  await auth()
+    .currentUser?.updatePassword(newPassword)
+    .then()
+    .catch(err => {
+      if (err.code === 'auth/requires-recent-login') {
+      }
+    });
 };
