@@ -1,9 +1,11 @@
+import MatchCard from 'components/shared/matchCard';
 import React, {useEffect} from 'react';
-import {Text} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMatches} from 'store/modules/match/actions';
 import {matchData} from 'store/modules/match/selectors';
+import styles from './styles';
 
 const History = () => {
   const {matches} = useSelector(matchData);
@@ -13,9 +15,19 @@ const History = () => {
     dispatch(getMatches());
   }, [dispatch]);
 
+  const renderItem = (item: any) => {
+    return <MatchCard match={item} />;
+  };
+  const listSeparator = () => <View style={styles.separator} />;
+
   return (
-    <SafeAreaView>
-      <Text>History SCREEN</Text>
+    <SafeAreaView style={styles.safeAreaView}>
+      <FlatList
+        data={matches}
+        renderItem={renderItem}
+        ItemSeparatorComponent={listSeparator}
+        bounces={false}
+      />
     </SafeAreaView>
   );
 };
