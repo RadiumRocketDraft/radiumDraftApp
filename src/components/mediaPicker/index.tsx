@@ -23,7 +23,16 @@ interface IMediaPickerCustomRef {
 const MediaPicker = forwardRef<IMediaPickerCustomRef, Props>(
   ({title, onError, onSuccess}, ref) => {
     const [isDisabled, setIsDisabled] = useState(false);
+    const [internalError, setInternalError] = useState<string>();
     const {isOpen, onOpen, onClose} = useDisclose();
+
+    const handleError = useCallback(
+      (error: string) => {
+        if (onError) return onError(error);
+        setInternalError(error);
+      },
+      [onError],
+    );
 
     const onGalleryPress = useCallback(async () => {
       if (isDisabled) return;
@@ -38,12 +47,11 @@ const MediaPicker = forwardRef<IMediaPickerCustomRef, Props>(
         });
         onSuccess?.(image);
       } catch (error) {
-        if (typeof error === 'string') onError?.(error);
-        onError?.(String(error));
+        if (typeof error === 'string') handleError(error);
+        handleError(String(error));
       }
       setIsDisabled(false);
-      onClose();
-    }, [isDisabled, onClose, onError, onSuccess]);
+    }, [handleError, isDisabled, onSuccess]);
 
     const onCameraPress = useCallback(async () => {
       if (isDisabled) return;
@@ -58,15 +66,15 @@ const MediaPicker = forwardRef<IMediaPickerCustomRef, Props>(
         });
         onSuccess?.(image);
       } catch (error) {
-        if (typeof error === 'string') onError?.(error);
-        onError?.(String(error));
+        if (typeof error === 'string') handleError(error);
+        handleError(String(error));
       }
       setIsDisabled(false);
-      onClose();
-    }, [isDisabled, onClose, onError, onSuccess]);
+    }, [handleError, isDisabled, onSuccess]);
 
     const conditionalOnClose = useCallback(() => {
       if (!isDisabled) onClose();
+      setInternalError(undefined);
     }, [isDisabled, onClose]);
 
     useImperativeHandle(
@@ -90,6 +98,7 @@ const MediaPicker = forwardRef<IMediaPickerCustomRef, Props>(
         hideDragIndicator>
         <Actionsheet.Content style={styles.actionSheetContent}>
           <Text style={styles.titleText}>{title}</Text>
+          <Text style={styles.internalError}>{internalError ?? ' '}</Text>
           <HStack style={styles.buttonsContainer}>
             <TouchableOpacity
               style={styles.mediaTypeButton}

@@ -28,4 +28,7 @@ export default StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingBottom: 4,
   },
+  internalError: {
+    color: 'red',
+  },
 });
