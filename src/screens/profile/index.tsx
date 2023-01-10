@@ -7,6 +7,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayerAccount, playerSelector} from 'store/modules/player';
 import ListRow from 'components/listRow';
+import {ModalWithInput} from 'components/shared/modals';
 
 const Profile = () => {
   const {isLoading, playerAccount} = useSelector(playerSelector);
@@ -73,6 +74,12 @@ const Profile = () => {
           isLoading={isLoading}
         />
       </ScrollView>
+      <ModalWithInput
+        firstInputName={'Email'}
+        secondInputName={'Password'}
+        buttonText={'Cambiar contraseña'}
+        headerText={'Login to change your password'}
+      />
     </View>
   );
 };

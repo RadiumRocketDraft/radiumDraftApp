@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   avatarContainer: {
@@ -19,5 +19,8 @@ export default StyleSheet.create({
   logOut: {
     alignSelf: 'flex-end',
     marginRight: 20,
+  },
+  modal: {
+    alignSelf: 'center',
   },
 });
