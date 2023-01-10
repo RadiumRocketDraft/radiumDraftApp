@@ -22,13 +22,9 @@ const MatchCard = ({match}: any) => {
 
   const statusStyling: any = {
     [MatchStatus.cancelled]: {
-      contentWrapper: styles.cardContainerCancel,
       rapezoidLeft: styles.rapezoidLeftCancel,
     },
     [MatchStatus.finished]: {
-      contentWrapper: isWinner
-        ? styles.cardContainerWin
-        : styles.cardContainerLoss,
       rapezoidLeft: isWinner
         ? styles.trapezoidLeftWin
         : styles.trapezoidLeftLoss,
@@ -57,7 +53,6 @@ const MatchCard = ({match}: any) => {
           <Text>{field}</Text>
         </View>
       </View>
-      {/* <View style={styles.trapezoidLeft} /> */}
       <View style={[
           styles.trapezoidLeft,
           statusStyling[matchStatus].rapezoidLeft,

@@ -17,7 +17,7 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderTopLeftRadius: 10,
     borderRightWidth: 0,
-    backgroundColor: '#F2DDF8',
+    backgroundColor: '#FFFF',
   },
   trapezoidLeft: {
     width: 10,
