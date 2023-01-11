@@ -1,25 +1,20 @@
 import MatchCard from 'components/shared/matchCard';
 import React, {useEffect} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMatches} from 'store/modules/match/actions';
 import {Match} from 'store/modules/match/reducers';
-import {matchData} from 'store/modules/match/selectors';
-import {MatchStatus} from 'types/enums/match';
+import {historyMatchesData} from 'store/modules/match/selectors';
 import styles from './styles';
 
 const History = () => {
-  const {matches} = useSelector(matchData);
+  const matches = useSelector(historyMatchesData);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMatches());
   }, [dispatch]);
-
-  const completedMatches = matches.filter(match => {
-    return match.status !== MatchStatus.toBePlayed;
-  });
 
   const renderItem = ({item}: {item: Match}) => {
     return <MatchCard match={item} />;
@@ -29,7 +24,7 @@ const History = () => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <FlatList
-        data={completedMatches}
+        data={matches}
         renderItem={renderItem}
         ItemSeparatorComponent={listSeparator}
         bounces={false}
