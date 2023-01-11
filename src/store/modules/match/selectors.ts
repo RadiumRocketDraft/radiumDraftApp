@@ -8,3 +8,9 @@ export const historyMatchesData = (state: RootState) => {
     return match.status !== MatchStatus.toBePlayed;
   });
 };
+
+export const matchesToBePlayed = (state: RootState) => {
+  return state.match.matches.filter(match => {
+    return match.status === MatchStatus.toBePlayed;
+  });
+};
