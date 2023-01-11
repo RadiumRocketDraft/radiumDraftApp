@@ -15,11 +15,13 @@ export interface Match {
   date: Date;
   result?: Result;
   status: MatchStatus;
+  field: string;
 }
 
 interface Result {
-  score: string;
-  winner: string;
+  teamA: number;
+  teamB: number;
+  winner: 'teamA' | 'teamB';
 }
 
 export const matchReducer = createReducer<MatchReducer>(

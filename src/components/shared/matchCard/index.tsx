@@ -5,8 +5,9 @@ import format from 'date-fns/format';
 import {MatchStatus} from 'types/enums/match';
 import {getCurrentFirebaseUid} from 'utils';
 import {IPlayer} from 'types/interfaces/player';
+import {Match} from 'store/modules/match';
 
-const MatchCard = ({match}: any) => {
+const MatchCard = ({match}: {match: Match}) => {
   const firebaseUid = getCurrentFirebaseUid();
   const scoreTeamA = match?.result?.teamA;
   const scoreTeamB = match?.result?.teamB;
@@ -15,11 +16,11 @@ const MatchCard = ({match}: any) => {
   const field = match?.field; // Cuando se conecte la creación de partido modificar esto con lo que viene
   const isWinner =
     matchStatus === MatchStatus.finished &&
-    match[match.result.winner].some(
+    match[match.result?.winner || 'teamA'].some(
       (player: IPlayer) => player.firebaseUid === firebaseUid,
     );
 
-  const statusStyling: any = {
+  const statusStyling = {
     [MatchStatus.cancelled]: {
       rapezoidLeft: styles.rapezoidLeftCancel,
     },
@@ -28,15 +29,12 @@ const MatchCard = ({match}: any) => {
         ? styles.trapezoidLeftWin
         : styles.trapezoidLeftLoss,
     },
+    [MatchStatus.toBePlayed]: {},
   };
 
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.cardContainer,
-          statusStyling[matchStatus].contentWrapper,
-        ]}>
+      <View style={[styles.cardContainer]}>
         <View style={styles.columnData}>
           <Text>Result</Text>
           <Text>
