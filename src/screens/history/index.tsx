@@ -4,6 +4,7 @@ import {FlatList, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMatches} from 'store/modules/match/actions';
+import {Match} from 'store/modules/match/reducers';
 import {matchData} from 'store/modules/match/selectors';
 import {MatchStatus} from 'types/enums/match';
 import styles from './styles';
@@ -20,7 +21,7 @@ const History = () => {
     return match.status !== MatchStatus.toBePlayed;
   });
 
-  const renderItem = ({item}: any) => {
+  const renderItem = ({item}: {item: Match}) => {
     return <MatchCard match={item} />;
   };
   const listSeparator = () => <View style={styles.separator} />;

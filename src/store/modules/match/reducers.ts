@@ -9,7 +9,7 @@ export interface MatchReducer {
   matches: Match[];
 }
 
-interface Match {
+export interface Match {
   teamA: IPlayer[];
   teamB: IPlayer[];
   date: Date;

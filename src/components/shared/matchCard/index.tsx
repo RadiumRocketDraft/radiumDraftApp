@@ -3,7 +3,8 @@ import {View, Text} from 'react-native';
 import styles from './styles';
 import format from 'date-fns/format';
 import {MatchStatus} from 'types/enums/match';
-import { getCurrentFirebaseUid } from 'utils';
+import {getCurrentFirebaseUid} from 'utils';
+import {IPlayer} from 'types/interfaces/player';
 
 const MatchCard = ({match}: any) => {
   const firebaseUid = getCurrentFirebaseUid();
@@ -15,10 +16,8 @@ const MatchCard = ({match}: any) => {
   const isWinner =
     matchStatus === MatchStatus.finished &&
     match[match.result.winner].some(
-      player => player.firebaseUid === firebaseUid,
+      (player: IPlayer) => player.firebaseUid === firebaseUid,
     );
-
-  console.log({isWinner});
 
   const statusStyling: any = {
     [MatchStatus.cancelled]: {
@@ -53,10 +52,9 @@ const MatchCard = ({match}: any) => {
           <Text>{field}</Text>
         </View>
       </View>
-      <View style={[
-          styles.trapezoidLeft,
-          statusStyling[matchStatus].rapezoidLeft,
-        ]} />
+      <View
+        style={[styles.trapezoidLeft, statusStyling[matchStatus].rapezoidLeft]}
+      />
     </View>
   );
 };
