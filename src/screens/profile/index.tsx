@@ -113,8 +113,8 @@ const Profile = () => {
       </ScrollView>
       <ModalWithInput
         onSubmit={() => {}} // TODO: Change password functionality
-        firstInputName={'Email'}
-        secondInputName={'Password'}
+        firstInputName={'email'}
+        secondInputName={'password'}
         buttonText={'Change password'}
         headerText={'You need to authenticate first'}
       />

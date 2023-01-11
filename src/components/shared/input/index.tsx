@@ -59,7 +59,7 @@ const Input = <
   );
   return (
     <View style={[styles.containerInput, customStyle]}>
-      {label && <Text>{label}</Text>}
+      {label && <Text style={styles.label}>{label}</Text>}
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (

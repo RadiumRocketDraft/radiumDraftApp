@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {Button, Modal, Text} from 'native-base';
 import Input from 'components/shared/input';
 import styles from './styles';
@@ -12,7 +12,7 @@ interface Props {
   headerText: string;
   firstInputName: string;
   secondInputName?: string;
-  onSubmit: () => void;
+  onSubmit: (data: {[x: string]: string}) => void;
 }
 
 const ModalWithInput = ({
@@ -22,37 +22,35 @@ const ModalWithInput = ({
   secondInputName,
   onSubmit,
 }: Props) => {
-  const newObject = {
+  const defaultValues = {
     [firstInputName]: '',
-    [secondInputName]: '',
+    [secondInputName as string]: '',
   };
 
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const {
     control,
     formState: {errors},
     setError,
-    watch,
     clearErrors,
     handleSubmit,
     setValue,
   } = useForm({
-    defaultValues: newObject,
+    defaultValues: defaultValues,
     resolver: yupResolver(schema),
     mode: 'onSubmit',
     reValidateMode: 'onBlur',
   });
-  const firstInputValue = watch(firstInputName);
-  const secondInputValue = watch(secondInputName);
-  const onPress = () => {
-    if (!firstInputValue || !secondInputValue) {
+
+  const onPress = (data: {[x: string]: string}) => {
+    if (!data.firstInputValue || !data.secondInputValue) {
       Keyboard.dismiss();
       setError(firstInputName, {
         type: 'Invalid email or password',
         message: 'You need to enter a valid user and password',
       });
     }
-    onSubmit();
+    onSubmit(data);
   };
 
   return (
@@ -109,7 +107,7 @@ const ModalWithInput = ({
         backgroundColor={'#187DE9'}
         onPress={() => {
           setValue(firstInputName, '');
-          setValue(secondInputName, '');
+          setValue(secondInputName as string, '');
           clearErrors();
           setModalVisible(!modalVisible);
         }}>
