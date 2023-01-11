@@ -42,4 +42,9 @@ export default StyleSheet.create({
   modal: {
     alignSelf: 'center',
   },
+  button: {
+    backgroundColor: '#187DE9',
+    marginBottom: 10, // TODO: Check low
+    alignSelf: 'center',
+  },
 });

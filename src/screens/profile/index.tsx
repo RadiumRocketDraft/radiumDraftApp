@@ -15,10 +15,13 @@ import {useRef} from 'react';
 import {TouchableOpacity} from 'react-native';
 import useFirebaseStorage from 'hooks/useFirebaseStorage';
 import {CustomToast, ToastStatus} from 'components/customToast';
+import Button from 'components/shared/button';
 
 const Profile = () => {
   const [pickedImage, setPickedImage] = useState<IImage>();
   const {isLoading, playerAccount} = useSelector(playerSelector);
+  const [isVisible, setIsVisible] = useState(false);
+
   const dispatch = useDispatch();
   const {top} = useSafeAreaInsets();
   const {storageError, isUploading} = useFirebaseStorage(pickedImage);
@@ -110,14 +113,26 @@ const Profile = () => {
           value={playerAccount?.matchesPlayed}
           isLoading={isLoading}
         />
+        <Button
+          text="Change password"
+          customStyle={styles.button}
+          handleSubmit={() => {
+            setIsVisible(!isVisible);
+          }}
+        />
       </ScrollView>
-      <ModalWithInput
-        onSubmit={() => {}} // TODO: Change password functionality
-        firstInputName={'email'}
-        secondInputName={'password'}
-        buttonText={'Change password'}
-        headerText={'You need to authenticate first'}
-      />
+      {isVisible && (
+        <ModalWithInput
+          onSubmit={() => {}} // TODO: Change password functionality
+          firstInputName={'email'}
+          secondInputName={'password'}
+          buttonText={'Change password'}
+          headerText={'You need to authenticate first'}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+        />
+      )}
+
       <MediaPicker
         ref={mediaPickerRef}
         title={

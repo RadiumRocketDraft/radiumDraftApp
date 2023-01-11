@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import {Button, Modal, Text} from 'native-base';
 import Input from 'components/shared/input';
 import styles from './styles';
@@ -11,23 +11,24 @@ interface Props {
   buttonText: string;
   headerText: string;
   firstInputName: string;
+  isVisible: boolean;
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
   secondInputName?: string;
   onSubmit: (data: {[x: string]: string}) => void;
 }
 
 const ModalWithInput = ({
-  buttonText,
   headerText,
   firstInputName,
   secondInputName,
   onSubmit,
+  isVisible,
+  setIsVisible,
 }: Props) => {
   const defaultValues = {
     [firstInputName]: '',
     [secondInputName as string]: '',
   };
-
-  const [modalVisible, setModalVisible] = useState(false);
   const {
     control,
     formState: {errors},
@@ -53,9 +54,16 @@ const ModalWithInput = ({
     onSubmit(data);
   };
 
+  useEffect(() => {
+    return () => {
+      setValue(firstInputName, '');
+      setValue(secondInputName as string, '');
+    };
+  }, [firstInputName, isVisible, secondInputName, setValue]);
+
   return (
     <>
-      <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
+      <Modal isOpen={true} onClose={() => setIsVisible(!isVisible)}>
         <Modal.Content>
           <Modal.Header backgroundColor={'#187DE9'}>{headerText}</Modal.Header>
           <Modal.Body>
@@ -92,7 +100,7 @@ const ModalWithInput = ({
               <Button
                 style={styles.button}
                 onPress={() => {
-                  setModalVisible(false);
+                  setIsVisible(false);
                 }}>
                 Cancel
               </Button>
@@ -103,16 +111,6 @@ const ModalWithInput = ({
           </Modal.Footer>
         </Modal.Content>
       </Modal>
-      <Button
-        backgroundColor={'#187DE9'}
-        onPress={() => {
-          setValue(firstInputName, '');
-          setValue(secondInputName as string, '');
-          clearErrors();
-          setModalVisible(!modalVisible);
-        }}>
-        {buttonText}
-      </Button>
     </>
   );
 };
