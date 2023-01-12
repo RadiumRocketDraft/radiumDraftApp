@@ -1,12 +1,12 @@
 import axios from 'axios';
-import Config from 'react-native-config';
+// import Config from 'react-native-config';
 
 const BASE_SETTINGS = {
   timeout: 0,
   headers: {
     'content-type': 'application/json',
   },
-  baseURL: Config.APP_API_URL,
+  baseURL: 'http://localhost:3333',
 };
 
 export const api = axios.create({
@@ -28,5 +28,6 @@ export const URL = {
     GET_INACTIVE_MATCHES: '/api/match/inactive',
     GET_ACTIVE_MATCHES: '/api/match/active',
     CREATE_MATCH: '/api/match',
+    GET_DRAFT: '/api/match/draft',
   },
 };

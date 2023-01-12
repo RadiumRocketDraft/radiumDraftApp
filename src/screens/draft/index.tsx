@@ -15,6 +15,8 @@ import DatePicker from 'react-native-date-picker';
 import {format} from 'date-fns-tz';
 import Button from 'components/shared/button';
 import {IPlayer, Routes, TNavigation} from 'types/interfaces';
+import {useDispatch} from 'react-redux';
+import {getDraft} from 'store/modules/match';
 
 const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
@@ -22,6 +24,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
   const [date, setDate] = useState<Date>(new Date());
   const [time, setTime] = useState<Date>(new Date());
   const {teamA, teamB} = route.params;
+  const dispatch = useDispatch();
 
   const modalDatePicker = (state: boolean) => {
     setOpenDatePicker(!state);
@@ -45,22 +48,6 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
     reValidateMode: 'onSubmit',
   });
 
-  const averageSkillTeamA = Math.floor(
-    teamA.reduce(
-      (accumulator: number, initialValue: IPlayer) =>
-        accumulator + initialValue.skill,
-      0,
-    ) / teamA.length,
-  );
-
-  const averageSkillTeamB = Math.floor(
-    teamB.reduce(
-      (accumulator: number, initialValue: IPlayer) =>
-        accumulator + initialValue.skill,
-      0,
-    ) / teamB.length,
-  );
-
   const listSeparator = () => <View style={styles.separator} />;
 
   const renderItemTeamA = (data: ListRenderItemInfo<IPlayer>) => {
@@ -82,30 +69,33 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
   const onConfirmDate = (value: Date) => {
     setDate(value);
     modalDatePicker(openDatePicker);
-    setValue('date', value);
+    setValue('date', String(value));
   };
 
   const onConfirmTime = (value: Date) => {
     setTime(value);
     modalTimePicker(openDatePicker);
-    setValue('time', value);
+    setValue('time', String(value));
   };
 
   const onSubmit = (data: any) => {
-    const dataMatch = {
-      field: data.field,
-      date: format(data.date, 'd/M/yyyy'),
-      time: data.time,
-    };
-    Alert.alert(
-      'Match',
-      dataMatch.field +
-        '\n' +
-        dataMatch.date +
-        '\n' +
-        format(dataMatch.time, 'h:mm a'),
-      [{text: 'OK'}],
-    );
+    // const dataMatch = {
+    //   field: data.field,
+    //   date: format(data.date, 'd/M/yyyy'),
+    //   time: data.time,
+    // };
+    // Alert.alert(
+    //   'Match',
+    //   dataMatch.field +
+    //     '\n' +
+    //     dataMatch.date +
+    //     '\n' +
+    //     format(dataMatch.time, 'h:mm a'),
+    //   [{text: 'OK'}],
+    // );
+    const players = [...teamA, ...teamB];
+    console.log('MABEL', players);
+    dispatch(getDraft(players));
   };
 
   return (
@@ -113,9 +103,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
       <View style={styles.teamsContainer}>
         <View style={styles.teamContainer}>
           <Text style={styles.teamTitle}>Team A</Text>
-          <Text style={styles.averageSkill}>
-            Skill avg: {averageSkillTeamA}
-          </Text>
+          <Text style={styles.averageSkill}>Skill avg: 33</Text>
           <FlatList
             data={teamA}
             renderItem={renderItemTeamA}
@@ -129,9 +117,7 @@ const Draft = ({route}: TNavigation<Routes.DRAFT>) => {
         </TouchableOpacity>
         <View style={styles.teamContainer}>
           <Text style={styles.teamTitle}>Team B</Text>
-          <Text style={styles.averageSkill}>
-            Skill avg: {averageSkillTeamB}
-          </Text>
+          <Text style={styles.averageSkill}>Skill avg: 44</Text>
           <FlatList
             data={teamB}
             renderItem={renderItemTeamB}

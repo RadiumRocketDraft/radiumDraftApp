@@ -1,4 +1,5 @@
 import {api, URL} from 'api';
+import {IPlayer} from 'types/interfaces';
 
 export const getInactiveMatchsRequest = async () => {
   const response = await api.get(URL.match.GET_INACTIVE_MATCHES);
@@ -23,5 +24,11 @@ export const createMatchRequest = async (body: MatchBody) => {
 
 export const getMatchesRequest = async () => {
   const response = await api.get(URL.match.GET_MATCHES);
+  return response.data;
+};
+
+export const getDraftRequest = async (players: IPlayer[]) => {
+  console.log('REQUEST', URL.match.GET_MATCHES);
+  const response = await api.post(URL.match.GET_DRAFT, {players});
   return response.data;
 };
