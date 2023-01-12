@@ -8,7 +8,7 @@ export default StyleSheet.create({
     color: 'red',
   },
   label: {
-    marginLeft: 5,
+    textTransform: 'capitalize',
   },
   icon: {
     marginRight: 10,

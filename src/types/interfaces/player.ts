@@ -9,4 +9,5 @@ export interface IPlayer {
   fidelity: number;
   matchesPlayed: number;
   profileImage?: string;
+  firebaseUid: string;
 }

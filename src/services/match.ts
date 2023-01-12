@@ -20,3 +20,8 @@ export const createMatchRequest = async (body: MatchBody) => {
   const response = await api.post(URL.match.CREATE_MATCH, body);
   return response.data;
 };
+
+export const getMatchesRequest = async () => {
+  const response = await api.get(URL.match.GET_MATCHES);
+  return response.data;
+};

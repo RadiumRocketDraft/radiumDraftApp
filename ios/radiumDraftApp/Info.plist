@@ -69,5 +69,9 @@
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This is necessary to allow the upload of a profile picture</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This is necessary to be able to take a picture and use it as a profile picture</string>
 </dict>
 </plist>
