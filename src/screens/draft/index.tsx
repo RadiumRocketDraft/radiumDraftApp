@@ -138,7 +138,7 @@ const Draft = ({navigation}: TNavigation<Routes.DRAFT>) => {
             id={id}
             description={'Match created succesfully'}
             title={'Success'}
-            status={ToastStatus.success}
+            status={ToastStatus.info}
           />
         );
       },
