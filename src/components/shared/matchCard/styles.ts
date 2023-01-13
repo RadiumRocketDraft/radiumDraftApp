@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { MatchStatus } from 'types/enums';
+import {MatchStatus} from 'types/enums';
 
 export default StyleSheet.create({
   container: {
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     borderRightWidth: 0,
     backgroundColor: '#FFFF',
   },
-  trapezoidLeft: {
+  resultIndicator: {
     width: 10,
     backgroundColor: '#cf0000',
     borderBottomRightRadius: 20,
@@ -28,14 +28,17 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgrey',
   },
-  trapezoidLeftWin: {
+  resultIndicatorWin: {
     backgroundColor: 'green',
   },
-  trapezoidLeftLoss: {
+  resultIndicatorLoss: {
     backgroundColor: 'red',
   },
-  rapezoidLeftCancel: {
+  resultIndicatorCancel: {
     backgroundColor: 'gray',
+  },
+  resultIndicatorToBePlayed: {
+    backgroundColor: 'white',
   },
   columnData: {
     alignItems: 'center',
