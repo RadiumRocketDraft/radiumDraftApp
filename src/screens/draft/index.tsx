@@ -13,7 +13,7 @@ import styles from './styles';
 import DatePicker from 'react-native-date-picker';
 import {format} from 'date-fns-tz';
 import Button from 'components/shared/button';
-import {IPlayer, Routes, TNavigation} from 'types/interfaces';
+import {IPlayer} from 'types/interfaces';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   currentMatchData,
@@ -30,7 +30,7 @@ interface FormData {
   time: string;
 }
 
-const Draft = ({navigation}: TNavigation<Routes.DRAFT>) => {
+const Draft = () => {
   const dispatch = useDispatch();
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openTimePicker, setOpenTimePicker] = useState(false);
@@ -130,7 +130,6 @@ const Draft = ({navigation}: TNavigation<Routes.DRAFT>) => {
 
     dispatch(updateMatch(dataMatch));
 
-    navigation.navigate(Routes.HOME);
     return Toast.show({
       render: ({id}) => {
         return (

@@ -1,6 +1,6 @@
 import MatchCard from 'components/shared/matchCard';
 import {Skeleton} from 'native-base';
-import React, {useCallback} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -8,26 +8,17 @@ import {
   FlatList,
   SafeAreaView,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {matchData, matchesToBePlayed} from 'store/modules/match/selectors';
 import {Routes, TNavigation} from 'types/interfaces';
 import {Match as IMatch} from 'store/modules/match/reducers';
 import styles from './styles';
-import {getMatches} from 'store/modules/match/actions';
 import Player5 from 'assets/svg/player5';
 import Player7 from 'assets/svg/player7';
-import {useFocusEffect} from '@react-navigation/native';
 
 const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
-  const dispatch = useDispatch();
   const matches = useSelector(matchesToBePlayed);
   const {isLoading} = useSelector(matchData);
-
-  useFocusEffect(
-    useCallback(() => {
-      dispatch(getMatches());
-    }, [dispatch]),
-  );
 
   const onPressMatch = (title: string, playersAmount: number) => {
     navigation.navigate(Routes.SELECT_PLAYERS, {
