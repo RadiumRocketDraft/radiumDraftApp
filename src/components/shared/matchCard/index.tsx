@@ -28,7 +28,9 @@ const MatchCard = ({match}: {match: Match}) => {
         ? styles.resultIndicatorWin
         : styles.resultIndicatorLoss,
     },
-    [MatchStatus.toBePlayed]: {},
+    [MatchStatus.toBePlayed]: {
+      resultIndicator: styles.resultIndicatorToBePlayed,
+    },
     [MatchStatus.pending]: {},
   };
 

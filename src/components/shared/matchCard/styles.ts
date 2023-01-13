@@ -38,7 +38,7 @@ export default StyleSheet.create({
     backgroundColor: 'gray',
   },
   resultIndicatorToBePlayed: {
-    backgroundColor: 'white',
+    backgroundColor: 'whitesmoke',
   },
   columnData: {
     alignItems: 'center',

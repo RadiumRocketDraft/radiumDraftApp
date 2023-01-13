@@ -14,6 +14,8 @@ import {Routes, TNavigation} from 'types/interfaces';
 import {Match as IMatch} from 'store/modules/match/reducers';
 import styles from './styles';
 import {getMatches} from 'store/modules/match/actions';
+import Player5 from 'assets/svg/player5';
+import Player7 from 'assets/svg/player7';
 
 const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
   const dispatch = useDispatch();
@@ -49,11 +51,20 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.selectOptionContainer}>
-        <TouchableOpacity onPress={() => onPressMatch('5 VS 5', 10)}>
-          <Text style={styles.option}>5 Vs 5</Text>
+        <Text style={styles.incomingTitle}>Select Match</Text>
+        <TouchableOpacity
+          style={styles.selectMatch}
+          onPress={() => onPressMatch('5 VS 5', 10)}>
+          <Player5 />
+          <Text style={styles.option}>VS</Text>
+          <Player5 />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => onPressMatch('7 VS 7', 14)}>
-          <Text style={styles.option}>7 Vs 7</Text>
+        <TouchableOpacity
+          style={styles.selectMatch}
+          onPress={() => onPressMatch('7 VS 7', 14)}>
+          <Player7 />
+          <Text style={styles.option}>VS</Text>
+          <Player7 />
         </TouchableOpacity>
       </View>
       <View style={styles.inComingMatchesContainer}>

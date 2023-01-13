@@ -13,8 +13,19 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  selectMatch: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 30,
+    borderWidth: 2,
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderColor: 'lightgrey',
+  },
   option: {
-    fontSize: 30,
+    fontSize: 20,
     marginBottom: 10,
   },
   inComingMatchesContainer: {
