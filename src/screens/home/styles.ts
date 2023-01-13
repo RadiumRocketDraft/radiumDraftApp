@@ -23,6 +23,15 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     borderColor: 'lightgrey',
+    backgroundColor: '#f2f2f2',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
   },
   option: {
     fontSize: 20,

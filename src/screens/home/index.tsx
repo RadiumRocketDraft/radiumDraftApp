@@ -1,6 +1,6 @@
 import MatchCard from 'components/shared/matchCard';
-import {Skeleton, Stack} from 'native-base';
-import React, {useEffect} from 'react';
+import {Skeleton} from 'native-base';
+import React, {useCallback} from 'react';
 import {
   Text,
   View,
@@ -16,15 +16,18 @@ import styles from './styles';
 import {getMatches} from 'store/modules/match/actions';
 import Player5 from 'assets/svg/player5';
 import Player7 from 'assets/svg/player7';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
   const dispatch = useDispatch();
   const matches = useSelector(matchesToBePlayed);
   const {isLoading} = useSelector(matchData);
 
-  useEffect(() => {
-    dispatch(getMatches());
-  }, [dispatch]);
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(getMatches());
+    }, [dispatch]),
+  );
 
   const onPressMatch = (title: string, playersAmount: number) => {
     navigation.navigate(Routes.SELECT_PLAYERS, {
@@ -41,9 +44,27 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
   const SkeletonLoader = () => {
     return (
       <SafeAreaView style={styles.skeletonContainer}>
-        <Skeleton size={'80%'} my={2} h={75} borderRadius={10} />
-        <Skeleton size={'80%'} my={2} h={75} borderRadius={10} />
-        <Skeleton size={'80%'} my={2} h={75} borderRadius={10} />
+        <Skeleton
+          startColor={'gray.400'}
+          size={'80%'}
+          my={2}
+          h={75}
+          borderRadius={10}
+        />
+        <Skeleton
+          startColor={'gray.400'}
+          size={'80%'}
+          my={2}
+          h={75}
+          borderRadius={10}
+        />
+        <Skeleton
+          startColor={'gray.400'}
+          size={'80%'}
+          my={2}
+          h={75}
+          borderRadius={10}
+        />
       </SafeAreaView>
     );
   };
@@ -67,19 +88,21 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
           <Player7 />
         </TouchableOpacity>
       </View>
-      <View style={styles.inComingMatchesContainer}>
-        <Text style={styles.incomingTitle}>Incoming Matches</Text>
-        {isLoading ? (
-          <SkeletonLoader />
-        ) : (
-          <FlatList
-            data={matches}
-            renderItem={renderItem}
-            ItemSeparatorComponent={listSeparator}
-            bounces={false}
-          />
-        )}
-      </View>
+      {matches.length !== 0 && (
+        <View style={styles.inComingMatchesContainer}>
+          <Text style={styles.incomingTitle}>Incoming Matches</Text>
+          {isLoading ? (
+            <SkeletonLoader />
+          ) : (
+            <FlatList
+              data={matches}
+              renderItem={renderItem}
+              ItemSeparatorComponent={listSeparator}
+              bounces={false}
+            />
+          )}
+        </View>
+      )}
     </SafeAreaView>
   );
 };
