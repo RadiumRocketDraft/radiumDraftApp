@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
-import format from 'date-fns/format';
 import {MatchStatus} from 'types/enums/match';
 import {getCurrentFirebaseUid} from 'utils';
 import {IPlayer} from 'types/interfaces/player';
@@ -12,7 +11,7 @@ const MatchCard = ({match}: {match: Match}) => {
   const scoreTeamA = match?.result?.teamA;
   const scoreTeamB = match?.result?.teamB;
   const matchStatus = match?.status;
-  const matchDate = format(new Date(match?.date), 'MM/dd/yyyy'); // Cuando se conecte la creación de partido modificar esto con lo que viene
+  const matchDate = new Date(match?.date).toLocaleDateString(); // Cuando se conecte la creación de partido modificar esto con lo que viene
   const field = match?.field; // Cuando se conecte la creación de partido modificar esto con lo que viene
   const isWinner =
     matchStatus === MatchStatus.finished &&
@@ -22,14 +21,17 @@ const MatchCard = ({match}: {match: Match}) => {
 
   const statusStyling = {
     [MatchStatus.cancelled]: {
-      rapezoidLeft: styles.rapezoidLeftCancel,
+      resultIndicator: styles.resultIndicatorCancel,
     },
     [MatchStatus.finished]: {
-      rapezoidLeft: isWinner
-        ? styles.trapezoidLeftWin
-        : styles.trapezoidLeftLoss,
+      resultIndicator: isWinner
+        ? styles.resultIndicatorWin
+        : styles.resultIndicatorLoss,
     },
-    [MatchStatus.toBePlayed]: {},
+    [MatchStatus.toBePlayed]: {
+      resultIndicator: styles.resultIndicatorToBePlayed,
+    },
+    [MatchStatus.pending]: {},
   };
 
   return (
@@ -51,7 +53,10 @@ const MatchCard = ({match}: {match: Match}) => {
         </View>
       </View>
       <View
-        style={[styles.trapezoidLeft, statusStyling[matchStatus].rapezoidLeft]}
+        style={[
+          styles.resultIndicator,
+          statusStyling[matchStatus].resultIndicator,
+        ]}
       />
     </View>
   );

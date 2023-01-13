@@ -6,6 +6,5 @@ export default StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: '#E0DCFF',
   },
 });

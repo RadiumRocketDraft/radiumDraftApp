@@ -6,6 +6,7 @@ import {
   getInactiveMatches,
   getMatches,
   reDraft,
+  updateMatch,
 } from './actions';
 import {IPlayer} from 'types/interfaces';
 
@@ -103,6 +104,17 @@ export const matchReducer = createReducer<MatchReducer>(
       state.isLoading = false;
     });
     builder.addCase(getMatches.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.matches = action.payload;
+    });
+    builder.addCase(updateMatch.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateMatch.rejected, (state, action) => {
+      state.error = action.error;
+      state.isLoading = false;
+    });
+    builder.addCase(updateMatch.fulfilled, (state, action) => {
       state.isLoading = false;
       state.matches = action.payload;
     });
