@@ -45,28 +45,17 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
         <Skeleton
           startColor={'gray.400'}
           size={'80%'}
-          style={{
-            marginVertical: 2,
-            height: 75,
-            borderRadius: 10,
-          }}
-          /*  my={2}
-          h={75}
-          borderRadius={10} */
+          style={styles.skeleton}
         />
         <Skeleton
           startColor={'gray.400'}
           size={'80%'}
-          my={2}
-          h={75}
-          borderRadius={10}
+          style={styles.skeleton}
         />
         <Skeleton
           startColor={'gray.400'}
           size={'80%'}
-          my={2}
-          h={75}
-          borderRadius={10}
+          style={styles.skeleton}
         />
       </SafeAreaView>
     );
