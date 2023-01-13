@@ -50,11 +50,12 @@ interface UpdateMatchPayload {
 
 export const updateMatchRequest = async (payload: UpdateMatchPayload) => {
   const {field, date, time, id} = payload;
-  const response = await api.put(`${URL.match.UPDATE_MATCH}${id}`, {
+  await api.put(`${URL.match.UPDATE_MATCH}${id}`, {
     time,
     field,
     date,
   });
+  const response = await api.get(URL.match.GET_MATCHES);
   navigationRef.navigate(Routes.HOME);
   return response.data;
 };
