@@ -58,6 +58,10 @@ const Profile = () => {
     logOut();
   };
 
+  const onCloseModal = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <View style={styles.container} pt={top}>
       <ButtonLine customStyles={styles.logOut} onPress={onPressLogOut}>
@@ -123,13 +127,17 @@ const Profile = () => {
       </ScrollView>
       {isVisible && (
         <ModalWithInput
-          onSubmit={() => {}} // TODO: Change password functionality
-          firstInputName={'email'}
-          secondInputName={'password'}
+          onSubmit={data => {
+            console.log('data', data);
+          }} // TODO: Change password functionality
+          firstInputName={'old password'}
+          secondInputName={'new password'}
           buttonText={'Change password'}
-          headerText={'You need to authenticate first'}
+          headerText={'Change password'}
           isVisible={isVisible}
-          setIsVisible={setIsVisible}
+          onClose={onCloseModal}
+          errorType={'Invalid email or password'}
+          errorMessage={'You need to enter a valid user and password'}
         />
       )}
 

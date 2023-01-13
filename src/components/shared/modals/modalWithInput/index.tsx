@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Button, Modal, Text} from 'native-base';
 import Input from 'components/shared/input';
 import styles from './styles';
@@ -12,9 +12,11 @@ interface Props {
   headerText: string;
   firstInputName: string;
   isVisible: boolean;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
+  onClose: () => void;
   secondInputName?: string;
   onSubmit: (data: {[x: string]: string}) => void;
+  errorType: string;
+  errorMessage: string;
 }
 
 const ModalWithInput = ({
@@ -23,7 +25,9 @@ const ModalWithInput = ({
   secondInputName,
   onSubmit,
   isVisible,
-  setIsVisible,
+  onClose,
+  errorType,
+  errorMessage,
 }: Props) => {
   const defaultValues = {
     [firstInputName]: '',
@@ -35,35 +39,32 @@ const ModalWithInput = ({
     setError,
     clearErrors,
     handleSubmit,
-    setValue,
+    reset,
   } = useForm({
     defaultValues: defaultValues,
     resolver: yupResolver(schema),
     mode: 'onSubmit',
     reValidateMode: 'onBlur',
   });
-
+  // TODO: Improve logic to handle use errors on optional input too
   const onPress = (data: {[x: string]: string}) => {
-    if (!data.firstInputValue || !data.secondInputValue) {
+    if (data === undefined || !data.firstInputValue) {
       Keyboard.dismiss();
       setError(firstInputName, {
-        type: 'Invalid email or password',
-        message: 'You need to enter a valid user and password',
+        type: errorType,
+        message: errorMessage,
       });
     }
     onSubmit(data);
   };
 
   useEffect(() => {
-    return () => {
-      setValue(firstInputName, '');
-      setValue(secondInputName as string, '');
-    };
-  }, [firstInputName, isVisible, secondInputName, setValue]);
+    if (!isVisible) reset();
+  }, [reset, isVisible]);
 
   return (
     <>
-      <Modal isOpen={true} onClose={() => setIsVisible(!isVisible)}>
+      <Modal isOpen={isVisible} onClose={onClose}>
         <Modal.Content>
           <Modal.Header backgroundColor={'#187DE9'}>{headerText}</Modal.Header>
           <Modal.Body>
@@ -97,11 +98,7 @@ const ModalWithInput = ({
           )}
           <Modal.Footer>
             <Button.Group space={2}>
-              <Button
-                style={styles.button}
-                onPress={() => {
-                  setIsVisible(false);
-                }}>
+              <Button style={styles.button} onPress={onClose}>
                 Cancel
               </Button>
               <Button style={styles.button} onPress={handleSubmit(onPress)}>
