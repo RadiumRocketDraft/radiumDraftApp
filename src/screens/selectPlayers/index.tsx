@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Checkbox, Skeleton} from 'native-base';
+import {Checkbox, Skeleton, Toast} from 'native-base';
 import {
   FlatList,
   ListRenderItemInfo,
@@ -12,11 +12,13 @@ import {IPlayer, Routes, TNavigation} from 'types/interfaces';
 import Button from 'components/shared/button';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayers, playerSelector} from 'store/modules/player';
+import {createMatch, matchData} from 'store/modules/match';
+import {getCurrentFirebaseUid} from 'utils';
+import {MatchBody} from 'services/match';
+import {skillChecker} from 'helpers';
+import {CustomToast, ToastStatus} from 'components/customToast';
 
-const SelectPlayers = ({
-  route,
-  navigation,
-}: TNavigation<Routes.SELECT_PLAYERS>) => {
+const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
   const {isLoading, players} = useSelector(playerSelector);
   const {playersAmount} = route.params;
@@ -25,6 +27,7 @@ const SelectPlayers = ({
     [playersAmount, selectedPlayers.length],
   );
   const dispatch = useDispatch();
+  const {error} = useSelector(matchData);
 
   useEffect(() => {
     dispatch(getPlayers());
@@ -42,13 +45,36 @@ const SelectPlayers = ({
     return setSelectedPlayers(current => [...current, item]);
   };
 
+  useEffect(() => {
+    if (error) {
+      console.log('Error: Dispatch CreateMatch', error);
+      Toast.show({
+        render: ({id}) => {
+          return (
+            <CustomToast
+              id={id}
+              description={'Cannot create match'}
+              title={'Error'}
+              status={ToastStatus.error}
+            />
+          );
+        },
+      });
+    }
+  }, [error]);
+
   const onHandleSubmit = () => {
-    const TEAM_A = players.slice(1, 6);
-    const TEAM_B = players.slice(6, 11);
-    navigation.navigate(Routes.DRAFT, {
-      teamA: TEAM_A,
-      teamB: TEAM_B,
-    });
+    try {
+      const firebaseUID = getCurrentFirebaseUid();
+      if (!firebaseUID) throw new Error('FirebaseUID not found');
+      const payload: MatchBody = {
+        firebaseUID: firebaseUID,
+        players: selectedPlayers,
+      };
+      dispatch(createMatch(payload));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const listHeader = () => {
@@ -56,7 +82,7 @@ const SelectPlayers = ({
       <View style={styles.headerContainer}>
         <Text style={[styles.rowText, styles.headerText]}>Seleccionados</Text>
         <Text style={[styles.wideRowText, styles.headerText]}>Jugadores</Text>
-        <Text style={[styles.rowText, styles.headerText]}>Fidelidad</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Skill</Text>
       </View>
     );
   };
@@ -80,7 +106,7 @@ const SelectPlayers = ({
         <Text style={styles.wideRowText}>
           {item?.firstName} {item?.lastName}
         </Text>
-        <Text style={styles.rowText}>{item.fidelity}</Text>
+        <View style={styles.rowText}>{skillChecker(item.skill)}</View>
       </View>
     );
   };

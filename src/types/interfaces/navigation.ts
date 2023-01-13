@@ -3,7 +3,6 @@ import {
   NativeStackNavigationOptions,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import {IPlayer} from './player';
 
 import {Routes} from './routes';
 
@@ -18,10 +17,7 @@ export type StackParamList = {
   [Routes.MATCH]: undefined;
   [Routes.HISTORY]: undefined;
   [Routes.PROFILE]: undefined;
-  [Routes.DRAFT]: {
-    teamA: IPlayer[];
-    teamB: IPlayer[];
-  };
+  [Routes.DRAFT]: undefined;
 };
 
 export type TNavigation<R extends keyof StackParamList> = {

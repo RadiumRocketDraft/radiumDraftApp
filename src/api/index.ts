@@ -28,5 +28,7 @@ export const URL = {
     GET_INACTIVE_MATCHES: '/api/match/inactive',
     GET_ACTIVE_MATCHES: '/api/match/active',
     CREATE_MATCH: '/api/match',
+    RE_DRAFT: (id: string) => `/api/match/${id}/draft`,
+    UPDATE_MATCH: 'api/match/',
   },
 };

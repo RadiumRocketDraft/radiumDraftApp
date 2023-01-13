@@ -73,6 +73,7 @@ const Login = ({navigation}: TNavigation<Routes.LOG_IN>) => {
         error={errors.email?.message}
         type="text"
         customStyle={styles.input}
+        autocapitalize="none"
       />
       <Input
         control={control}
