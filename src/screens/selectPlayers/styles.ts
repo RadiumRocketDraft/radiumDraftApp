@@ -24,9 +24,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
   },
-  // rowContainerHighlighted: {
-  //   backgroundColor: 'lightblue',
-  // },
   flatList: {
     width: '100%',
   },
