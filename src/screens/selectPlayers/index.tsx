@@ -19,7 +19,6 @@ import {MatchBody} from 'services/match';
 import {skillChecker} from 'helpers';
 import {CustomToast, ToastStatus} from 'components/customToast';
 import AntIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Fontisto from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
@@ -37,7 +36,6 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   }, [dispatch]);
 
   const onChangeCheckbox = (item: IPlayer) => {
-    console.log('item', item);
     const isSelectedPlayer = selectedPlayers.some(
       player => player._id === item._id,
     );
@@ -51,7 +49,6 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
 
   useEffect(() => {
     if (error) {
-      console.log('Error: Dispatch CreateMatch', error);
       Toast.show({
         render: ({id}) => {
           return (
@@ -111,7 +108,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
               size={25}
             />
           ) : (
-            <Fontisto
+            <AntIcon
               style={styles.checkIcon}
               name="checkbox-blank-outline"
               size={25}
