@@ -25,6 +25,9 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 10,
   },
+  // rowContainerHighlighted: {
+  //   backgroundColor: 'lightblue',
+  // },
   flatList: {
     width: '100%',
   },
@@ -40,10 +43,16 @@ export default StyleSheet.create({
   headerText: {
     fontWeight: '500',
     paddingVertical: 5,
+    textAlign: 'center',
   },
   rowText: {
     flex: 1,
-    textAlign: 'center',
+    alignItems: 'center',
+  },
+  isChecked: {
+    flex: 1,
+  },
+  checkIcon: {
     alignSelf: 'center',
   },
   bottomButton: {

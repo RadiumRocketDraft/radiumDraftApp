@@ -1,10 +1,11 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Checkbox, Skeleton, Toast} from 'native-base';
+import {Skeleton, Toast} from 'native-base';
 import {
   FlatList,
   ListRenderItemInfo,
   SafeAreaView,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -17,6 +18,8 @@ import {getCurrentFirebaseUid} from 'utils';
 import {MatchBody} from 'services/match';
 import {skillChecker} from 'helpers';
 import {CustomToast, ToastStatus} from 'components/customToast';
+import AntIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Fontisto from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
@@ -34,6 +37,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   }, [dispatch]);
 
   const onChangeCheckbox = (item: IPlayer) => {
+    console.log('item', item);
     const isSelectedPlayer = selectedPlayers.some(
       player => player._id === item._id,
     );
@@ -93,21 +97,31 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
     const isChecked = selectedPlayers.some(player => player._id === item._id);
 
     return (
-      <View style={styles.rowContainer}>
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            isDisabled={!isChecked && isCheckboxDisabled}
-            accessibilityLabel="player"
-            value={item.lastName}
-            size="md"
-            onChange={() => onChangeCheckbox(item)}
-          />
+      <TouchableOpacity
+        disabled={!isChecked && isCheckboxDisabled}
+        accessibilityLabel="player"
+        onPress={() => onChangeCheckbox(item)}
+        style={styles.rowContainer}>
+        <View style={styles.isChecked}>
+          {isChecked ? (
+            <AntIcon
+              style={styles.checkIcon}
+              name="checkbox-marked-outline"
+              size={25}
+            />
+          ) : (
+            <Fontisto
+              style={styles.checkIcon}
+              name="checkbox-blank-outline"
+              size={25}
+            />
+          )}
         </View>
         <Text style={styles.wideRowText}>
           {item?.firstName} {item?.lastName}
         </Text>
         <View style={styles.rowText}>{skillChecker(item.skill)}</View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
