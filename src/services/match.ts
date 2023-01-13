@@ -13,7 +13,7 @@ export const getActiveMatchsRequest = async () => {
 };
 
 export interface MatchBody {
-  firebaseUID: string;
+  firebaseUid: string;
   players: IPlayer[];
 }
 
