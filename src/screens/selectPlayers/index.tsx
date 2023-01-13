@@ -146,7 +146,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>
-        Jugadores restantes: {playersAmount - selectedPlayers.length}
+        Remaining players: {playersAmount - selectedPlayers.length}
       </Text>
       <FlatList
         bounces={false}
@@ -162,7 +162,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
       <Button
         isDisabled={!isCheckboxDisabled}
         handleSubmit={onHandleSubmit}
-        text="Confirmar"
+        text="Confirm"
       />
     </SafeAreaView>
   );
