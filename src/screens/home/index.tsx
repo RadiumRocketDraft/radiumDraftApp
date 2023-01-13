@@ -1,6 +1,6 @@
 import MatchCard from 'components/shared/matchCard';
 import {Skeleton} from 'native-base';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
@@ -8,15 +8,17 @@ import {
   FlatList,
   SafeAreaView,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {matchData, matchesToBePlayed} from 'store/modules/match/selectors';
 import {Routes, TNavigation} from 'types/interfaces';
 import {Match as IMatch} from 'store/modules/match/reducers';
 import styles from './styles';
 import Player5 from 'assets/svg/player5';
 import Player7 from 'assets/svg/player7';
+import {getMatches} from 'store/modules/match/actions';
 
 const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
+  const dispatch = useDispatch();
   const matches = useSelector(matchesToBePlayed);
   const {isLoading} = useSelector(matchData);
 
@@ -26,6 +28,11 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
       playersAmount,
     });
   };
+
+  useEffect(() => {
+    dispatch(getMatches());
+  }, [dispatch]);
+
   const listSeparator = () => <View style={styles.separator} />;
 
   const renderItem = ({item}: {item: IMatch}) => {
@@ -38,9 +45,14 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
         <Skeleton
           startColor={'gray.400'}
           size={'80%'}
-          my={2}
+          style={{
+            marginVertical: 2,
+            height: 75,
+            borderRadius: 10,
+          }}
+          /*  my={2}
           h={75}
-          borderRadius={10}
+          borderRadius={10} */
         />
         <Skeleton
           startColor={'gray.400'}
@@ -79,21 +91,28 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
           <Player7 />
         </TouchableOpacity>
       </View>
-      {matches.length !== 0 && (
-        <View style={styles.inComingMatchesContainer}>
-          <Text style={styles.incomingTitle}>Incoming Matches</Text>
-          {isLoading ? (
-            <SkeletonLoader />
-          ) : (
-            <FlatList
-              data={matches}
-              renderItem={renderItem}
-              ItemSeparatorComponent={listSeparator}
-              bounces={false}
-            />
-          )}
-        </View>
-      )}
+
+      <View style={styles.inComingMatchesContainer}>
+        <Text style={styles.incomingTitle}>Incoming Matches</Text>
+        {isLoading ? (
+          <SkeletonLoader />
+        ) : (
+          <FlatList
+            data={matches}
+            renderItem={renderItem}
+            ItemSeparatorComponent={listSeparator}
+            bounces={false}
+            contentContainerStyle={
+              matches.length === 0 && styles.flatListContainer
+            }
+            ListEmptyComponent={
+              <View style={styles.noMatchesContainer}>
+                <Text style={styles.noMatches}>No matches to be played</Text>
+              </View>
+            }
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 };

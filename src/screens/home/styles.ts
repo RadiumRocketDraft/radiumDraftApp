@@ -7,6 +7,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-evenly',
+    marginBottom: 10,
   },
   selectOptionContainer: {
     flex: 1,
@@ -50,5 +51,23 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     bottom: 35,
+  },
+  noMatchesContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 50,
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: 'lightgrey',
+  },
+  noMatches: {
+    fontSize: 20,
+    textAlign: 'center',
+    width: '100%',
+  },
+  flatListContainer: {
+    flex: 1,
+    flexGrow: 1,
   },
 });
