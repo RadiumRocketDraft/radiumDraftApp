@@ -5,7 +5,10 @@ export const matchData = (state: RootState) => state.match;
 
 export const historyMatchesData = (state: RootState) => {
   return state.match.matches.filter(match => {
-    return match.status !== MatchStatus.toBePlayed;
+    return (
+      match.status === MatchStatus.finished ||
+      match.status === MatchStatus.cancelled
+    );
   });
 };
 

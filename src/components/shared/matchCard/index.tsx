@@ -30,6 +30,7 @@ const MatchCard = ({match}: {match: Match}) => {
         : styles.trapezoidLeftLoss,
     },
     [MatchStatus.toBePlayed]: {},
+    [MatchStatus.pending]: {},
   };
 
   return (
