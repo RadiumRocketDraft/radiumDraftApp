@@ -69,4 +69,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
   },
+  rowText: {
+    width: '100%',
+  },
+  buttonStyle: {
+    width: '100%',
+  },
 });

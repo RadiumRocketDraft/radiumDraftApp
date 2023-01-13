@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FlatList} from 'native-base';
+import {FlatList, Toast} from 'native-base';
 import {
   View,
   Text,
@@ -15,8 +15,14 @@ import {format} from 'date-fns-tz';
 import Button from 'components/shared/button';
 import {IPlayer, Routes, TNavigation} from 'types/interfaces';
 import {useDispatch, useSelector} from 'react-redux';
-import {currentMatch, reDraft, updateMatch} from 'store/modules/match';
+import {
+  currentMatchData,
+  matchData,
+  reDraft,
+  updateMatch,
+} from 'store/modules/match';
 import FeatherIcons from 'react-native-vector-icons/Feather';
+import {CustomToast, ToastStatus} from 'components/customToast';
 
 interface FormData {
   field: string;
@@ -30,7 +36,8 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const [openTimePicker, setOpenTimePicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
-  const match = useSelector(currentMatch);
+  const match = useSelector(currentMatchData);
+  const {error} = useSelector(matchData);
 
   const modalDatePicker = (state: boolean) => {
     setOpenDatePicker(!state);
@@ -58,7 +65,7 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
 
   const renderItemTeamA = (data: ListRenderItemInfo<IPlayer>) => {
     return (
-      <View style={{width: '100%'}}>
+      <View style={styles.rowText}>
         <Text style={styles.teamARow}>
           {data.item.firstName} {data.item.lastName}
         </Text>
@@ -68,7 +75,7 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
 
   const renderItemTeamB = (data: ListRenderItemInfo<IPlayer>) => {
     return (
-      <View style={{width: '100%'}}>
+      <View style={styles.rowText}>
         <Text style={styles.teamBRow}>
           {data.item.firstName} {data.item.lastName}
         </Text>
@@ -104,7 +111,35 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
     };
 
     dispatch(updateMatch(dataMatch));
+    if (error) {
+      console.log('Error: Dispatch CreateMatch(UPDATE)');
+      return Toast.show({
+        render: ({id}) => {
+          return (
+            <CustomToast
+              id={id}
+              description={'Cannot create match'}
+              title={'Error'}
+              status={ToastStatus.error}
+            />
+          );
+        },
+      });
+    }
+
     navigation.navigate(Routes.HOME);
+    return Toast.show({
+      render: ({id}) => {
+        return (
+          <CustomToast
+            id={id}
+            description={'Match created succesfully'}
+            title={'Success'}
+            status={ToastStatus.success}
+          />
+        );
+      },
+    });
   };
 
   const players = match?.teamA.concat(match.teamB);
@@ -124,7 +159,7 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
         <View style={styles.teamContainerA}>
           <Text style={styles.teamTitleA}>Team A</Text>
           <Text style={styles.averageSkillA}>
-            Skill avg: {match?.skillAvgA}
+            Skill avg: {match?.skillAvgA ?? '--'}
           </Text>
           <FlatList
             data={match?.teamA}
@@ -137,7 +172,7 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
         <View style={styles.teamContainerB}>
           <Text style={styles.teamTitleB}>Team B</Text>
           <Text style={styles.averageSkillB}>
-            Skill avg: {match?.skillAvgB}
+            Skill avg: {match?.skillAvgB ?? '--'}
           </Text>
           <FlatList
             data={match?.teamB}
@@ -198,7 +233,7 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
         />
         <View style={styles.buttonContainer}>
           <Button
-            customStyle={{width: '100%'}}
+            customStyle={styles.buttonStyle}
             isDisabled={false}
             handleSubmit={handleSubmit(onSubmit)}
             text="Confirmar partido"

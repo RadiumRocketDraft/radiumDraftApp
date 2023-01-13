@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Checkbox, Skeleton} from 'native-base';
+import {Checkbox, Skeleton, Toast} from 'native-base';
 import {
   FlatList,
   ListRenderItemInfo,
@@ -12,10 +12,11 @@ import {IPlayer, Routes, TNavigation} from 'types/interfaces';
 import Button from 'components/shared/button';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayers, playerSelector} from 'store/modules/player';
-import {createMatch} from 'store/modules/match';
+import {createMatch, matchData} from 'store/modules/match';
 import {getCurrentFirebaseUid} from 'utils';
 import {MatchBody} from 'services/match';
 import {skillChecker} from 'helpers';
+import {CustomToast, ToastStatus} from 'components/customToast';
 
 const SelectPlayers = ({
   route,
@@ -29,6 +30,7 @@ const SelectPlayers = ({
     [playersAmount, selectedPlayers.length],
   );
   const dispatch = useDispatch();
+  const {error} = useSelector(matchData);
 
   useEffect(() => {
     dispatch(getPlayers());
@@ -55,9 +57,24 @@ const SelectPlayers = ({
         players: selectedPlayers,
       };
       dispatch(createMatch(payload));
+      if (error) {
+        console.log('Error: Dispatch CreateMatch');
+        return Toast.show({
+          render: ({id}) => {
+            return (
+              <CustomToast
+                id={id}
+                description={'Cannot create match'}
+                title={'Error'}
+                status={ToastStatus.error}
+              />
+            );
+          },
+        });
+      }
       navigation.navigate(Routes.DRAFT);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -90,7 +107,7 @@ const SelectPlayers = ({
         <Text style={styles.wideRowText}>
           {item?.firstName} {item?.lastName}
         </Text>
-        <Text style={styles.rowText}>{skillChecker(item.skill)}</Text>
+        <View style={styles.rowText}>{skillChecker(item.skill)}</View>
       </View>
     );
   };

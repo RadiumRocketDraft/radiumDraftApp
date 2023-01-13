@@ -33,7 +33,7 @@ interface ReDraftPayload {
 
 export const reDraftRequest = async (payload: ReDraftPayload) => {
   const {id, players} = payload;
-  const response = await api.put(`${URL.match.RE_DRAFT}${id}/draft`, {
+  const response = await api.put(`${URL.match.RE_DRAFT(id)}`, {
     players,
   });
   return response.data;
