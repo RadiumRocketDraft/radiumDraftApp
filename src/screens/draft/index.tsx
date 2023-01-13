@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Toast} from 'native-base';
 import {
   View,
@@ -30,7 +30,7 @@ interface FormData {
   time: string;
 }
 
-const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
+const Draft = ({navigation}: TNavigation<Routes.DRAFT>) => {
   const dispatch = useDispatch();
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openTimePicker, setOpenTimePicker] = useState(false);
@@ -62,6 +62,24 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
   });
 
   const listSeparator = () => <View style={styles.separator} />;
+
+  useEffect(() => {
+    if (error) {
+      console.log('Error: Dispatch CreateMatch(UPDATE)', error);
+      Toast.show({
+        render: ({id}) => {
+          return (
+            <CustomToast
+              id={id}
+              description={'Cannot create match'}
+              title={'Error'}
+              status={ToastStatus.error}
+            />
+          );
+        },
+      });
+    }
+  }, [error]);
 
   const renderItemTeamA = (data: ListRenderItemInfo<IPlayer>) => {
     return (
@@ -111,21 +129,6 @@ const Draft = ({navigation}: TNavigation<Routes.SELECT_PLAYERS>) => {
     };
 
     dispatch(updateMatch(dataMatch));
-    if (error) {
-      console.log('Error: Dispatch CreateMatch(UPDATE)');
-      return Toast.show({
-        render: ({id}) => {
-          return (
-            <CustomToast
-              id={id}
-              description={'Cannot create match'}
-              title={'Error'}
-              status={ToastStatus.error}
-            />
-          );
-        },
-      });
-    }
 
     navigation.navigate(Routes.HOME);
     return Toast.show({

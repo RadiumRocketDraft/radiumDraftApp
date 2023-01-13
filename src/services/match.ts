@@ -1,5 +1,6 @@
 import {api, URL} from 'api';
-import {IPlayer} from 'types/interfaces';
+import {navigationRef} from 'navigation/mainStack';
+import {IPlayer, Routes} from 'types/interfaces';
 
 export const getInactiveMatchsRequest = async () => {
   const response = await api.get(URL.match.GET_INACTIVE_MATCHES);
@@ -18,6 +19,7 @@ export interface MatchBody {
 
 export const createMatchRequest = async (payload: MatchBody) => {
   const response = await api.post(URL.match.CREATE_MATCH, {payload});
+  navigationRef.navigate(Routes.DRAFT);
   return response.data;
 };
 
@@ -53,5 +55,6 @@ export const updateMatchRequest = async (payload: UpdateMatchPayload) => {
     field,
     date,
   });
+  navigationRef.navigate(Routes.HOME);
   return response.data;
 };

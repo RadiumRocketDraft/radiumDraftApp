@@ -18,10 +18,7 @@ import {MatchBody} from 'services/match';
 import {skillChecker} from 'helpers';
 import {CustomToast, ToastStatus} from 'components/customToast';
 
-const SelectPlayers = ({
-  route,
-  navigation,
-}: TNavigation<Routes.SELECT_PLAYERS>) => {
+const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
   const {isLoading, players} = useSelector(playerSelector);
   const {playersAmount} = route.params;
@@ -48,6 +45,24 @@ const SelectPlayers = ({
     return setSelectedPlayers(current => [...current, item]);
   };
 
+  useEffect(() => {
+    if (error) {
+      console.log('Error: Dispatch CreateMatch', error);
+      Toast.show({
+        render: ({id}) => {
+          return (
+            <CustomToast
+              id={id}
+              description={'Cannot create match'}
+              title={'Error'}
+              status={ToastStatus.error}
+            />
+          );
+        },
+      });
+    }
+  }, [error]);
+
   const onHandleSubmit = () => {
     try {
       const firebaseUID = getCurrentFirebaseUid();
@@ -57,22 +72,6 @@ const SelectPlayers = ({
         players: selectedPlayers,
       };
       dispatch(createMatch(payload));
-      if (error) {
-        console.log('Error: Dispatch CreateMatch');
-        return Toast.show({
-          render: ({id}) => {
-            return (
-              <CustomToast
-                id={id}
-                description={'Cannot create match'}
-                title={'Error'}
-                status={ToastStatus.error}
-              />
-            );
-          },
-        });
-      }
-      navigation.navigate(Routes.DRAFT);
     } catch (err) {
       console.log(err);
     }
