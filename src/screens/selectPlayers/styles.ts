@@ -22,7 +22,6 @@ export default StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
     marginTop: 10,
   },
   flatList: {
@@ -32,18 +31,21 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  wideRowText: {
-    flex: 2,
-    textAlign: 'center',
-    alignSelf: 'center',
-  },
   headerText: {
     fontWeight: '500',
     paddingVertical: 5,
+    textAlign: 'center',
   },
   rowText: {
     flex: 1,
+    alignSelf: 'center',
+    alignItems: 'center',
     textAlign: 'center',
+  },
+  isChecked: {
+    flex: 1,
+  },
+  checkIcon: {
     alignSelf: 'center',
   },
   bottomButton: {

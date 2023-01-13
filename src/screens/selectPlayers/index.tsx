@@ -1,10 +1,11 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Checkbox, Skeleton, Toast} from 'native-base';
+import {Skeleton, Toast} from 'native-base';
 import {
   FlatList,
   ListRenderItemInfo,
   SafeAreaView,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -17,6 +18,7 @@ import {getCurrentFirebaseUid} from 'utils';
 import {MatchBody} from 'services/match';
 import {skillChecker} from 'helpers';
 import {CustomToast, ToastStatus} from 'components/customToast';
+import AntIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
@@ -47,7 +49,6 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
 
   useEffect(() => {
     if (error) {
-      console.log('Error: Dispatch CreateMatch', error);
       Toast.show({
         render: ({id}) => {
           return (
@@ -80,8 +81,9 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const listHeader = () => {
     return (
       <View style={styles.headerContainer}>
-        <Text style={[styles.rowText, styles.headerText]}>Seleccionados</Text>
-        <Text style={[styles.wideRowText, styles.headerText]}>Jugadores</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Selected</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Players</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Position</Text>
         <Text style={[styles.rowText, styles.headerText]}>Skill</Text>
       </View>
     );
@@ -93,21 +95,32 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
     const isChecked = selectedPlayers.some(player => player._id === item._id);
 
     return (
-      <View style={styles.rowContainer}>
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            isDisabled={!isChecked && isCheckboxDisabled}
-            accessibilityLabel="player"
-            value={item.lastName}
-            size="md"
-            onChange={() => onChangeCheckbox(item)}
-          />
+      <TouchableOpacity
+        disabled={!isChecked && isCheckboxDisabled}
+        accessibilityLabel="player"
+        onPress={() => onChangeCheckbox(item)}
+        style={styles.rowContainer}>
+        <View style={styles.isChecked}>
+          {isChecked ? (
+            <AntIcon
+              style={styles.checkIcon}
+              name="checkbox-marked-outline"
+              size={25}
+            />
+          ) : (
+            <AntIcon
+              style={styles.checkIcon}
+              name="checkbox-blank-outline"
+              size={25}
+            />
+          )}
         </View>
-        <Text style={styles.wideRowText}>
-          {item?.firstName} {item?.lastName}
+        <Text style={styles.rowText}>
+          {item?.firstName}.{item?.lastName.slice(0, 1)}
         </Text>
+        <Text style={styles.rowText}>{item?.position}</Text>
         <View style={styles.rowText}>{skillChecker(item.skill)}</View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -130,7 +143,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>
-        Jugadores restantes: {playersAmount - selectedPlayers.length}
+        Remaining players: {playersAmount - selectedPlayers.length}
       </Text>
       <FlatList
         bounces={false}
@@ -146,7 +159,7 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
       <Button
         isDisabled={!isCheckboxDisabled}
         handleSubmit={onHandleSubmit}
-        text="Confirmar"
+        text="Confirm"
       />
     </SafeAreaView>
   );

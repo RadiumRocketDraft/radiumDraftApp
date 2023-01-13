@@ -188,8 +188,8 @@ const Draft = () => {
       <View style={styles.viewOptionsMatch}>
         <Input
           name="field"
-          placeholder="Cancha"
-          label="Ingresar cancha"
+          placeholder="Field"
+          label="Add field"
           control={control}
           error={errors.field?.message}
           type="text"
@@ -204,8 +204,8 @@ const Draft = () => {
         />
         <Input
           name="date"
-          placeholder="Fecha"
-          label="Elegir fecha:"
+          placeholder="Date"
+          label="Select date:"
           control={control}
           error={errors.field?.message}
           type="text"
@@ -224,8 +224,8 @@ const Draft = () => {
         />
         <Input
           name="time"
-          placeholder="Hora"
-          label="Elegir Hora:"
+          placeholder="Time"
+          label="Select time:"
           control={control}
           error={errors.time?.message}
           type="text"
@@ -238,7 +238,7 @@ const Draft = () => {
             customStyle={styles.buttonStyle}
             isDisabled={false}
             handleSubmit={handleSubmit(onSubmit)}
-            text="Confirmar partido"
+            text="Confirm match"
           />
         </View>
       </View>
