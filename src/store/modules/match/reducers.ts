@@ -1,22 +1,38 @@
 import {createReducer, SerializedError} from '@reduxjs/toolkit';
 import {MatchStatus} from 'types/enums';
-import {getActiveMatches, getInactiveMatches, getMatches} from './actions';
+import {
+  createMatch,
+  getActiveMatches,
+  getInactiveMatches,
+  getMatches,
+  reDraft,
+} from './actions';
 import {IPlayer} from 'types/interfaces';
+
+export interface Match {
+  teamA: IPlayer[];
+  teamB: IPlayer[];
+  date?: Date;
+  result?: Result;
+  status?: MatchStatus;
+  field?: string;
+}
+
+export interface CurrentMatch {
+  _id: string;
+  teamA: IPlayer[];
+  teamB: IPlayer[];
+  skillAvgA: number;
+  skillAvgB: number;
+}
+
 export interface MatchReducer {
   isLoading: boolean;
   activeMatches: Match[];
   inactiveMatches: Match[];
   matches: Match[];
   error: SerializedError | undefined;
-}
-
-export interface Match {
-  teamA: IPlayer[];
-  teamB: IPlayer[];
-  date: Date;
-  result?: Result;
-  status: MatchStatus;
-  field: string;
+  currentMatch?: CurrentMatch;
 }
 
 interface Result {
@@ -29,11 +45,34 @@ export const matchReducer = createReducer<MatchReducer>(
   {
     isLoading: false,
     activeMatches: [],
+    currentMatch: undefined,
     inactiveMatches: [],
     matches: [],
     error: undefined,
   },
   builder => {
+    builder.addCase(createMatch.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(createMatch.rejected, (state, action) => {
+      state.error = action.error;
+      state.isLoading = false;
+    });
+    builder.addCase(createMatch.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.currentMatch = action.payload;
+    });
+    builder.addCase(reDraft.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(reDraft.rejected, (state, action) => {
+      state.error = action.error;
+      state.isLoading = false;
+    });
+    builder.addCase(reDraft.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.currentMatch = action.payload;
+    });
     builder.addCase(getActiveMatches.pending, state => {
       state.isLoading = true;
     });

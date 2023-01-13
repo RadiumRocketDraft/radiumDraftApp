@@ -12,7 +12,7 @@ const CustomTooltip: FC<Props> = ({title, description}) => (
       <Popover.Content>
         <Popover.Arrow />
         <Popover.CloseButton />
-        {!!title && <Popover.Header>Skill Functionality</Popover.Header>}
+        {!!title && <Popover.Header>{title}</Popover.Header>}
         <Popover.Body>{description}</Popover.Body>
       </Popover.Content>
     </Popover>
