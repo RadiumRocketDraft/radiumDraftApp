@@ -1,5 +1,5 @@
 import MatchCard from 'components/shared/matchCard';
-import {Stack} from 'native-base';
+import {Skeleton, Stack} from 'native-base';
 import React, {useEffect} from 'react';
 import {
   Text,
@@ -9,15 +9,16 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {matchesToBePlayed} from 'store/modules/match/selectors';
+import {matchData, matchesToBePlayed} from 'store/modules/match/selectors';
 import {Routes, TNavigation} from 'types/interfaces';
 import {Match as IMatch} from 'store/modules/match/reducers';
 import styles from './styles';
 import {getMatches} from 'store/modules/match/actions';
 
 const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
-  const matches = useSelector(matchesToBePlayed);
   const dispatch = useDispatch();
+  const matches = useSelector(matchesToBePlayed);
+  const {isLoading} = useSelector(matchData);
 
   useEffect(() => {
     dispatch(getMatches());
@@ -35,6 +36,16 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
     return <MatchCard match={item} />;
   };
 
+  const SkeletonLoader = () => {
+    return (
+      <SafeAreaView style={styles.skeletonContainer}>
+        <Skeleton size={'80%'} my={2} h={75} borderRadius={10} />
+        <Skeleton size={'80%'} my={2} h={75} borderRadius={10} />
+        <Skeleton size={'80%'} my={2} h={75} borderRadius={10} />
+      </SafeAreaView>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.selectOptionContainer}>
@@ -47,12 +58,16 @@ const Match = ({navigation}: TNavigation<Routes.MATCH>) => {
       </View>
       <View style={styles.inComingMatchesContainer}>
         <Text style={styles.incomingTitle}>Incoming Matches</Text>
-        <FlatList
-          data={matches}
-          renderItem={renderItem}
-          ItemSeparatorComponent={listSeparator}
-          bounces={false}
-        />
+        {isLoading ? (
+          <SkeletonLoader />
+        ) : (
+          <FlatList
+            data={matches}
+            renderItem={renderItem}
+            ItemSeparatorComponent={listSeparator}
+            bounces={false}
+          />
+        )}
       </View>
     </SafeAreaView>
   );

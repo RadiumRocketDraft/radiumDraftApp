@@ -25,4 +25,10 @@ export default StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 20,
   },
+  skeletonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    bottom: 35,
+  },
 });
