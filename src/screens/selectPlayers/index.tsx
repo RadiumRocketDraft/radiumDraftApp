@@ -65,10 +65,10 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
 
   const onHandleSubmit = () => {
     try {
-      const firebaseUID = getCurrentFirebaseUid();
-      if (!firebaseUID) throw new Error('FirebaseUID not found');
+      const firebaseUid = getCurrentFirebaseUid();
+      if (!firebaseUid) throw new Error('FirebaseUID not found');
       const payload: MatchBody = {
-        firebaseUID: firebaseUID,
+        firebaseUid,
         players: selectedPlayers,
       };
       dispatch(createMatch(payload));
