@@ -84,8 +84,9 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
   const listHeader = () => {
     return (
       <View style={styles.headerContainer}>
-        <Text style={[styles.rowText, styles.headerText]}>Seleccionados</Text>
-        <Text style={[styles.wideRowText, styles.headerText]}>Jugadores</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Selected</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Players</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Position</Text>
         <Text style={[styles.rowText, styles.headerText]}>Skill</Text>
       </View>
     );
@@ -117,9 +118,10 @@ const SelectPlayers = ({route}: TNavigation<Routes.SELECT_PLAYERS>) => {
             />
           )}
         </View>
-        <Text style={styles.wideRowText}>
-          {item?.firstName} {item?.lastName}
+        <Text style={styles.rowText}>
+          {item?.firstName}.{item?.lastName.slice(0, 1)}
         </Text>
+        <Text style={styles.rowText}>{item?.position}</Text>
         <View style={styles.rowText}>{skillChecker(item.skill)}</View>
       </TouchableOpacity>
     );
