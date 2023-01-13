@@ -11,14 +11,13 @@ export const getActiveMatchsRequest = async () => {
   return response.data;
 };
 
-interface MatchBody {
-  teamA: string[];
-  teamB: string[];
-  date: Date;
+export interface MatchBody {
+  firebaseUID: string;
+  players: IPlayer[];
 }
 
-export const createMatchRequest = async (body: MatchBody) => {
-  const response = await api.post(URL.match.CREATE_MATCH, body);
+export const createMatchRequest = async (payload: MatchBody) => {
+  const response = await api.post(URL.match.CREATE_MATCH, {payload});
   return response.data;
 };
 
@@ -27,8 +26,32 @@ export const getMatchesRequest = async () => {
   return response.data;
 };
 
-export const getDraftRequest = async (players: IPlayer[]) => {
-  console.log('REQUEST', URL.match.GET_MATCHES);
-  const response = await api.post(URL.match.GET_DRAFT, {players});
+interface ReDraftPayload {
+  id: string;
+  players: IPlayer[];
+}
+
+export const reDraftRequest = async (payload: ReDraftPayload) => {
+  const {id, players} = payload;
+  const response = await api.put(`${URL.match.RE_DRAFT}${id}/draft`, {
+    players,
+  });
+  return response.data;
+};
+
+interface UpdateMatchPayload {
+  id: string;
+  field: string;
+  date: string;
+  time: string;
+}
+
+export const updateMatchRequest = async (payload: UpdateMatchPayload) => {
+  const {field, date, time, id} = payload;
+  const response = await api.put(`${URL.match.UPDATE_MATCH}${id}`, {
+    time,
+    field,
+    date,
+  });
   return response.data;
 };

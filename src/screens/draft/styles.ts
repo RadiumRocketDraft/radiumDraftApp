@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   safeAreaViewContainer: {
-    justifyContent: 'space-around',
     flex: 1,
   },
   redraftContainer: {
@@ -13,31 +12,61 @@ export default StyleSheet.create({
   },
   teamsContainer: {
     flexDirection: 'row',
-    flex: 1,
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-    marginTop: 50,
   },
-  teamTitle: {
+  teamTitleA: {
     fontWeight: 'bold',
     marginBottom: 2,
   },
-  averageSkill: {
+  teamTitleB: {
+    textAlign: 'right',
+    fontWeight: 'bold',
+    marginBottom: 2,
+  },
+  averageSkillA: {
     marginBottom: 20,
     fontWeight: '500',
   },
-  teamContainer: {
-    alignItems: 'center',
+  averageSkillB: {
+    textAlign: 'right',
+    marginBottom: 20,
+    fontWeight: '500',
+  },
+  teamContainerA: {
+    marginLeft: 20,
+    width: '45%',
+  },
+  teamContainerB: {
+    marginRight: 20,
+    width: '45%',
   },
   flatListTeam: {
-    alignItems: 'center',
+    width: '100%',
   },
   viewOptionsMatch: {
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    alignSelf: 'center',
+    marginTop: 80,
+    width: '80%',
+    minWidth: 200,
   },
   separator: {
     height: 14,
+  },
+  teamARow: {
+    textAlign: 'left',
+    width: '100%',
+  },
+  teamBRow: {
+    textAlign: 'right',
+    width: '100%',
+  },
+  redraftButton: {
+    marginTop: 30,
+    alignSelf: 'center',
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    marginTop: 30,
   },
 });

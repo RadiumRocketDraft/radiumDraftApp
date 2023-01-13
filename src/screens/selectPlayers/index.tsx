@@ -12,6 +12,10 @@ import {IPlayer, Routes, TNavigation} from 'types/interfaces';
 import Button from 'components/shared/button';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayers, playerSelector} from 'store/modules/player';
+import {createMatch} from 'store/modules/match';
+import {getCurrentFirebaseUid} from 'utils';
+import {MatchBody} from 'services/match';
+import {skillChecker} from 'helpers';
 
 const SelectPlayers = ({
   route,
@@ -43,12 +47,18 @@ const SelectPlayers = ({
   };
 
   const onHandleSubmit = () => {
-    const TEAM_A = players.slice(1, 6);
-    const TEAM_B = players.slice(6, 11);
-    navigation.navigate(Routes.DRAFT, {
-      teamA: TEAM_A,
-      teamB: TEAM_B,
-    });
+    try {
+      const firebaseUID = getCurrentFirebaseUid();
+      if (!firebaseUID) throw new Error('FirebaseUID not found');
+      const payload: MatchBody = {
+        firebaseUID: firebaseUID,
+        players: selectedPlayers,
+      };
+      dispatch(createMatch(payload));
+      navigation.navigate(Routes.DRAFT);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const listHeader = () => {
@@ -56,7 +66,7 @@ const SelectPlayers = ({
       <View style={styles.headerContainer}>
         <Text style={[styles.rowText, styles.headerText]}>Seleccionados</Text>
         <Text style={[styles.wideRowText, styles.headerText]}>Jugadores</Text>
-        <Text style={[styles.rowText, styles.headerText]}>Fidelidad</Text>
+        <Text style={[styles.rowText, styles.headerText]}>Skill</Text>
       </View>
     );
   };
@@ -80,7 +90,7 @@ const SelectPlayers = ({
         <Text style={styles.wideRowText}>
           {item?.firstName} {item?.lastName}
         </Text>
-        <Text style={styles.rowText}>{item.fidelity}</Text>
+        <Text style={styles.rowText}>{skillChecker(item.skill)}</Text>
       </View>
     );
   };
