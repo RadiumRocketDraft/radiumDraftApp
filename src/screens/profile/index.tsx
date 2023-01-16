@@ -8,16 +8,20 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPlayerAccount, playerSelector} from 'store/modules/player';
 import ListRow from 'components/listRow';
+import {ModalWithInput} from 'components/shared/modals';
 
 import MediaPicker from 'components/mediaPicker';
 import {useRef} from 'react';
 import {TouchableOpacity} from 'react-native';
 import useFirebaseStorage from 'hooks/useFirebaseStorage';
 import {CustomToast, ToastStatus} from 'components/customToast';
+import Button from 'components/shared/button';
 
 const Profile = () => {
   const [pickedImage, setPickedImage] = useState<IImage>();
   const {isLoading, playerAccount} = useSelector(playerSelector);
+  const [isVisible, setIsVisible] = useState(false);
+
   const dispatch = useDispatch();
   const {top} = useSafeAreaInsets();
   const {storageError, isUploading} = useFirebaseStorage(pickedImage);
@@ -52,6 +56,10 @@ const Profile = () => {
 
   const onPressLogOut = () => {
     logOut();
+  };
+
+  const onCloseModal = () => {
+    setIsVisible(!isVisible);
   };
 
   return (
@@ -109,7 +117,30 @@ const Profile = () => {
           value={playerAccount?.matchesPlayed}
           isLoading={isLoading}
         />
+        <Button
+          text="Change password"
+          customStyle={styles.button}
+          handleSubmit={() => {
+            setIsVisible(!isVisible);
+          }}
+        />
       </ScrollView>
+      {isVisible && (
+        <ModalWithInput
+          onSubmit={data => {
+            console.log('data', data);
+          }} // TODO: Change password functionality
+          firstInputName={'old password'}
+          secondInputName={'new password'}
+          buttonText={'Change password'}
+          headerText={'Change password'}
+          isVisible={isVisible}
+          onClose={onCloseModal}
+          errorType={'Invalid email or password'}
+          errorMessage={'You need to enter a valid user and password'}
+        />
+      )}
+
       <MediaPicker
         ref={mediaPickerRef}
         title={

@@ -39,4 +39,12 @@ export default StyleSheet.create({
     alignSelf: 'flex-end',
     marginRight: 20,
   },
+  modal: {
+    alignSelf: 'center',
+  },
+  button: {
+    backgroundColor: '#187DE9',
+    marginBottom: 10, // TODO: Check low
+    alignSelf: 'center',
+  },
 });
