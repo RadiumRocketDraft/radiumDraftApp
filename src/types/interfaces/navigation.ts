@@ -18,6 +18,7 @@ export type StackParamList = {
   [Routes.HISTORY]: undefined;
   [Routes.PROFILE]: undefined;
   [Routes.DRAFT]: undefined;
+  [Routes.MATCH_RECEIPT]: undefined;
 };
 
 export type TNavigation<R extends keyof StackParamList> = {

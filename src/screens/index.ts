@@ -5,3 +5,4 @@ export {default as Profile} from './profile';
 export {default as CreateAccount} from './createAccount';
 export {default as SelectPlayers} from './selectPlayers';
 export {default as Draft} from './draft';
+export {default as MatchReceipt} from './matchReceipt';

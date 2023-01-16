@@ -7,4 +7,5 @@ export enum Routes {
   HISTORY = 'HISTORY',
   PROFILE = 'PROFILE',
   DRAFT = 'DRAFT',
+  MATCH_RECEIPT = 'MATCH_RECEIPT',
 }

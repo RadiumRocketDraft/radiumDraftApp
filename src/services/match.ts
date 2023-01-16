@@ -56,6 +56,6 @@ export const updateMatchRequest = async (payload: UpdateMatchPayload) => {
     date,
   });
   const response = await api.get(URL.match.GET_MATCHES);
-  navigationRef.navigate(Routes.HOME);
+  navigationRef.navigate(Routes.MATCH_RECEIPT);
   return response.data;
 };
