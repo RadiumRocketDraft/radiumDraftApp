@@ -19,7 +19,7 @@ export interface MatchBody {
 
 export const createMatchRequest = async (payload: MatchBody) => {
   const response = await api.post(URL.match.CREATE_MATCH, {payload});
-  navigationRef.navigate(Routes.DRAFT);
+  navigationRef.navigate(Routes.DRAFT, {players: payload});
   return response.data;
 };
 
@@ -46,6 +46,7 @@ interface UpdateMatchPayload {
   field: string;
   date: string;
   time: string;
+  players: IPlayer;
 }
 
 export const updateMatchRequest = async (payload: UpdateMatchPayload) => {
@@ -56,6 +57,6 @@ export const updateMatchRequest = async (payload: UpdateMatchPayload) => {
     date,
   });
   const response = await api.get(URL.match.GET_MATCHES);
-  navigationRef.navigate(Routes.MATCH_RECEIPT);
+  navigationRef.navigate(Routes.MATCH_RECEIPT, {matchData: payload});
   return response.data;
 };
