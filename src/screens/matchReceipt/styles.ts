@@ -3,7 +3,9 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   safeAreaViewContainer: {
     flex: 1,
-    borderWidth: 2,
+  },
+  shareContainer: {
+    flex: 5,
   },
   teamsContainer: {
     flex: 2,
