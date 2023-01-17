@@ -74,7 +74,8 @@ export default StyleSheet.create({
     fontWeight: '600',
   },
   infoText: {
-    fontSize: 16,
+    marginTop: 10,
+    fontSize: 20,
   },
   buttonContainer: {
     flex: 1,
