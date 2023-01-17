@@ -26,4 +26,7 @@ export const appNavOptions: AppNavOptions = {
     headerTitle: '',
     headerBackTitle: 'Select Players',
   },
+  [Routes.MATCH_RECEIPT]: {
+    headerShown: false,
+  },
 };

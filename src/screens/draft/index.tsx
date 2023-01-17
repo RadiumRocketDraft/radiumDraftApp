@@ -30,7 +30,7 @@ interface FormData {
   time: string;
 }
 
-const Draft = () => {
+const Draft = ({route}: any) => {
   const dispatch = useDispatch();
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openTimePicker, setOpenTimePicker] = useState(false);
@@ -38,6 +38,7 @@ const Draft = () => {
   const [time, setTime] = useState(new Date());
   const match = useSelector(currentMatchData);
   const {error} = useSelector(matchData);
+  const {players: listOfPlayers} = route.params;
 
   const modalDatePicker = (state: boolean) => {
     setOpenDatePicker(!state);
@@ -126,6 +127,7 @@ const Draft = () => {
       field: data.field,
       date: format(date, 'MM-dd-yyyy'),
       time: format(time, 'hh:mm'),
+      players: listOfPlayers,
     };
 
     dispatch(updateMatch(dataMatch));
