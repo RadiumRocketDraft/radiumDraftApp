@@ -3,29 +3,33 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   safeAreaViewContainer: {
     flex: 1,
+    borderWidth: 2,
   },
   teamsContainer: {
+    flex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
   },
   teamTitleA: {
     fontWeight: 'bold',
+    fontSize: 20,
     marginBottom: 2,
   },
   teamTitleB: {
-    textAlign: 'right',
     fontWeight: 'bold',
+    fontSize: 20,
     marginBottom: 2,
   },
   averageSkillA: {
     marginBottom: 20,
-    fontWeight: '500',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   averageSkillB: {
-    textAlign: 'right',
     marginBottom: 20,
-    fontWeight: '500',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   teamContainerA: {
     alignItems: 'center',
@@ -38,7 +42,8 @@ export default StyleSheet.create({
     width: '45%',
   },
   flatListTeam: {
-    width: '100%',
+    flex: 1,
+    justifyContent: 'space-evenly',
   },
   separator: {
     height: 14,
@@ -53,5 +58,33 @@ export default StyleSheet.create({
   },
   rowText: {
     width: '100%',
+  },
+  infoContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flex: 2,
+  },
+  infoRow: {
+    alignItems: 'center',
+  },
+  infoTitle: {
+    fontSize: 28,
+    fontWeight: '600',
+  },
+  infoText: {
+    fontSize: 16,
+  },
+  buttonContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  buttonStyle: {
+    width: '70%',
+    position: 'relative',
+  },
+  shareIcon: {
+    position: 'absolute',
+    right: -20,
+    color: 'white',
   },
 });
