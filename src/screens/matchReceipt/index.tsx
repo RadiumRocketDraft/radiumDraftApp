@@ -13,16 +13,13 @@ import {IPlayer} from 'types/interfaces/player';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Share from 'react-native-share';
 import {captureRef} from 'react-native-view-shot';
-
-import styles from './styles';
 import {Routes} from 'types/interfaces';
+import styles from './styles';
 
 const MatchReceipt = ({navigation, route}: any) => {
   const match = useSelector(currentMatchData);
   const {matchData} = route.params;
   const viewRef = useRef();
-
-  console.log('matchDatamatchDatamatchData', matchData);
 
   const renderItemTeamA = (data: ListRenderItemInfo<IPlayer>) => {
     return (
@@ -58,7 +55,6 @@ const MatchReceipt = ({navigation, route}: any) => {
       });
       await Share.open({url: uri});
     } catch (err) {
-      // onCancel();
       console.log(err);
     }
   };
